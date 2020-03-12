@@ -1,4 +1,4 @@
-package golhar.cocomo.zinger_app;
+package golhar.cocomo.zinger;
 
 import org.junit.Test;
 

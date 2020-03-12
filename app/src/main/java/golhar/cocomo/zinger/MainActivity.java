@@ -1,7 +1,6 @@
-package golhar.cocomo.zinger_app;
+package golhar.cocomo.zinger;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
