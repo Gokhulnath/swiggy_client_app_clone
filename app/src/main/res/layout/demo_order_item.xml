@@ -7,19 +7,20 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iv_food_item"
+        android:id="@+id/food_itemIV"
         android:src="@mipmap/ic_launcher"
         android:layout_centerInParent="true"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_200sdp"/>
 
     <TextView
-        android:id="@+id/tv_item"
-        android:layout_below="@+id/iv_food_item"
+        android:id="@+id/itemTV"
+        android:layout_below="@+id/food_itemIV"
         android:textAlignment="center"
         android:layout_marginTop="@dimen/_25sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_14ssp"/>
 
 
 

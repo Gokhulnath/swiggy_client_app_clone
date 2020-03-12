@@ -13,5 +13,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         startActivity(new Intent(this, RecyclerViewDemoActivity.class));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+
+            }
+        });
     }
 }

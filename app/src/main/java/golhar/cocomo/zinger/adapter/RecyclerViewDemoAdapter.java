@@ -61,8 +61,8 @@ public class RecyclerViewDemoAdapter extends RecyclerView.Adapter<RecyclerViewDe
 
         public DemoHolder(@NonNull View itemView) {
             super(itemView);
-            iv_item=itemView.findViewById(R.id.iv_food_item);
-            tv_item_name=itemView.findViewById(R.id.tv_item);
+            iv_item=itemView.findViewById(R.id.food_itemIV);
+            tv_item_name=itemView.findViewById(R.id.itemTV);
 
         }
     }
