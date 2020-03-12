@@ -57,6 +57,7 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         rv_items.setLayoutManager(linearLayoutManager);
         rv_items.setAdapter(demoAdapter);
+        //test comment
 
     }
 }
