@@ -9,9 +9,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_item_list"
-        android:layout_marginTop="@dimen/_20sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"/>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

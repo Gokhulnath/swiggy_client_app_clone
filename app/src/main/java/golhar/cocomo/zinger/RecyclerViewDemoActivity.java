@@ -25,13 +25,29 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
 
         ArrayList<ItemModel> itemModelArrayList=new ArrayList<>();
 
-        ItemModel item1=new ItemModel();
-        item1.setName("Item 1");
-        itemModelArrayList.add(item1);
+        ItemModel item=new ItemModel();
+        item.setName("Item 1");
+        itemModelArrayList.add(item);
 
-        ItemModel item2=new ItemModel();
-        item2.setName("Item 2");
-        itemModelArrayList.add(item2);
+        item=new ItemModel();
+        item.setName("Item 2");
+        itemModelArrayList.add(item);
+
+        item=new ItemModel();
+        item.setName("Item 3");
+        itemModelArrayList.add(item);
+
+        item=new ItemModel();
+        item.setName("Item 4");
+        itemModelArrayList.add(item);
+
+        item=new ItemModel();
+        item.setName("Item 5");
+        itemModelArrayList.add(item);
+
+        item=new ItemModel();
+        item.setName("Item 6");
+        itemModelArrayList.add(item);
 
         demoAdapter=new RecyclerViewDemoAdapter(itemModelArrayList,this);
         rv_items=findViewById(R.id.rv_item_list);
