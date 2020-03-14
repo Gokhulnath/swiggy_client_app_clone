@@ -1,10 +1,7 @@
 package golhar.cocomo.zinger.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
-
-import java.sql.Date;
-
+import java.util.Date;
 import golhar.cocomo.zinger.enums.OrderStatus;
 
 public class OrderModel {
@@ -12,15 +9,9 @@ public class OrderModel {
     private UserModel userModel;
     private TransactionModel transactionModel;
     private ShopModel shopModel;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private Date date;
-
     private OrderStatus orderStatus;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private Date lastStatusUpdatedTime;
-
     private Double price;
     private Double deliveryPrice;
     private String deliveryLocation;

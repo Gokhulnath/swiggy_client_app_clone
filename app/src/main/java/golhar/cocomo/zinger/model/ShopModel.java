@@ -1,8 +1,8 @@
 package golhar.cocomo.zinger.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.sql.Time;
+import java.util.Date;
+
 
 public class ShopModel {
     private Integer id;
@@ -10,13 +10,8 @@ public class ShopModel {
     private String photoUrl;
     private String mobile;
     private CollegeModel collegeModel;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-    private Time openingTime;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-    private Time closingTime;
-
+    private Date openingTime;
+    private Date closingTime;
     private Integer isDelete;
 
     public ShopModel() {
@@ -63,19 +58,19 @@ public class ShopModel {
         this.collegeModel = collegeModel;
     }
 
-    public Time getOpeningTime() {
+    public Date getOpeningTime() {
         return openingTime;
     }
 
-    public void setOpeningTime(Time openingTime) {
+    public void setOpeningTime(Date openingTime) {
         this.openingTime = openingTime;
     }
 
-    public Time getClosingTime() {
+    public Date getClosingTime() {
         return closingTime;
     }
 
-    public void setClosingTime(Time closingTime) {
+    public void setClosingTime(Date closingTime) {
         this.closingTime = closingTime;
     }
 

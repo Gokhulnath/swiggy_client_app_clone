@@ -1,10 +1,7 @@
 package golhar.cocomo.zinger.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
-
-import java.sql.Date;
-
+import java.util.Date;
 import golhar.cocomo.zinger.enums.Priority;
 
 public class AuditModel {
@@ -14,10 +11,7 @@ public class AuditModel {
     private Integer errCode;
     private String message;
     private String updatedValue;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private Date date;
-
     private Priority priority;
 
     public Integer getId() {
