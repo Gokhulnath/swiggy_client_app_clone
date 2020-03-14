@@ -50,7 +50,7 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
         itemModelArrayList.add(item);
 
         demoAdapter=new RecyclerViewDemoAdapter(itemModelArrayList,this);
-        rv_items=findViewById(R.id.rv_item_list);
+        rv_items=findViewById(R.id.item_listRV);
 
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
