@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ADD8E6">
+
+    <ImageView
+        android:id="@+id/iv_frag1"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_450sdp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/Frag1TV"
+        android:text="Order from a wide range\n of restaurants"
+        android:textAlignment="center"
+        android:textSize="@dimen/_25ssp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_frag1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:textColor="#000000"/>
+
+</RelativeLayout>
