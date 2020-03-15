@@ -91,26 +91,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        /* Mahima Example
-        MainRepository.getService().getOrderByMobile("9566220635",1,5,"auth_9566220635",
-                "9566220635",UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<OrderModel>>>() {
-            @Override
-            public void onResponse(Call<Response<List<OrderModel>>> call, retrofit2.Response<Response<List<OrderModel>>> response) {
 
-                Response<List<OrderModel>> responseFromServer=response.body();
-
-                if(responseFromServer.getCode().equals(ErrorLog.CodeSuccess)&&responseFromServer.getMessage().equals(ErrorLog.Success)){
-                    Log.d("RetroFit",responseFromServer.toString());
-                }else{
-                    Log.d("RetroFit","errorr");
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Response<List<OrderModel>>> call, Throwable t) {
-                Log.d("RetroFit","errorr");
-            }
-        });*/
     }
 }

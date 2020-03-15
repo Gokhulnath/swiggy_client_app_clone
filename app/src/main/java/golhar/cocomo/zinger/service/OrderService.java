@@ -25,7 +25,7 @@ public interface OrderService {
                                               @Header("oauth_id") String oauthId, @Header("mobile") String mobile, @Header("role") String role);
 
     @GET("/order/customer/{mobile}/{pageNum}/{pageCount}")
-    Call<Response<List<OrderModel>>> getOrderByMobile(@Path("mobile") String mobile, @Path("pageNum") Integer pageNum, @Path("pageCount") Integer pageCount,
+    Call<Response<List<OrderItemListModel>>> getOrderByMobile(@Path("mobile") String mobile, @Path("pageNum") Integer pageNum, @Path("pageCount") Integer pageCount,
                                                       @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);
 
     @GET("/order/seller/{shopId}/{pageNum}/{pageCount}")
