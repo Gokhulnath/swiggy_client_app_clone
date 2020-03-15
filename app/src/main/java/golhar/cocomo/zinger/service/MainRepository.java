@@ -18,7 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainRepository {
 
     public static MainService getService() {
-
         Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTypeDeserializer()).create();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -29,12 +28,8 @@ public class MainRepository {
         return (MainService) retrofit.create(MainService.class);
     }
 
-
-
     public static class DateTypeDeserializer implements JsonDeserializer<Date> {
-
         private final String[] DATE_FORMATS = new String[]{"dd/MM/yyyy HH:mm:ss", "HH:mm:ss"};
-
         @Override
         public Date deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             for (String format : DATE_FORMATS) {
@@ -45,11 +40,5 @@ public class MainRepository {
             }
             throw new JsonParseException("Unparseable date: \""+jsonElement.getAsString());
         }
-
     }
-
 }
-
-/*
-   //startActivity(new Intent(this, RecyclerViewDemoActivity.class));
-*/
