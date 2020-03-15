@@ -52,38 +52,4 @@ public class MainRepository {
 
 /*
    //startActivity(new Intent(this, RecyclerViewDemoActivity.class));
-        UserModel userModel=new UserModel();
-        userModel.setMobile("9176019349");
-        userModel.setOauthId("auth_9176019349");
-        userModel.setRole(UserRole.CUSTOMER);
-        userModel.setIsDelete(0);
-
-        MainRepository.getService().insertCustomer(userModel).enqueue(new Callback<Response<UserCollegeModel>>() {
-            @Override
-            public void onResponse(Call<Response<UserCollegeModel>> call, retrofit2.Response<Response<UserCollegeModel>> response) {
-                Response<UserCollegeModel> userCollegeModelResponse=response.body();
-                Log.d("RetroFit",userCollegeModelResponse.toString());
-            }
-            @Override
-            public void onFailure(Call<Response<UserCollegeModel>> call, Throwable t) {
-                Log.d("RetroFit","errorr"+t);
-            }
-        });
-
-        MainRepository.getService().getOrderByMobile("9176019349",1,5,"auth_9176019349",
-                "9176019349",UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<OrderModel>>>() {
-            @Override
-            public void onResponse(Call<Response<List<OrderModel>>> call, retrofit2.Response<Response<List<OrderModel>>> response) {
-
-                Response<List<OrderModel>> orderModelList=response.body();
-                Log.d("RetroFit",orderModelList.toString());
-            }
-
-            @Override
-            public void onFailure(Call<Response<List<OrderModel>>> call, Throwable t) {
-                Log.d("RetroFit","errorr"+t);
-
-            }
-        });
-
 */

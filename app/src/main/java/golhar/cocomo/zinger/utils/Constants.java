@@ -6,7 +6,6 @@ package golhar.cocomo.zinger.utils;
 
 public class Constants {
 
-    public static final String packageName="golhar.cocomo.zinger_app";
     public static final String tableName = "users";
     public static final String mobile = "mobile";
     public static final String name = "name";
