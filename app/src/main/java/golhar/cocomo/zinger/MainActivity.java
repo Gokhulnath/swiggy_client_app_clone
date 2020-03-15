@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import java.util.List;
+
 import golhar.cocomo.zinger.adapter.ViewPageAdapter;
 import golhar.cocomo.zinger.fragment.Frag1;
 import golhar.cocomo.zinger.fragment.Frag2;
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         userModel.setRole(UserRole.CUSTOMER);
         userModel.setIsDelete(0);
 
-        // Gokhul example
+        /* Gokhul example
         MainRepository.getService().insertCustomer(userModel).enqueue(new Callback<Response<UserCollegeModel>>() {
             @Override
             public void onResponse(Call<Response<UserCollegeModel>> call, retrofit2.Response<Response<UserCollegeModel>> response) {
@@ -87,10 +89,9 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<Response<UserCollegeModel>> call, Throwable t) {
                 Log.d("RetroFit","failure");
             }
-        });
+        });*/
 
-
-        // Mahima Example
+        /* Mahima Example
         MainRepository.getService().getOrderByMobile("9566220635",1,5,"auth_9566220635",
                 "9566220635",UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<OrderModel>>>() {
             @Override
@@ -110,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<Response<List<OrderModel>>> call, Throwable t) {
                 Log.d("RetroFit","errorr");
             }
-        });
+        });*/
     }
 }
-//comment from mahima
