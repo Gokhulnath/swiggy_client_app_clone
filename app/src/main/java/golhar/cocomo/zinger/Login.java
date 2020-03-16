@@ -19,7 +19,7 @@ public class Login extends AppCompatActivity {
         otp_verification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otp = new Intent(Login.this,otp_Verification.class);
+                Intent otp = new Intent(Login.this, OtpVerification.class);
                 startActivity(otp);
             }
         });
