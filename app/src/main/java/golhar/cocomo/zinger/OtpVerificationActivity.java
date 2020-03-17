@@ -30,7 +30,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp__verification);
+        setContentView(R.layout.activity_otp_verification);
 
         int firebaseResponse = 1; //Temp for firebase authentication
         String phoneNumber = SharedPref.getString(getApplicationContext(), "phone_number");
