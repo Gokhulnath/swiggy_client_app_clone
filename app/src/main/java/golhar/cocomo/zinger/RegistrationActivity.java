@@ -4,15 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import golhar.cocomo.zinger.utils.SharedPref;
 
-public class Registration extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity {
 
 TextView college_list;
+TextView college_Name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +23,22 @@ TextView college_list;
         college_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent college_select = new Intent(Registration.this,CollegeList.class);
+                Intent college_select = new Intent(RegistrationActivity.this, CollegeListActivity.class);
                 startActivity(college_select);
-
             }
         });
-
-        Toast.makeText(this, SharedPref.getString(getApplicationContext(),"selected_college"), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int collegeID;
+        String collegeName;
+        collegeName = SharedPref.getString(getApplicationContext(),"selected_college");
+        collegeID = SharedPref.getInt(getApplicationContext(),"selected_college_id");
+        college_Name=(TextView)findViewById(R.id.collegeTV);
+        college_Name.setText(collegeName);
+        SharedPref.remove(getApplicationContext(),"selected_college");
+    }
+
 }

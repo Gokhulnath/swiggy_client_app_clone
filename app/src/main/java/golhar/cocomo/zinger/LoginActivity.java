@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button otp_verification;
     @Override
@@ -19,7 +19,7 @@ public class Login extends AppCompatActivity {
         otp_verification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otp = new Intent(Login.this, OtpVerification.class);
+                Intent otp = new Intent(LoginActivity.this, OtpVerificationActivity.class);
                 startActivity(otp);
             }
         });

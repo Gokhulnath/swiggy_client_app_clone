@@ -5,12 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="golhar.cocomo.zinger.CollegeList">
+    tools:context="golhar.cocomo.zinger.CollegeListActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_15sdp">
 
+    <EditText
+        android:id="@+id/collegeNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your college name"
+        android:layout_marginTop="@dimen/_25sdp"
+
+        ></EditText>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_listRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-
+    </LinearLayout>
 </RelativeLayout>
