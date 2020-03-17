@@ -29,7 +29,7 @@
         android:paddingLeft="@dimen/_15sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_24ssp"
+        android:textSize="@dimen/_15ssp"
         android:layout_toRightOf="@id/CollegeProfileImageCIV"
         android:text="ssn"
         android:textStyle="bold"
@@ -41,7 +41,7 @@
             android:paddingLeft="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_12ssp"
             android:text="Kalavakkam"
            android:textColor="#000000"/>
     </LinearLayout>

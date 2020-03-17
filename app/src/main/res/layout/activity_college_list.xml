@@ -18,7 +18,9 @@
         android:layout_height="wrap_content"
         android:hint="Your college name"
         android:layout_marginTop="@dimen/_25sdp"
-
+        android:lines="1"
+        android:maxLines="1"
+        android:textSize="@dimen/_15ssp"
         ></EditText>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_listRV"

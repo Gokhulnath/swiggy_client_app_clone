@@ -1,15 +1,20 @@
 package golhar.cocomo.zinger;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import golhar.cocomo.zinger.adapter.RecyclerViewCollegeListAdapter;
 import golhar.cocomo.zinger.model.CollegeModel;
@@ -47,6 +52,30 @@ CollegeListActivity extends AppCompatActivity {
                 if(responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)){
                     collegeAdapter.setCollegeArrayList((ArrayList<CollegeModel>) responseFromServer.getData());
                     collegeAdapter.notifyDataSetChanged();
+
+                    collegeName.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @RequiresApi(api = Build.VERSION_CODES.N)
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            ArrayList<CollegeModel> collegeList = (ArrayList<CollegeModel>) responseFromServer.getData();
+                            ArrayList<CollegeModel> modifiedCollegeList = (ArrayList<CollegeModel>) collegeList
+                                    .stream()
+                                    .filter(collegeModel -> collegeModel.getName().toLowerCase().contains(s.toString().toLowerCase()))
+                                    .collect(Collectors.toList());
+                            collegeAdapter.setCollegeArrayList(modifiedCollegeList);
+                            collegeAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+
+                        }
+                    });
                 }else{
                     // TODO toast the message
                     Log.d("RetroFit","failure");
