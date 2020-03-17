@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/_10sdp"
     android:visibility="visible">
+
     <RelativeLayout
         android:id="@+id/orderRV"
         android:layout_width="wrap_content"
@@ -24,8 +25,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="Gangotree"
                 android:textSize="@dimen/_20sdp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/hotel_priceTV"
@@ -33,8 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/hotel_nameTV"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="₹250">
-            </TextView>
+                android:text="₹250"></TextView>
 
             <ImageView
                 android:id="@+id/Hotel_tickIV"
@@ -43,18 +42,16 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:src="@drawable/ic_check_circle">
-            </ImageView>
+                android:src="@drawable/ic_check_circle"></ImageView>
 
             <TextView
                 android:id="@+id/hotel_statusTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_toLeftOf="@id/Hotel_tickIV"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:text="Picked-up">
-            </TextView>
+                android:layout_toLeftOf="@id/Hotel_tickIV"
+                android:text="Picked-up"></TextView>
         </RelativeLayout>
 
         <View
@@ -76,8 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:text="Sev Puri x1, Dahi Papri Chaat x 1"
-                android:textSize="@dimen/_12ssp">
-            </TextView>
+                android:textSize="@dimen/_12ssp"></TextView>
 
             <TextView
                 android:id="@+id/order_dateTV"
@@ -85,8 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/order_itemsTV"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="March 5, 5:45 PM">
-            </TextView>
+                android:text="March 5, 5:45 PM"></TextView>
 
             <Button
                 android:id="@+id/but_reorderBT"
@@ -109,8 +104,7 @@
                 android:layout_toRightOf="@+id/but_reorderBT"
                 android:background="#fff"
                 android:padding="@dimen/_8sdp"
-                android:text="RATE FOOD">
-            </Button>
+                android:text="RATE FOOD"></Button>
 
             <TextView
                 android:id="@+id/order_rateTV"
@@ -118,8 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/but_reorderBT"
                 android:padding="@dimen/_5sdp"
-                android:text="Your food rating">
-            </TextView>
+                android:text="Your food rating"></TextView>
 
             <ImageView
                 android:id="@+id/star_imgIV"
@@ -128,8 +121,7 @@
                 android:layout_below="@id/order_rateTV"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:src="@drawable/ic_star">
-            </ImageView>
+                android:src="@drawable/ic_star"></ImageView>
 
             <TextView
                 android:id="@+id/order_yourratingTV"
@@ -140,8 +132,7 @@
                 android:layout_toRightOf="@id/order_rateTV"
                 android:text="4"
                 android:textSize="@dimen/_18ssp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

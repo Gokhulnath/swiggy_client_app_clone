@@ -1,6 +1,7 @@
 package golhar.cocomo.zinger.adapter;
 
 import java.util.Date;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 
-public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.DemoHolder>{
+public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.DemoHolder> {
 
 
     DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyy hh:mm:ss");
@@ -29,14 +30,14 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
     public OrderHistoryAdapter(List<OrderItemListModel> itemList, Context context) {
         this.itemList = itemList;
-        this.context=context;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public DemoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.order_history_row,parent,false);
-        DemoHolder demoHolder=new DemoHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_history_row, parent, false);
+        DemoHolder demoHolder = new DemoHolder(v);
         return demoHolder;
     }
 
@@ -60,16 +61,16 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         return itemList.size();
     }
 
-    public class DemoHolder extends RecyclerView.ViewHolder{
+    public class DemoHolder extends RecyclerView.ViewHolder {
 
         TextView hotel_name;
-        TextView hotel_price ;
+        TextView hotel_price;
         TextView hotel_status;
-        TextView order_items ;
-        TextView order_date ;
+        TextView order_items;
+        TextView order_date;
         TextView order_yourrating;
 
-        public DemoHolder(@NonNull View itemView){
+        public DemoHolder(@NonNull View itemView) {
             super(itemView);
             hotel_name = itemView.findViewById(R.id.hotel_nameTV);
             hotel_price = itemView.findViewById(R.id.hotel_priceTV);
