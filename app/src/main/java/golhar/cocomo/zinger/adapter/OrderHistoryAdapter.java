@@ -1,5 +1,6 @@
 package golhar.cocomo.zinger.adapter;
 
+import java.util.Date;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,25 +17,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
-public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.DemoHolder>{
+public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.DemoHolder> {
 
 
-
-   List<OrderItemListModel> itemList;
+    DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyy hh:mm:ss");
+    List<OrderItemListModel> itemList;
     Context context;
 
     public OrderHistoryAdapter(List<OrderItemListModel> itemList, Context context) {
         this.itemList = itemList;
-        this.context=context;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public DemoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.order_history_row,parent,false);
-        DemoHolder demoHolder=new DemoHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_history_row, parent, false);
+        DemoHolder demoHolder = new DemoHolder(v);
         return demoHolder;
     }
 
@@ -44,11 +47,11 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         final OrderItemListModel orderItemListModel = itemList.get(position);
 
         holder.hotel_name.setText(orderItemListModel.getOrderModel().getShopModel().getName());
-//        holder.hotel_price.setText(orderItemListModel.getHotel_price());
-//        holder.hotel_status.setText(orderItemListModel.getHotel_status());
-//        holder.order_date.setText(orderItemListModel.getOrder_date());
-//        holder.order_items.setText(orderItemListModel.getOrder_items());
-//        holder.order_yourrating.setText(orderItemListModel.getYour_rating());
+        holder.hotel_price.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
+        holder.hotel_status.setText(String.valueOf(orderItemListModel.getOrderModel().getOrderStatus()));
+        holder.order_date.setText(dateFormat.format(orderItemListModel.getOrderModel().getDate()));
+        holder.order_items.setText((CharSequence) orderItemListModel.getOrderItemsList());
+        holder.order_yourrating.setText(String.valueOf(orderItemListModel.getOrderModel().getRating()));
 
 
     }
@@ -58,24 +61,23 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         return itemList.size();
     }
 
-    public class DemoHolder extends RecyclerView.ViewHolder{
+    public class DemoHolder extends RecyclerView.ViewHolder {
 
         TextView hotel_name;
-        TextView hotel_area ;
-        TextView hotel_price ;
+        TextView hotel_price;
         TextView hotel_status;
-        TextView order_items ;
-        TextView order_date ;
+        TextView order_items;
+        TextView order_date;
         TextView order_yourrating;
 
-        public DemoHolder(@NonNull View itemView){
+        public DemoHolder(@NonNull View itemView) {
             super(itemView);
-            hotel_name = itemView.findViewById(R.id.hotel_name);
-            hotel_price = itemView.findViewById(R.id.hotel_price);
-            hotel_status = itemView.findViewById(R.id.hotel_status);
-            order_items = itemView.findViewById(R.id.order_items);
-            order_date = itemView.findViewById(R.id.order_date);
-            order_yourrating = itemView.findViewById(R.id.order_yourrating);
+            hotel_name = itemView.findViewById(R.id.hotel_nameTV);
+            hotel_price = itemView.findViewById(R.id.hotel_priceTV);
+            hotel_status = itemView.findViewById(R.id.hotel_statusTV);
+            order_items = itemView.findViewById(R.id.order_itemsTV);
+            order_date = itemView.findViewById(R.id.order_dateTV);
+            order_yourrating = itemView.findViewById(R.id.order_yourratingTV);
 
         }
     }

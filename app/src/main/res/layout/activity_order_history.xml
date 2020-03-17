@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".OrderHistoryActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".OrderHistoryActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_20sdp">
+
         <RelativeLayout
             android:id="@+id/user_detailsRV"
             android:layout_width="wrap_content"
@@ -24,8 +24,7 @@
                 android:text="MAHIMA S"
                 android:textColor="#000"
                 android:textSize="@dimen/_20ssp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/user_noTV"
@@ -34,8 +33,7 @@
                 android:layout_below="@+id/user_nameTV"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:padding="@dimen/_5sdp"
-                android:text="9090654232345">
-            </TextView>
+                android:text="9090654232345"></TextView>
 
             <TextView
                 android:id="@+id/user_email"
@@ -46,27 +44,25 @@
                 android:layout_marginTop="@dimen/_6sdp"
                 android:layout_toRightOf="@+id/user_noTV"
                 android:padding="@dimen/_3sdp"
-                android:text="welcometozingshkb@gmail.com">
-            </TextView>
+                android:text="welcometozingshkb@gmail.com"></TextView>
 
             <Button
                 android:id="@+id/user_editBT"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
+                android:layout_below="@+id/user_nameTV"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:layout_below="@+id/user_nameTV"
                 android:background="#fff"
                 android:text="EDIT"
-                android:textColor="#FF6600">
-            </Button>
+                android:textColor="#FF6600"></Button>
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/separator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/separator"
             android:layout_below="@+id/user_detailsRV">
 
             <View
@@ -89,21 +85,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_15sdp"
-                android:text="PAST ORDERS">
-            </TextView>
+                android:text="PAST ORDERS"></TextView>
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/order_listRV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/past_ordersTV"/>
+            android:layout_below="@+id/past_ordersTV" />
 
         <RelativeLayout
+            android:id="@+id/separator2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/separator2"
             android:layout_below="@+id/order_listRV">
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_4sdp"
@@ -113,32 +109,32 @@
                 android:background="#000" />
         </RelativeLayout>
 
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/separator2"
-    android:id="@+id/moreRV">
-
-        <Button
-            android:id="@+id/view_moreBT"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/moreRV"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#fff"
-            android:text="   VIEW MORE ORDERS"
-            android:textAlignment="textStart"
-            android:textColor="#FF6600">
-        </Button>
+            android:layout_below="@+id/separator2">
 
-        <Button
-            android:id="@+id/logout_BT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/view_moreBT"
-            android:background="#fff"
-            android:text="   LOGOUT"
-            android:textAlignment="textStart"
-            android:textColor="#000">
-        </Button>
+            <Button
+                android:id="@+id/view_moreBT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:paddingLeft="@dimen/_8sdp"
+                android:text="VIEW MORE ORDERS"
+                android:textAlignment="textStart"
+                android:textColor="#FF6600"></Button>
+
+            <Button
+                android:id="@+id/logout_BT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_moreBT"
+                android:background="#fff"
+                android:paddingLeft="@dimen/_8sdp"
+                android:text="LOGOUT"
+                android:textAlignment="textStart"
+                android:textColor="#000"></Button>
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>
