@@ -18,10 +18,6 @@ public interface UserService {
     @POST("/user/seller")
     Call<Response<UserShopListModel>> insertSeller(@Body UserModel user);
 
-    @PATCH("/user")
-    Call<Response<String>> updateUser(@Body UserModel userModel,
-                                      @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);
-
     @PATCH(value = "/user/college")
     Call<Response<String>> updateUserCollegeData(@Body UserCollegeModel userCollegeModel,
                                                  @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);

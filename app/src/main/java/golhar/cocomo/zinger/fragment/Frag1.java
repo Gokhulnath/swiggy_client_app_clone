@@ -23,7 +23,7 @@ public class Frag1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.frag1,container,false);
-        ImageView iv_image=view.findViewById(R.id.iv_frag1);
+        ImageView iv_image=view.findViewById(R.id.frag1IV);
         iv_image.setImageResource(R.drawable.img1);
 
         TextView tv_text=view.findViewById(R.id.Frag1TV);
@@ -31,7 +31,7 @@ public class Frag1 extends Fragment {
         YoYo.with(Techniques.Shake)
                 .duration(900)
                 .repeat(2)
-                .playOn(view.findViewById(R.id.iv_frag1));
+                .playOn(view.findViewById(R.id.frag1IV));
 
 
         return view;

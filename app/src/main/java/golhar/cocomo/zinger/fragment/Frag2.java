@@ -25,7 +25,7 @@ public class Frag2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.frag1,container,false);
-        iv_image=view.findViewById(R.id.iv_frag1);
+        iv_image=view.findViewById(R.id.frag1IV);
         iv_image.setImageResource(R.drawable.img2);
 
         TextView tv_text=view.findViewById(R.id.Frag1TV);

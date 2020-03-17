@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,31 +10,30 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_520sdp"></androidx.viewpager.widget.ViewPager>
+        android:layout_height="@dimen/_520sdp" />
 
     <TextView
         android:id="@+id/word1TV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/viewPager"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:gravity="center_horizontal"
         android:text="Ready to order from canteens within your campus?"
         android:textAlignment="center"
         android:textColor="#C0C0C0"
-        android:gravity="center_horizontal"
-        android:textSize="@dimen/_10ssp"
-        android:layout_marginTop="@dimen/_15sdp"/>
+        android:textSize="@dimen/_10ssp" />
 
     <Button
         android:id="@+id/loginB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/word1TV"
-        android:gravity="center_vertical"
         android:layout_centerHorizontal="true"
-        android:text="LOGIN"
-        android:textStyle="bold"
-        android:textSize="@dimen/_15ssp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:paddingHorizontal="@dimen/_30sdp"></Button>
-=
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/_30sdp"
+        android:text="LOGIN"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold" />
 </RelativeLayout>

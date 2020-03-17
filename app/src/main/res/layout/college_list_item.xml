@@ -10,8 +10,7 @@
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/_15sdp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/collegeProfileImageCIV"
             android:layout_width="@dimen/_60sdp"
             android:layout_height="@dimen/_60sdp"

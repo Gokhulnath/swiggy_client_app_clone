@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,24 +10,25 @@
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="30dp"
         android:background="#ADD8E6"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/_15sdp"
+        android:paddingTop="30dp"
         android:paddingBottom="@dimen/_20sdp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="VERIFY DETAILS"
-            android:textSize="@dimen/_15ssp"
-            android:textStyle="bold"
             android:textColor="#000000"
-            ></TextView>
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/numberTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="OTP sent to XXXXXXXXX"></TextView>
+            android:text="OTP sent to XXXXXXXXX" />
     </LinearLayout>
 
     <LinearLayout
@@ -36,87 +36,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll1"
-        android:orientation="vertical"
         android:layout_marginTop="@dimen/_40sdp"
-        android:paddingLeft="@dimen/_15sdp">
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_15sdp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Enter OTP"
-            android:textSize="@dimen/_15ssp"
-            android:textStyle="bold"
             android:textColor="#000000"
-            ></TextView>
-        <LinearLayout
-            android:id="@+id/layout_otp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"
-        android:layout_below="@+id/layout_header"
-        android:orientation="horizontal" 
-            android:gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_15sdp">
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/editTextoneET"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_32sdp"
-        android:inputType="numberPassword"
-        android:maxLength="1"
-        android:nextFocusRight="@+id/editText_two">
 
-        <requestFocus />
-    </EditText>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otpTIL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:errorEnabled="true">
 
-    <EditText
-        android:id="@+id/editTexttwoET"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_32sdp"
-    android:inputType="numberPassword"
-    android:maxLength="1"/>
-
-    <EditText
-        android:id="@+id/editTextthreeET"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_32sdp"
-    android:inputType="numberPassword"
-    android:maxLength="1"/>
-
-    <EditText
-        android:id="@+id/editTextfourET"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_32sdp"
-    android:inputType="numberPassword"
-    android:maxLength="1"/>
-            
-            <EditText
-                android:id="@+id/editTextfiveET"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_32sdp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otpTIET"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
                 android:inputType="numberPassword"
-                android:maxLength="1"/>
+                android:maxLength="6"
+                android:textSize="@dimen/_20ssp" />
 
-            <EditText
-                android:id="@+id/editTextsixET"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_32sdp"
-                android:inputType="numberPassword"
-                android:maxLength="1"/>
 
-</LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/otp_verfiedB"
+        android:id="@+id/otpVerfiedB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll2"
         android:layout_centerHorizontal="true"
-        android:text="VERIFY OTP"
-        android:textStyle="bold"
-        android:textSize="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:paddingHorizontal="15dp"
-        android:layout_marginHorizontal="20dp"></Button>
+        android:text="VERIFY OTP"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
 
 </RelativeLayout>

@@ -40,7 +40,6 @@ public class CollegeListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_college_list);
 
         collegeName = (EditText) findViewById(R.id.collegeNameET);
-
         collegeAdapter = new RecyclerViewCollegeListAdapter(new ArrayList<>(), this);
         itemListRV = findViewById(R.id.itemListRV);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -50,7 +49,6 @@ public class CollegeListActivity extends AppCompatActivity {
         collegeName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -66,7 +64,6 @@ public class CollegeListActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
