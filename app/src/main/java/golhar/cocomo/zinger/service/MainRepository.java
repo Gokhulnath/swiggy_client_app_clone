@@ -16,11 +16,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainRepository {
 
-    public static OrderService getService() {
+    public static String BASE_URL = "https://food-backend-ssn.herokuapp.com";
+
+    public static OrderService getOrderService() {
         Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTypeDeserializer()).create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                                .baseUrl(MainService.BASE_URL)
+                                .baseUrl(BASE_URL)
                                 .addConverterFactory(GsonConverterFactory.create(gson))
                                 .build();
 
@@ -31,7 +33,7 @@ public class MainRepository {
         Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTypeDeserializer()).create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MainService.BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
@@ -42,7 +44,7 @@ public class MainRepository {
         Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTypeDeserializer()).create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MainService.BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

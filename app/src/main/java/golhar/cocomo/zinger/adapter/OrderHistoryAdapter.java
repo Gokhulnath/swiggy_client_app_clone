@@ -1,30 +1,26 @@
 package golhar.cocomo.zinger.adapter;
 
-import java.util.Date;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.model.OrderItemListModel;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import golhar.cocomo.zinger.model.OrderItemModel;
 
 
-public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.DemoHolder> {
+public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderHolder> {
 
 
-    DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyy hh:mm:ss");
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
     List<OrderItemListModel> itemList;
     Context context;
 
@@ -35,25 +31,34 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
     @NonNull
     @Override
-    public DemoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_history_row, parent, false);
-        DemoHolder demoHolder = new DemoHolder(v);
-        return demoHolder;
+        OrderHolder orderHolder = new OrderHolder(v);
+        return orderHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DemoHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrderHolder holder, int position) {
 
         final OrderItemListModel orderItemListModel = itemList.get(position);
 
-        holder.hotel_name.setText(orderItemListModel.getOrderModel().getShopModel().getName());
+        holder.hotelNameTV.setText(orderItemListModel.getOrderModel().getShopModel().getName());
         holder.hotel_price.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
         holder.hotel_status.setText(String.valueOf(orderItemListModel.getOrderModel().getOrderStatus()));
         holder.order_date.setText(dateFormat.format(orderItemListModel.getOrderModel().getDate()));
-        holder.order_items.setText((CharSequence) orderItemListModel.getOrderItemsList());
+        String item_name, item, Quantity, temp_item;
+        item = "";
+      //  Toast.makeText(context, getItemCount(), Toast.LENGTH_SHORT).show();
+        List<OrderItemModel> orderItemList= orderItemListModel.getOrderItemsList();
+        for (int i = 0; i < orderItemList.size(); i++) {
+            Quantity = orderItemList.get(i).getQuantity().toString();
+            item_name = orderItemList.get(i).getItemModel().getName();
+            temp_item = item_name + "x" + Quantity + " ,";
+            item = item.concat(temp_item);
+        }
+        holder.order_items.setText(item);
+        //TODO run a loop and print with quantity
         holder.order_yourrating.setText(String.valueOf(orderItemListModel.getOrderModel().getRating()));
-
-
     }
 
     @Override
@@ -61,24 +66,26 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         return itemList.size();
     }
 
-    public class DemoHolder extends RecyclerView.ViewHolder {
+    public class OrderHolder extends RecyclerView.ViewHolder {
 
-        TextView hotel_name;
+        TextView hotelNameTV;
         TextView hotel_price;
         TextView hotel_status;
         TextView order_items;
         TextView order_date;
         TextView order_yourrating;
 
-        public DemoHolder(@NonNull View itemView) {
-            super(itemView);
-            hotel_name = itemView.findViewById(R.id.hotel_nameTV);
-            hotel_price = itemView.findViewById(R.id.hotel_priceTV);
-            hotel_status = itemView.findViewById(R.id.hotel_statusTV);
-            order_items = itemView.findViewById(R.id.order_itemsTV);
-            order_date = itemView.findViewById(R.id.order_dateTV);
-            order_yourrating = itemView.findViewById(R.id.order_yourratingTV);
 
+//TODO camelcase all names and rename xml variables, remove empty line
+        //TODO ratefoodBT based on if statement
+        public OrderHolder(@NonNull View itemView) {
+            super(itemView);
+            hotelNameTV = itemView.findViewById(R.id.hotelNameTV);
+            hotel_price = itemView.findViewById(R.id.hotelPriceTV);
+            hotel_status = itemView.findViewById(R.id.hotelStatusTV);
+            order_items = itemView.findViewById(R.id.orderItemsTV);
+            order_date = itemView.findViewById(R.id.orderDateTV);
+            order_yourrating = itemView.findViewById(R.id.orderRatingTV);
         }
     }
 }

@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import golhar.cocomo.zinger.adapter.OrderHistoryAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.OrderItemListModel;
-import golhar.cocomo.zinger.model.OrderModel;
 import golhar.cocomo.zinger.service.MainRepository;
 import golhar.cocomo.zinger.utils.ErrorLog;
 import golhar.cocomo.zinger.utils.Response;
@@ -28,12 +27,12 @@ public class OrderHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
         ArrayList<OrderItemListModel> orderItemListModelArrayList=new ArrayList<>();
-        order_listRV=findViewById(R.id.order_listRV);
+        order_listRV=findViewById(R.id.orderListRV);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         order_listRV.setLayoutManager(linearLayoutManager);
 
-        MainRepository.getService().getOrderByMobile("9566220635",1,5,"auth_9566220635",
+        MainRepository.getOrderService().getOrderByMobile("9566220635",1,5,"auth_9566220635",
                 "9566220635", UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<OrderItemListModel>>>() {
             @Override
             public void onResponse(Call<Response<List<OrderItemListModel>>> call, retrofit2.Response<Response<List<OrderItemListModel>>> response) {
@@ -48,7 +47,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 }else{
                     Log.d("RetroFit","errorr");
                 }
-
             }
 
             @Override
