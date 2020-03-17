@@ -39,6 +39,7 @@ TextView college_Name;
         college_Name=(TextView)findViewById(R.id.collegeTV);
         college_Name.setText(collegeName);
         SharedPref.remove(getApplicationContext(),"selected_college");
+        SharedPref.remove(getApplicationContext(),"selected_college_id");
     }
 
 }

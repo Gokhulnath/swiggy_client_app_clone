@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingHorizontal="@dimen/_15sdp"
-    android:layout_marginTop="@dimen/_15sdp">
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/CollegeProfileImageCIV"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
-        android:src="@mipmap/ic_launcher"
-        app:civ_border_width="@dimen/_2sdp"
-        app:civ_border_color="#FF000000"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <TextView
-        android:id="@+id/CollegNameTV"
-        android:layout_below="@+id/food_itemIV"
-        android:paddingLeft="@dimen/_15sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_15ssp"
-        android:layout_toRightOf="@id/CollegeProfileImageCIV"
-        android:text="ssn"
-        android:textStyle="bold"
-        android:textColor="#000000"/>
+        android:layout_marginTop="@dimen/_15sdp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_15sdp">
 
-       <TextView
-            android:id="@+id/CollegeAddressTV"
-            android:layout_below="@+id/CollegNameTV"
-            android:paddingLeft="@dimen/_15sdp"
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/collegeProfileImageCIV"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="@dimen/_2sdp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_12ssp"
-            android:text="Kalavakkam"
-           android:textColor="#000000"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/collegeNameTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_15sdp"
+                android:text="ssn"
+                android:textColor="#000000"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/collegeAddressTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_15sdp"
+                android:text="Kalavakkam"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
 
 </RelativeLayout>
