@@ -2,34 +2,23 @@ package golhar.cocomo.zinger;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import java.util.List;
-
 import golhar.cocomo.zinger.adapter.ViewPageAdapter;
+import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.fragment.Frag1;
 import golhar.cocomo.zinger.fragment.Frag2;
 import golhar.cocomo.zinger.fragment.Frag3;
-import golhar.cocomo.zinger.enums.UserRole;
-import golhar.cocomo.zinger.model.OrderModel;
-import golhar.cocomo.zinger.model.UserCollegeModel;
 import golhar.cocomo.zinger.model.UserModel;
-import golhar.cocomo.zinger.service.MainRepository;
-import golhar.cocomo.zinger.utils.ErrorLog;
-import golhar.cocomo.zinger.utils.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView Login_tv;
-    Button location;
+
+    Button login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,22 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adpater);
 
-        Login_tv = (TextView) findViewById(R.id.LoginTV);
-        Login_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Login_activity = new Intent(MainActivity.this,Login.class);
-                startActivity(Login_activity);
-                //startActivity(new Intent(this, RecyclerViewDemoActivity.class));
-            }
-        });
 
-        location = (Button) findViewById(R.id.locationB);
-        location.setOnClickListener(new View.OnClickListener() {
+        login = (Button) findViewById(R.id.loginB);
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent college_loco = new Intent(MainActivity.this,CollegeList.class);
-                startActivity(college_loco);
+                Intent login = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(login);
             }
         });
 
@@ -91,26 +71,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        /* Mahima Example
-        MainRepository.getService().getOrderByMobile("9566220635",1,5,"auth_9566220635",
-                "9566220635",UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<OrderModel>>>() {
-            @Override
-            public void onResponse(Call<Response<List<OrderModel>>> call, retrofit2.Response<Response<List<OrderModel>>> response) {
 
-                Response<List<OrderModel>> responseFromServer=response.body();
-
-                if(responseFromServer.getCode().equals(ErrorLog.CodeSuccess)&&responseFromServer.getMessage().equals(ErrorLog.Success)){
-                    Log.d("RetroFit",responseFromServer.toString());
-                }else{
-                    Log.d("RetroFit","errorr");
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Response<List<OrderModel>>> call, Throwable t) {
-                Log.d("RetroFit","errorr");
-            }
-        });*/
     }
 }

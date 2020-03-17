@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".CollegeList"></activity>
+        <activity android:name=".OrderHistoryActivity"></activity>
+        <activity android:name=".CollegeListActivity" />
         <activity android:name=".RecyclerViewDemoActivity" />
-        <activity android:name=".Registration" />
-        <activity android:name=".otp_Verification" />
-        <activity android:name=".Login" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".OtpVerificationActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

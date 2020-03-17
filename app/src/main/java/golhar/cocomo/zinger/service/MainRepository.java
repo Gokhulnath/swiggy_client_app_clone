@@ -10,14 +10,13 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainRepository {
 
-    public static MainService getService() {
+    public static OrderService getService() {
         Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTypeDeserializer()).create();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -25,7 +24,29 @@ public class MainRepository {
                                 .addConverterFactory(GsonConverterFactory.create(gson))
                                 .build();
 
-        return (MainService) retrofit.create(MainService.class);
+        return (OrderService) retrofit.create(OrderService.class);
+    }
+
+    public static CollegeService getCollegeService() {
+        Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTypeDeserializer()).create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(MainService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        return (CollegeService) retrofit.create(CollegeService.class);
+    }
+
+    public static UserService getUserService() {
+        Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTypeDeserializer()).create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(MainService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        return (UserService) retrofit.create(UserService.class);
     }
 
     public static class DateTypeDeserializer implements JsonDeserializer<Date> {
