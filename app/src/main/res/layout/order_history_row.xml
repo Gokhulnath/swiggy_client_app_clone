@@ -5,166 +5,146 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:padding="@dimen/_10sdp"
     android:visibility="visible">
 
 
     <RelativeLayout
-        android:id="@+id/order"
+        android:id="@+id/orderRV"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pastorders">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/hotel"
+            android:id="@+id/hotelRV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="@dimen/_10sdp">
 
             <TextView
-                android:id="@+id/hotel_name"
+                android:id="@+id/hotel_nameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="Gangotree"
-                android:textSize="20dp"
+                android:textSize="@dimen/_20sdp"
                 android:textStyle="bold">
-
-
             </TextView>
-
-
 
             <TextView
                 android:id="@+id/hotel_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/hotel_name"
-                android:layout_marginTop="5dp"
+                android:layout_below="@+id/hotel_nameTV"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:text="₹250">
-
             </TextView>
 
             <ImageView
-                android:id="@+id/Hotel_tick"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
+                android:id="@+id/Hotel_tickIV"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-
-                android:layout_marginTop="3dp"
-
+                android:layout_marginTop="@dimen/_3sdp"
                 android:src="@drawable/ic_check_circle">
-
             </ImageView>
 
             <TextView
-                android:id="@+id/hotel_status"
+                android:id="@+id/hotel_statusTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_toLeftOf="@id/Hotel_tick"
-                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/Hotel_tickIV"
+                android:layout_marginRight="@dimen/_15sdp"
                 android:text="Picked-up">
-
             </TextView>
-
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_below="@id/hotel"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_below="@id/hotelRV"
             android:background="@drawable/dash_line"
             android:layerType="software" />
 
         <RelativeLayout
-            android:id="@+id/order_details"
+            android:id="@+id/order_detailsRV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/hotel">
+            android:layout_below="@id/hotelRV">
 
             <TextView
-                android:id="@+id/order_items"
+                android:id="@+id/order_itemsTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:text="Sev Puri x1, Dahi Papri Chaat x 1"
-                android:textSize="15dp">
-
+                android:textSize="@dimen/_12ssp">
             </TextView>
 
             <TextView
-                android:id="@+id/order_date"
+                android:id="@+id/order_dateTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/order_items"
-                android:layout_marginTop="5dp"
+                android:layout_below="@+id/order_itemsTV"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:text="March 5, 5:45 PM">
-
             </TextView>
 
             <Button
-                android:id="@+id/but_reorder"
-                android:layout_width="126dp"
+                android:id="@+id/but_reorderBT"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/order_date"
-                android:layout_marginTop="15dp"
+                android:layout_below="@+id/order_dateTV"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:background="#fff"
-                android:padding="5dp"
+                android:padding="@dimen/_8sdp"
                 android:text="REORDER"
                 android:textColor="#ff6600"></Button>
 
             <Button
                 android:id="@+id/but_rate"
-                android:layout_width="126dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/order_date"
-                android:layout_marginLeft="44dp"
-                android:layout_marginTop="15dp"
-                android:layout_toRightOf="@+id/but_reorder"
+                android:layout_below="@+id/order_dateTV"
+                android:layout_marginLeft="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_toRightOf="@+id/but_reorderBT"
                 android:background="#fff"
-                android:padding="5dp"
-
+                android:padding="@dimen/_8sdp"
                 android:text="RATE FOOD">
-
             </Button>
 
             <TextView
-                android:id="@+id/order_rate"
+                android:id="@+id/order_rateTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/but_rate"
-                android:padding="5dp"
+                android:layout_below="@id/but_reorderBT"
+                android:padding="@dimen/_5sdp"
                 android:text="Your food rating">
-
             </TextView>
 
             <ImageView
-                android:id="@+id/star_img"
-                android:layout_width="32dp"
-                android:layout_height="23dp"
-                android:layout_below="@id/order_rate"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="3dp"
+                android:id="@+id/star_imgIV"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_below="@id/order_rateTV"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:src="@drawable/ic_star">
-
             </ImageView>
 
             <TextView
-                android:id="@+id/order_yourrating"
-                android:layout_width="31dp"
-                android:layout_height="26dp"
-                android:layout_below="@id/order_rate"
-                android:layout_marginLeft="-65dp"
-                android:layout_marginTop="-1dp"
-                android:layout_toRightOf="@id/order_rate"
+                android:id="@+id/order_yourratingTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/order_rateTV"
+                android:layout_marginLeft="-57dp"
+                android:layout_toRightOf="@id/order_rateTV"
                 android:text="4"
-                android:textSize="20sp"
+                android:textSize="@dimen/_18ssp"
                 android:textStyle="bold">
-
             </TextView>
-
         </RelativeLayout>
     </RelativeLayout>
-
 </RelativeLayout>
