@@ -59,7 +59,7 @@ public class RegistrationActivity extends AppCompatActivity {
         collegeTV.setText(collegeName);
         SharedPref.remove(getApplicationContext(), "selected_college");
         SharedPref.remove(getApplicationContext(), "selected_college_id");
-
+//todo put toast for college value null
         registerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

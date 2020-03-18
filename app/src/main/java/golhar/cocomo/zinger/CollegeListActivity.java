@@ -27,7 +27,6 @@ import golhar.cocomo.zinger.utils.SharedPref;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-//TODO check the naming conventions.......DONE
 public class CollegeListActivity extends AppCompatActivity {
     RecyclerView itemListRV;
     RecyclerViewCollegeListAdapter collegeAdapter;
@@ -67,7 +66,7 @@ public class CollegeListActivity extends AppCompatActivity {
             }
         });
 
-        //TODO dynamic header value.....DONE
+        //todo shared pref use dont use _
         String phoneNumber = SharedPref.getString(getApplicationContext(), "phone_number");
         String authid = SharedPref.getString(getApplicationContext(),"authId");
         MainRepository.getCollegeService().getAllColleges(authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {

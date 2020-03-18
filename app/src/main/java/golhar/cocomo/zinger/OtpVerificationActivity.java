@@ -40,6 +40,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
     private PhoneAuthProvider phoneAuth;
     private String verificationId;
 
+    //todo use BT instead of B
     Button otpVerifiedB;
     Button sendOtpB;
     TextView numberTV;
@@ -54,9 +55,8 @@ public class OtpVerificationActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         phoneAuth = PhoneAuthProvider.getInstance();
-        int firebaseResponse = 1; //Temp for firebase authentication
         phNumber = SharedPref.getString(getApplicationContext(), "phone_number");
-        otpVerifiedB = (Button) findViewById(R.id.otpVerifiedB);
+        otpVerifiedB = (Button) findViewById(R.id.otpVerifiedB); //todo remove all typecast
         numberTV = (TextView) findViewById(R.id.numberTV);
         numberTV.setText("OTP sent to " + phNumber);
         otpTIET = (TextInputEditText) findViewById(R.id.otpTIET);
@@ -64,7 +64,6 @@ public class OtpVerificationActivity extends AppCompatActivity {
         sendOtpB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 sendOtpB.setEnabled(false);
                 new CountDownTimer(10000, 1000) {
                     public void onTick(long millisUntilFinished) {
@@ -139,22 +138,22 @@ public class OtpVerificationActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(OtpVerificationActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                    authId=FirebaseAuth.getInstance().getUid();
-                    SharedPref.putString(getApplicationContext(),"authId",authId);
+                    authId = FirebaseAuth.getInstance().getUid();
+                    SharedPref.putString(getApplicationContext(), "authId", authId);
                     UserModel userModel = new UserModel();
                     userModel.setMobile(phNumber);
                     userModel.setOauthId(authId);
                     userModel.setRole(UserRole.CUSTOMER);
-                    userModel.setIsDelete(0);
                     MainRepository.getUserService().insertCustomer(userModel).enqueue(new Callback<Response<UserCollegeModel>>() {
                         @Override
                         public void onResponse(Call<Response<UserCollegeModel>> call, retrofit2.Response<Response<UserCollegeModel>> response) {
                             Response<UserCollegeModel> userDataResponse = response.body();
                             if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.Success)) {
-                                SharedPref.putString(getApplicationContext(),"userName",userDataResponse.getData().getUserModel().getName());
-                                SharedPref.putString(getApplicationContext(),"userEmail",userDataResponse.getData().getUserModel().getEmail());
-                                SharedPref.putInt(getApplicationContext(),"collegeId",userDataResponse.getData().getCollegeModel().getId());
-                                SharedPref.putInt(getApplicationContext(),"loginStatus",1);
+                                SharedPref.putString(getApplicationContext(), "userName", userDataResponse.getData().getUserModel().getName());
+                                SharedPref.putString(getApplicationContext(), "userEmail", userDataResponse.getData().getUserModel().getEmail());
+                                SharedPref.putInt(getApplicationContext(), "collegeId", userDataResponse.getData().getCollegeModel().getId());
+                                //todo store all important data
+                                SharedPref.putInt(getApplicationContext(), "loginStatus", 1);
                                 Intent shopList = new Intent(OtpVerificationActivity.this, ShopListActivity.class);
                                 startActivity(shopList);
                             } else {
@@ -170,7 +169,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Response<UserCollegeModel>> call, Throwable t) {
-
+                                            //todo toast failure
                         }
                     });
                 } else {

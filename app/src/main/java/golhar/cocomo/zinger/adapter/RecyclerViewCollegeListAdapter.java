@@ -78,7 +78,6 @@ public class RecyclerViewCollegeListAdapter extends RecyclerView.Adapter<Recycle
 
     public class CollegeNameHolder extends RecyclerView.ViewHolder {
 
-        //TODO put variable name as same as layout name.......DONE
         TextView collegeNameTV;
         TextView collegeAddressTV;
         CircleImageView collegeProfileImageCIV;

@@ -14,8 +14,6 @@ public class CommonUtils {
 
     public static void hideKeyboard(Activity activity){
 
-        // todo refactor
-
         try {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             View view = activity.getCurrentFocus();
