@@ -32,7 +32,7 @@
                 android:layout_below="@+id/userNameTV"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:padding="@dimen/_5sdp"
-                android:text="9090654232345" />
+                android:text="9090654232" />
 
             <TextView
                 android:id="@+id/userEmail"
@@ -131,10 +131,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/viewMoreBT"
+                android:layout_alignParentBottom="true"
                 android:background="#fff"
                 android:paddingLeft="@dimen/_8sdp"
                 android:text="LOGOUT"
-                android:layout_alignParentBottom="true"
                 android:textAlignment="textStart"
                 android:textColor="#000" />
         </RelativeLayout>

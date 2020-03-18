@@ -1,5 +1,9 @@
 package golhar.cocomo.zinger;
 
+import android.os.Bundle;
+import android.util.Log;
+import java.util.ArrayList;
+import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,53 +13,47 @@ import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.service.MainRepository;
 import golhar.cocomo.zinger.utils.ErrorLog;
 import golhar.cocomo.zinger.utils.Response;
+import golhar.cocomo.zinger.utils.SharedPref;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-import android.os.Bundle;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class OrderHistoryActivity extends AppCompatActivity {
     OrderHistoryAdapter orderHistoryAdapter;
-    RecyclerView order_listRV;
+    RecyclerView orderListRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
-        ArrayList<OrderItemListModel> orderItemListModelArrayList=new ArrayList<>();
-        order_listRV=findViewById(R.id.orderListRV);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        ArrayList<OrderItemListModel> orderItemListModelArrayList = new ArrayList<>();
+        orderListRV = findViewById(R.id.orderListRV);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        order_listRV.setLayoutManager(linearLayoutManager);
+        orderListRV.setLayoutManager(linearLayoutManager);
 
-        MainRepository.getOrderService().getOrderByMobile("9566220635",1,5,"auth_9566220635",
-                "9566220635", UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<OrderItemListModel>>>() {
+        String phoneNo, authId;
+        phoneNo= SharedPref.getString(getApplicationContext(),"phone_number");
+        authId=SharedPref.getString(getApplicationContext(),"authId");
+        MainRepository.getOrderService().getOrderByMobile(phoneNo, 1, 5, authId,
+                phoneNo, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<OrderItemListModel>>>() {
             @Override
             public void onResponse(Call<Response<List<OrderItemListModel>>> call, retrofit2.Response<Response<List<OrderItemListModel>>> response) {
 
-                Response<List<OrderItemListModel>> responseFromServer=response.body();
+                Response<List<OrderItemListModel>> responseFromServer = response.body();
+                if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)) {
+                    Log.d("RetroFit", responseFromServer.toString());
+                    orderHistoryAdapter = new OrderHistoryAdapter(responseFromServer.getData(), getApplicationContext());
+                    orderListRV.setAdapter(orderHistoryAdapter);
 
-                if(responseFromServer.getCode().equals(ErrorLog.CodeSuccess)&&responseFromServer.getMessage().equals(ErrorLog.Success)){
-                    Log.d("RetroFit",responseFromServer.toString());
-                    orderHistoryAdapter=new OrderHistoryAdapter(responseFromServer.getData(),getApplicationContext());
-                    order_listRV.setAdapter(orderHistoryAdapter);
-
-                }else{
-                    Log.d("RetroFit","errorr");
+                } else {
+                    Log.d("RetroFit", "error");
                 }
             }
 
             @Override
             public void onFailure(Call<Response<List<OrderItemListModel>>> call, Throwable t) {
-                Log.d("RetroFit","errorr");
+                Log.d("RetroFit", "error");
             }
         });
-
-
-
     }
 }

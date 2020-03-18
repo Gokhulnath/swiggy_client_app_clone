@@ -1,4 +1,5 @@
 package golhar.cocomo.zinger.adapter;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,14 +42,14 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         holder.hotelPriceTV.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
         holder.hotelStatusTV.setText(String.valueOf(orderItemListModel.getOrderModel().getOrderStatus()));
         holder.orderDateTV.setText(dateFormat.format(orderItemListModel.getOrderModel().getDate()));
-        String item_name, item, Quantity, temp_item;
+        String itemName, item, Quantity, tempItem;
         item = "";
-        List<OrderItemModel> orderItemList= orderItemListModel.getOrderItemsList();
+        List<OrderItemModel> orderItemList = orderItemListModel.getOrderItemsList();
         for (int i = 0; i < orderItemList.size(); i++) {
             Quantity = orderItemList.get(i).getQuantity().toString();
-            item_name = orderItemList.get(i).getItemModel().getName();
-            temp_item = item_name + "x" + Quantity + " ,";
-            item = item.concat(temp_item);
+            itemName = orderItemList.get(i).getItemModel().getName();
+            tempItem = itemName + "x" + Quantity + " ,";
+            item = item.concat(tempItem);
         }
         holder.orderItemTV.setText(item);
         holder.orderRatingTV.setText(String.valueOf(orderItemListModel.getOrderModel().getRating()));
@@ -78,14 +79,11 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             orderRatingTV = itemView.findViewById(R.id.orderRatingTV);
 
             Button rateBT = itemView.findViewById(R.id.rateBT);
-            rateBT.setVisibility(View.GONE);
-            if(String.valueOf(orderRatingTV).equals("0.0"))
-            {
-              rateBT.setVisibility(View.VISIBLE);
-            }
-            else
-            {
+            rateBT.setVisibility(View.VISIBLE);
+            if (String.valueOf(orderRatingTV).equals("0.0")) {
                 rateBT.setVisibility(View.GONE);
+            } else {
+                rateBT.setVisibility(View.VISIBLE);
             }
         }
     }
