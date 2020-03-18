@@ -1,7 +1,5 @@
 package golhar.cocomo.zinger.model;
-
 import java.util.List;
-
 public class OrderItemListModel {
 
     OrderModel orderModel;
