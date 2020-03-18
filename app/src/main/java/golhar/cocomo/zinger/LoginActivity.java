@@ -13,26 +13,26 @@ import golhar.cocomo.zinger.utils.SharedPref;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button phnOtpB;
-    TextInputEditText otpTIET;
+    Button verifyB;
+    TextInputEditText phoneNumberTIET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        otpTIET = (TextInputEditText) findViewById(R.id.otpTIET);
-        phnOtpB = (Button) findViewById(R.id.phnOtpB);
-        phnOtpB.setOnClickListener(new View.OnClickListener() {
+        phoneNumberTIET = (TextInputEditText) findViewById(R.id.phoneNumberTIET);
+        verifyB = (Button) findViewById(R.id.verifyB);
+        verifyB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNumber = otpTIET.getText().toString();
-                if (phoneNumber.length() == 10 && phoneNumber != null) {
-                    SharedPref.putString(getApplicationContext(), "phone_number", phoneNumber);
+                String phNumber = phoneNumberTIET.getText().toString();
+                if (phNumber.length() == 10 && phNumber != null) {
+                    SharedPref.putString(getApplicationContext(), "phone_number", phNumber);
                     Intent otp = new Intent(LoginActivity.this, OtpVerificationActivity.class);
                     startActivity(otp);
                 } else {
-                    otpTIET.setError("Please enter valid phone number");
+                    phoneNumberTIET.setError("Please enter valid phone number");
                 }
             }
         });

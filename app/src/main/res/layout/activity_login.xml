@@ -36,14 +36,14 @@
             android:text="Enter your phone number to proceed" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/otpTIL"
+            android:id="@+id/phoneNumberTIL"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/otpTIET"
+                android:id="@+id/phoneNumberTIET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="10 digit mobile number"
@@ -53,13 +53,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/phnOtpB"
+            android:id="@+id/verifyB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_15sdp"
             android:paddingHorizontal="@dimen/_15sdp"
-            android:text="GET OTP"
+            android:text="VERIFY"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold" />
 

@@ -74,7 +74,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/otpVerfiedB"
+        android:id="@+id/otpVerifiedB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll2"
@@ -83,6 +83,19 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:paddingHorizontal="15dp"
         android:text="VERIFY OTP"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/sendOtpB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/otpVerifiedB"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:paddingHorizontal="15dp"
+        android:text="SEND OTP"
         android:textSize="20dp"
         android:textStyle="bold" />
 

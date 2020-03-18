@@ -48,7 +48,7 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         String phoneNumber = SharedPref.getString(getApplicationContext(), "phone_number");
-        String authId = "auth_" + phoneNumber;
+        String authId = SharedPref.getString(getApplicationContext(), "authId");
         int collegeID;
         String collegeName;
         nameTIET = (TextInputEditText) findViewById(R.id.nameTIET);

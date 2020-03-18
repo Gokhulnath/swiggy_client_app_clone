@@ -69,7 +69,8 @@ public class CollegeListActivity extends AppCompatActivity {
 
         //TODO dynamic header value.....DONE
         String phoneNumber = SharedPref.getString(getApplicationContext(), "phone_number");
-        MainRepository.getCollegeService().getAllColleges("auth_" + phoneNumber, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {
+        String authid = SharedPref.getString(getApplicationContext(),"authId");
+        MainRepository.getCollegeService().getAllColleges(authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {
             @Override
             public void onResponse(Call<Response<List<CollegeModel>>> call, retrofit2.Response<Response<List<CollegeModel>>> response) {
                 Response<List<CollegeModel>> responseFromServer = response.body();
