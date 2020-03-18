@@ -48,12 +48,20 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         for (int i = 0; i < orderItemList.size(); i++) {
             Quantity = orderItemList.get(i).getQuantity().toString();
             itemName = orderItemList.get(i).getItemModel().getName();
-            tempItem = itemName + "x" + Quantity + " ,";
+            tempItem = itemName + "x" + Quantity + "   ";
             item = item.concat(tempItem);
         }
         holder.orderItemTV.setText(item);
         holder.orderRatingTV.setText(String.valueOf(orderItemListModel.getOrderModel().getRating()));
+        if (String.valueOf(holder.orderRatingTV.getText()).equals("0.0")) {
+            holder.rateBT.setVisibility(View.VISIBLE);
+            holder.orderRatingTV.setVisibility(View.GONE);
+        } else {
+            holder.rateBT.setVisibility(View.GONE);
+            holder.orderRatingTV.setVisibility(View.VISIBLE);
+        }
     }
+    //todo don"t show star when food rating not available
 
     @Override
     public int getItemCount() {
@@ -68,6 +76,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         TextView orderItemTV;
         TextView orderDateTV;
         TextView orderRatingTV;
+        Button rateBT;
 
         public OrderHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,14 +86,8 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             orderItemTV = itemView.findViewById(R.id.orderItemsTV);
             orderDateTV = itemView.findViewById(R.id.orderDateTV);
             orderRatingTV = itemView.findViewById(R.id.orderRatingTV);
+            rateBT = itemView.findViewById(R.id.rateBT);
 
-            Button rateBT = itemView.findViewById(R.id.rateBT);
-            rateBT.setVisibility(View.VISIBLE);
-            if (String.valueOf(orderRatingTV).equals("0.0")) {
-                rateBT.setVisibility(View.GONE);
-            } else {
-                rateBT.setVisibility(View.VISIBLE);
-            }
         }
     }
 }

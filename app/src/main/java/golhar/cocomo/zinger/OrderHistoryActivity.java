@@ -36,9 +36,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
-        userNameTV = (TextView) findViewById(R.id.userNameTV);
-        userNumTV = (TextView) findViewById(R.id.userNumTV);
-        userEmailTV = (TextView) findViewById(R.id.userEmailTV);
+        userNameTV = findViewById(R.id.userNameTV);
+        userNumTV =  findViewById(R.id.userNumTV);
+        userEmailTV = findViewById(R.id.userEmailTV);
 
         String phoneNo, authId, email, userName;
         phoneNo = SharedPref.getString(getApplicationContext(), "phone_number");
@@ -48,19 +48,15 @@ public class OrderHistoryActivity extends AppCompatActivity {
         userNameTV.setText(userName);
         userEmailTV.setText(email);
         userNumTV.setText(phoneNo);
-        ArrayList<OrderItemListModel> orderItemListModelArrayList = new ArrayList<>();
         orderListRV = findViewById(R.id.orderListRV);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         orderListRV.setLayoutManager(linearLayoutManager);
-        logoutBT = (Button) findViewById(R.id.logoutBT);
-        logoutBT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPref.putInt(getApplicationContext(), "loginStatus", 0);
-                Intent MainActivity = new Intent(OrderHistoryActivity.this, golhar.cocomo.zinger.MainActivity.class);
-                startActivity(MainActivity);
-            }
+        logoutBT = findViewById(R.id.logoutBT);
+        logoutBT.setOnClickListener(view -> {
+            SharedPref.putInt(getApplicationContext(), "loginStatus", 0);
+            Intent MainActivity = new Intent(OrderHistoryActivity.this, golhar.cocomo.zinger.MainActivity.class);
+            startActivity(MainActivity);
         });
 
         MainRepository.getOrderService().getOrderByMobile(phoneNo, 1, 5, authId,
