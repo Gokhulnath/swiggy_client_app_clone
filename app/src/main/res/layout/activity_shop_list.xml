@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_15sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,15 +20,17 @@
             android:gravity="right">
 
             <EditText
-                android:layout_width="@dimen/_250sdp"
+                android:layout_width="@dimen/_240sdp"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/_15ssp"
                 android:hint="Search"
-                android:drawableLeft="@drawable/ic_search_"/>
+                android:drawableLeft="@drawable/ic_search_"
+                />
 
             <Button
                 android:id="@+id/accountB"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/ic_account_box" />
         </LinearLayout>
     </LinearLayout>

@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         if (loginStatus == 1) {
             Intent shopList = new Intent(MainActivity.this, ShopListActivity.class);
             startActivity(shopList);
+            finish();
         } else {
             ViewPager viewPager = findViewById(R.id.viewPager);
 
@@ -48,5 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent shopList = new Intent(MainActivity.this, ShopListActivity.class);
+        startActivity(shopList);
     }
 }
