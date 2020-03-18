@@ -51,7 +51,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             item = item.concat(temp_item);
         }
         holder.orderItemTV.setText(item);
-        holder.orderYourratingTV.setText(String.valueOf(orderItemListModel.getOrderModel().getRating()));
+        holder.orderRatingTV.setText(String.valueOf(orderItemListModel.getOrderModel().getRating()));
     }
 
     @Override
@@ -66,9 +66,8 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         TextView hotelStatusTV;
         TextView orderItemTV;
         TextView orderDateTV;
-        TextView orderYourratingTV;
+        TextView orderRatingTV;
 
-        //TODO ratefoodBT based on if statement
         public OrderHolder(@NonNull View itemView) {
             super(itemView);
             hotelNameTV = itemView.findViewById(R.id.hotelNameTV);
@@ -76,11 +75,11 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             hotelStatusTV = itemView.findViewById(R.id.hotelStatusTV);
             orderItemTV = itemView.findViewById(R.id.orderItemsTV);
             orderDateTV = itemView.findViewById(R.id.orderDateTV);
-            orderYourratingTV = itemView.findViewById(R.id.orderRatingTV);
+            orderRatingTV = itemView.findViewById(R.id.orderRatingTV);
 
             Button rateBT = itemView.findViewById(R.id.rateBT);
             rateBT.setVisibility(View.GONE);
-            if(String.valueOf(orderYourratingTV).equals("0.0"))
+            if(String.valueOf(orderRatingTV).equals("0.0"))
             {
               rateBT.setVisibility(View.VISIBLE);
             }
