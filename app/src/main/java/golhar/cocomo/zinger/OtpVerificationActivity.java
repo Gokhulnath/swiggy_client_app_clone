@@ -151,6 +151,10 @@ public class OtpVerificationActivity extends AppCompatActivity {
                         public void onResponse(Call<Response<UserCollegeModel>> call, retrofit2.Response<Response<UserCollegeModel>> response) {
                             Response<UserCollegeModel> userDataResponse = response.body();
                             if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.Success)) {
+                                SharedPref.putString(getApplicationContext(),"userName",userDataResponse.getData().getUserModel().getName());
+                                SharedPref.putString(getApplicationContext(),"userEmail",userDataResponse.getData().getUserModel().getEmail());
+                                SharedPref.putInt(getApplicationContext(),"collegeId",userDataResponse.getData().getCollegeModel().getId());
+                                SharedPref.putInt(getApplicationContext(),"loginStatus",1);
                                 Intent shopList = new Intent(OtpVerificationActivity.this, ShopListActivity.class);
                                 startActivity(shopList);
                             } else {

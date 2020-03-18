@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import golhar.cocomo.zinger.adapter.OrderHistoryAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.OrderItemListModel;
@@ -34,6 +35,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_order_history);
         userNameTV = (TextView) findViewById(R.id.userNameTV);
         userNumTV = (TextView) findViewById(R.id.userNumTV);
         userEmailTV = (TextView) findViewById(R.id.userEmailTV);
@@ -46,8 +48,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
         userNameTV.setText(userName);
         userEmailTV.setText(email);
         userNumTV.setText(phoneNo);
-
-        setContentView(R.layout.activity_order_history);
         ArrayList<OrderItemListModel> orderItemListModelArrayList = new ArrayList<>();
         orderListRV = findViewById(R.id.orderListRV);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

@@ -93,6 +93,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
                                 Response<String> userDataResponse = response.body();
                                 if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.Success) && userDataResponse.getData().equals(ErrorLog.Success)) {
+                                    SharedPref.putInt(getApplicationContext(),"loginStatus",1);
                                     Intent shopList = new Intent(RegistrationActivity.this, ShopListActivity.class);
                                     startActivity(shopList);
                                 } else {

@@ -12,6 +12,7 @@ import golhar.cocomo.zinger.adapter.ViewPageAdapter;
 import golhar.cocomo.zinger.fragment.Frag1;
 import golhar.cocomo.zinger.fragment.Frag2;
 import golhar.cocomo.zinger.fragment.Frag3;
+import golhar.cocomo.zinger.utils.SharedPref;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,24 +24,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        int loginStatus = SharedPref.getInt(getApplicationContext(), "loginStatus");
+        if (loginStatus == 1) {
+            Intent shopList = new Intent(MainActivity.this, ShopListActivity.class);
+            startActivity(shopList);
+        } else {
+            ViewPager viewPager = findViewById(R.id.viewPager);
 
-        ViewPageAdapter adpater = new ViewPageAdapter(getSupportFragmentManager());
+            ViewPageAdapter adpater = new ViewPageAdapter(getSupportFragmentManager());
 
-        adpater.addFragment(new Frag1());
-        adpater.addFragment(new Frag2());
-        adpater.addFragment(new Frag3());
+            adpater.addFragment(new Frag1());
+            adpater.addFragment(new Frag2());
+            adpater.addFragment(new Frag3());
 
-        viewPager.setAdapter(adpater);
+            viewPager.setAdapter(adpater);
 
-
-        loginB = (Button) findViewById(R.id.loginB);
-        loginB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent login = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(login);
-            }
-        });
+            loginB = (Button) findViewById(R.id.loginB);
+            loginB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent login = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(login);
+                }
+            });
+        }
     }
 }
