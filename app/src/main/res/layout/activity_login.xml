@@ -1,71 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="golhar.cocomo.zinger.LoginActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingHorizontal="@dimen/_15sdp">
 
-    <ImageView
-        android:id="@+id/LoginIV"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:src="@drawable/login_bkg2"
-        ></ImageView>
-
-
-    <TextView
-        android:id="@+id/login_word1_TV"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LOGIN"
-        android:textSize="@dimen/_25ssp"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:paddingBottom="@dimen/_5sdp"></TextView>
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_15sdp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter your phone number to proceed"
-        android:layout_marginBottom="@dimen/_15sdp">
-    </TextView>
+        <ImageView
+            android:id="@+id/LoginIV"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:src="@drawable/login_bkg2" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ph_numberTIL"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ph_numberTIET"
+        <TextView
+            android:id="@+id/loginWord1TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="10 digit mobile number"
-            android:inputType="phone"
-            ></com.google.android.material.textfield.TextInputEditText>
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="LOGIN"
+            android:textColor="#000000"
+            android:textSize="@dimen/_25ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:text="Enter your phone number to proceed" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneNumberTIL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneNumberTIET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="10 digit mobile number"
+                android:inputType="phone" />
 
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/phn_otpB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GET OTP"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:textSize="@dimen/_15ssp"
-        android:paddingHorizontal="@dimen/_15sdp"></Button>
+        <Button
+            android:id="@+id/verifyB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:text="VERIFY"
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

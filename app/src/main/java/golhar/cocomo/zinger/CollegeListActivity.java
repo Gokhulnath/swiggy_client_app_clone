@@ -40,7 +40,6 @@ public class CollegeListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_college_list);
 
         collegeName = (EditText) findViewById(R.id.collegeNameET);
-
         collegeAdapter = new RecyclerViewCollegeListAdapter(new ArrayList<>(), this);
         itemListRV = findViewById(R.id.itemListRV);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -50,7 +49,6 @@ public class CollegeListActivity extends AppCompatActivity {
         collegeName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -66,13 +64,13 @@ public class CollegeListActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
         //TODO dynamic header value.....DONE
         String phoneNumber = SharedPref.getString(getApplicationContext(), "phone_number");
-        MainRepository.getCollegeService().getAllColleges("auth_" + phoneNumber, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {
+        String authid = SharedPref.getString(getApplicationContext(),"authId");
+        MainRepository.getCollegeService().getAllColleges(authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {
             @Override
             public void onResponse(Call<Response<List<CollegeModel>>> call, retrofit2.Response<Response<List<CollegeModel>>> response) {
                 Response<List<CollegeModel>> responseFromServer = response.body();

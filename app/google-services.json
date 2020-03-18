@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "388724858747",
+    "firebase_url": "https://zinger-58902.firebaseio.com",
+    "project_id": "zinger-58902",
+    "storage_bucket": "zinger-58902.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388724858747:android:bb82854602ae26ad2b67de",
+        "android_client_info": {
+          "package_name": "golhar.cocomo.zinger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388724858747-m7pujp36r6gkicff703rothf664ii138.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBc3OGuTsarP4_iAcTeJ3mvoJRWs6mfh1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388724858747-m7pujp36r6gkicff703rothf664ii138.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

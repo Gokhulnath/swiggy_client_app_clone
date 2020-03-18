@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,97 +16,87 @@
             android:id="@+id/RegistrationIV"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
-            android:src="@drawable/login_bkg2"
-            ></ImageView>
+            android:src="@drawable/login_bkg2"/>
 
 
         <TextView
-            android:id="@+id/Registration_word1_TV"
+            android:id="@+id/RegistrationWord1TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_5sdp"
             android:text="REGISTER"
-            android:textSize="@dimen/_25ssp"
             android:textColor="#000000"
-            android:textStyle="bold"
-            android:paddingBottom="@dimen/_5sdp"></TextView>
+            android:textSize="@dimen/_25ssp"
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please fill all the below details"
-            android:layout_marginBottom="@dimen/_15sdp">
-        </TextView>
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:text="Please fill all the below details"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTIL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-            >
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameTIET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name"
-                android:inputType="textPersonName"
                 android:layout_marginBottom="@dimen/_10sdp"
-                ></com.google.android.material.textfield.TextInputEditText>
+                android:hint="Name"
+                android:inputType="textPersonName"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailTIL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-            >
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailTIET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
                 android:layout_marginBottom="@dimen/_10sdp"
-                ></com.google.android.material.textfield.TextInputEditText>
+                android:hint="Email"
+                android:inputType="textEmailAddress"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
-
 
 
         <TextView
             android:id="@+id/collegeTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Click here to choose your college"
-            android:textSize="@dimen/_15ssp"
-            android:paddingVertical="@dimen/_10sdp"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:clickable="true"
             android:background="@drawable/myborder"
-            >
+            android:clickable="true"
+            android:hint="Click here to choose your college"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:textSize="@dimen/_15ssp">
 
         </TextView>
 
 
-
         <Button
-            android:id="@+id/phn_otpB"
+            android:id="@+id/registerB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="REGISTER"
-            android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_15sdp"
+            android:paddingHorizontal="@dimen/_25sdp"
+            android:text="REGISTER"
             android:textSize="@dimen/_15ssp"
-            android:paddingHorizontal="@dimen/_25sdp"></Button>
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

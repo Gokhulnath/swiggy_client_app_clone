@@ -5,7 +5,7 @@
     android:background="#ADD8E6">
 
     <ImageView
-        android:id="@+id/iv_frag1"
+        android:id="@+id/frag1IV"
         android:src="@mipmap/ic_launcher"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_450sdp"
@@ -19,7 +19,7 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_frag1"
+        android:layout_below="@id/frag1IV"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:textColor="#000000"/>
