@@ -28,7 +28,7 @@
                 />
 
             <Button
-                android:id="@+id/accountB"
+                android:id="@+id/accountBT"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/ic_account_box" />

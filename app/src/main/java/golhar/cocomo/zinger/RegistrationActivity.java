@@ -27,14 +27,14 @@ public class RegistrationActivity extends AppCompatActivity {
     TextView collegeTV;
     TextInputEditText nameTIET;
     TextInputEditText emailTIET;
-    Button registerB;
+    Button registerBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        collegeTV = (TextView) findViewById(R.id.collegeTV);
+        collegeTV = findViewById(R.id.collegeTV);
         collegeTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,20 +47,20 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        String phoneNumber = SharedPref.getString(getApplicationContext(), "phone_number");
+        String phoneNumber = SharedPref.getString(getApplicationContext(), "phoneNumber");
         String authId = SharedPref.getString(getApplicationContext(), "authId");
         int collegeID;
         String collegeName;
-        nameTIET = (TextInputEditText) findViewById(R.id.nameTIET);
-        emailTIET = (TextInputEditText) findViewById(R.id.emailTIET);
-        registerB = (Button) findViewById(R.id.registerB);
-        collegeName = SharedPref.getString(getApplicationContext(), "selected_college");
-        collegeID = SharedPref.getInt(getApplicationContext(), "selected_college_id");
+        nameTIET = findViewById(R.id.nameTIET);
+        emailTIET = findViewById(R.id.emailTIET);
+        registerBT = findViewById(R.id.registerBT);
+        collegeName = SharedPref.getString(getApplicationContext(), "selectedCollege");
+        collegeID = SharedPref.getInt(getApplicationContext(), "selectedCollegeId");
         collegeTV.setText(collegeName);
-        SharedPref.remove(getApplicationContext(), "selected_college");
-        SharedPref.remove(getApplicationContext(), "selected_college_id");
+        SharedPref.remove(getApplicationContext(), "selectedCollege");
+        SharedPref.remove(getApplicationContext(), "selectedCollegeId");
 //todo put toast for college value null
-        registerB.setOnClickListener(new View.OnClickListener() {
+        registerBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -70,48 +70,48 @@ public class RegistrationActivity extends AppCompatActivity {
                     if (emailTIET.getText().toString().equals("")) {
                         emailTIET.setError("Please enter your email");
                     } else {
-                        String userName;
-                        String userEmail;
-                        userName = nameTIET.getText().toString();
-                        userEmail = emailTIET.getText().toString();
-                        SharedPref.putString(getApplicationContext(), "userName", userName);
-                        SharedPref.putString(getApplicationContext(), "userEmail", userEmail);
-                        UserCollegeModel userCollegeModel = new UserCollegeModel();
-                        UserModel userModel = new UserModel();
-                        userModel.setName(userName);
-                        userModel.setEmail(userEmail);
-                        userModel.setMobile(phoneNumber);
-                        userModel.setOauthId(authId);
-                        userModel.setRole(UserRole.CUSTOMER);
-                        userModel.setIsDelete(0);
-                        CollegeModel collegeModel = new CollegeModel();
-                        collegeModel.setId(collegeID);
-                        userCollegeModel.setUserModel(userModel);
-                        userCollegeModel.setCollegeModel(collegeModel);
-                        MainRepository.getUserService().updateUserCollegeData(userCollegeModel, authId, phoneNumber, UserRole.CUSTOMER.toString()).enqueue(new Callback<Response<String>>() {
-                            @Override
-                            public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
-                                Response<String> userDataResponse = response.body();
-                                if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.Success) && userDataResponse.getData().equals(ErrorLog.Success)) {
-                                    SharedPref.putInt(getApplicationContext(),"loginStatus",1);
-                                    Intent shopList = new Intent(RegistrationActivity.this, ShopListActivity.class);
-                                    startActivity(shopList);
-                                } else {
-                                    if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.Success) && userDataResponse.getData().equals(ErrorLog.CollegeDetailNotUpdated)) {
-                                        Toast.makeText(RegistrationActivity.this, "Please Select your college", Toast.LENGTH_SHORT).show();
+                        if (collegeTV.getText().toString().equals("")) {
+                            Toast.makeText(RegistrationActivity.this, "Please choose your college", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String userName;
+                            String userEmail;
+                            userName = nameTIET.getText().toString();
+                            userEmail = emailTIET.getText().toString();
+                            SharedPref.putString(getApplicationContext(), "userName", userName);
+                            SharedPref.putString(getApplicationContext(), "userEmail", userEmail);
+                            UserCollegeModel userCollegeModel = new UserCollegeModel();
+                            UserModel userModel = new UserModel();
+                            userModel.setName(userName);
+                            userModel.setEmail(userEmail);
+                            userModel.setMobile(phoneNumber);
+                            userModel.setOauthId(authId);
+                            userModel.setRole(UserRole.CUSTOMER);
+                            userModel.setIsDelete(0);
+                            CollegeModel collegeModel = new CollegeModel();
+                            collegeModel.setId(collegeID);
+                            userCollegeModel.setUserModel(userModel);
+                            userCollegeModel.setCollegeModel(collegeModel);
+                            MainRepository.getUserService().updateUserCollegeData(userCollegeModel, authId, phoneNumber, UserRole.CUSTOMER.toString()).enqueue(new Callback<Response<String>>() {
+                                @Override
+                                public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
+                                    Response<String> userDataResponse = response.body();
+                                    if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.Success) && userDataResponse.getData().equals(ErrorLog.Success)) {
+                                        SharedPref.putInt(getApplicationContext(), "loginStatus", 1);
+                                        Intent shopList = new Intent(RegistrationActivity.this, ShopListActivity.class);
+                                        startActivity(shopList);
                                     } else {
-                                        if (userDataResponse.getCode().equals(ErrorLog.CodeFailure) && userDataResponse.getMessage().equals(ErrorLog.Failure)) {
-                                            Toast.makeText(RegistrationActivity.this, "Failure", Toast.LENGTH_SHORT).show();
-                                        }
+                                            if (userDataResponse.getCode().equals(ErrorLog.CodeFailure) && userDataResponse.getMessage().equals(ErrorLog.Failure)) {
+                                                Toast.makeText(RegistrationActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                                            }
                                     }
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(Call<Response<String>> call, Throwable t) {
+                                @Override
+                                public void onFailure(Call<Response<String>> call, Throwable t) {
 
-                            }
-                        });
+                                }
+                            });
+                        }
                     }
                 }
             }

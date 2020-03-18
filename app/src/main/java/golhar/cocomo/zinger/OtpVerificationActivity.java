@@ -40,9 +40,9 @@ public class OtpVerificationActivity extends AppCompatActivity {
     private PhoneAuthProvider phoneAuth;
     private String verificationId;
 
-    //todo use BT instead of B
-    Button otpVerifiedB;
-    Button sendOtpB;
+    //todo use BT instead of B  Done G
+    Button otpVerifiedBT;
+    Button sendOtpBT;
     TextView numberTV;
     TextInputEditText otpTIET;
     String phNumber;
@@ -55,26 +55,28 @@ public class OtpVerificationActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         phoneAuth = PhoneAuthProvider.getInstance();
-        phNumber = SharedPref.getString(getApplicationContext(), "phone_number");
-        otpVerifiedB = (Button) findViewById(R.id.otpVerifiedB); //todo remove all typecast
-        numberTV = (TextView) findViewById(R.id.numberTV);
+        phNumber = SharedPref.getString(getApplicationContext(), "phoneNumber");
+        otpVerifiedBT = findViewById(R.id.otpVerifiedBT); //todo remove all typecast  Done G
+        numberTV = findViewById(R.id.numberTV);
         numberTV.setText("OTP sent to " + phNumber);
-        otpTIET = (TextInputEditText) findViewById(R.id.otpTIET);
-        sendOtpB = (Button) findViewById(R.id.sendOtpB);
-        sendOtpB.setOnClickListener(new View.OnClickListener() {
+        otpTIET = findViewById(R.id.otpTIET);
+        sendOtpBT = findViewById(R.id.sendOtpBT);
+        otpVerifiedBT.setEnabled(false);
+        sendOtpBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendOtpB.setEnabled(false);
+                otpVerifiedBT.setEnabled(true);
+                sendOtpBT.setEnabled(false);
                 new CountDownTimer(10000, 1000) {
                     public void onTick(long millisUntilFinished) {
-                        sendOtpB.setText("RESEND OTP IN " + millisUntilFinished / 1000 + "sec");
+                        sendOtpBT.setText("RESEND OTP IN " + millisUntilFinished / 1000 + "sec");
                     }
 
                     public void onFinish() {
-                        sendOtpB.setText("RESEND OTP");
+                        sendOtpBT.setText("RESEND OTP");
                     }
                 }.start();
-                sendOtpB.setText("RESEND OTP IN 5sec");
+                sendOtpBT.setText("RESEND OTP IN 5sec");
                 Timer sendOtpTimer = new Timer();
                 sendOtpTimer.schedule(new TimerTask() {
                     @Override
@@ -82,7 +84,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                sendOtpB.setEnabled(true);
+                                sendOtpBT.setEnabled(true);
                             }
                         });
                     }
@@ -118,7 +120,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
             }
         });
 
-        otpVerifiedB.setOnClickListener(new View.OnClickListener() {
+        otpVerifiedBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (otpTIET.getEditableText().toString().matches("")) {
@@ -152,7 +154,9 @@ public class OtpVerificationActivity extends AppCompatActivity {
                                 SharedPref.putString(getApplicationContext(), "userName", userDataResponse.getData().getUserModel().getName());
                                 SharedPref.putString(getApplicationContext(), "userEmail", userDataResponse.getData().getUserModel().getEmail());
                                 SharedPref.putInt(getApplicationContext(), "collegeId", userDataResponse.getData().getCollegeModel().getId());
-                                //todo store all important data
+                                SharedPref.putString(getApplicationContext(),"collegeName",userDataResponse.getData().getCollegeModel().getName());
+                                SharedPref.putString(getApplicationContext(),"collegeAddress",userDataResponse.getData().getCollegeModel().getAddress());
+                                SharedPref.putString(getApplicationContext(),"collegeUrl",userDataResponse.getData().getCollegeModel().getIconUrl());
                                 SharedPref.putInt(getApplicationContext(), "loginStatus", 1);
                                 Intent shopList = new Intent(OtpVerificationActivity.this, ShopListActivity.class);
                                 startActivity(shopList);
@@ -162,14 +166,14 @@ public class OtpVerificationActivity extends AppCompatActivity {
                                     Intent registration = new Intent(OtpVerificationActivity.this, RegistrationActivity.class);
                                     startActivity(registration);
                                 } else {
-                                    Toast.makeText(OtpVerificationActivity.this, "ERROR OCCURED", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(OtpVerificationActivity.this, "ERROR OCCURRED", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Response<UserCollegeModel>> call, Throwable t) {
-                                            //todo toast failure
+                            Toast.makeText(OtpVerificationActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {

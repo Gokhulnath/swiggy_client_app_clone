@@ -74,7 +74,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/otpVerifiedB"
+        android:id="@+id/otpVerifiedBT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll2"
@@ -87,10 +87,10 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/sendOtpB"
+        android:id="@+id/sendOtpBT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/otpVerifiedB"
+        android:layout_below="@+id/otpVerifiedBT"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="@dimen/_15sdp"

@@ -10,7 +10,7 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_520sdp" />
+        android:layout_height="@dimen/_500sdp" />
 
     <TextView
         android:id="@+id/word1TV"
@@ -25,7 +25,7 @@
         android:textSize="@dimen/_10ssp" />
 
     <Button
-        android:id="@+id/loginB"
+        android:id="@+id/loginBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/word1TV"

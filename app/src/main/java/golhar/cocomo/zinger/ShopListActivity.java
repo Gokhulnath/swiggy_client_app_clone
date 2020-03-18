@@ -11,16 +11,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ShopListActivity extends AppCompatActivity {
 
-    Button accountB;
+    Button accountBT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_list);
-        accountB=(Button) findViewById(R.id.accountB);
-        accountB.setOnClickListener(new View.OnClickListener() {
+
+
+        accountBT = findViewById(R.id.accountBT);
+        accountBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent order = new Intent(ShopListActivity.this,OrderHistoryActivity.class);
+                Intent order = new Intent(ShopListActivity.this, OrderHistoryActivity.class);
                 startActivity(order);
             }
         });
@@ -32,10 +35,7 @@ public class ShopListActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            Intent a = new Intent(Intent.ACTION_MAIN);
-            a.addCategory(Intent.CATEGORY_HOME);
-            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(a);
+            finishAffinity();
             return;
         }
 
@@ -46,8 +46,9 @@ public class ShopListActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }
+
 }

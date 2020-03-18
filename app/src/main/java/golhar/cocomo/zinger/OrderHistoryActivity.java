@@ -36,12 +36,12 @@ public class OrderHistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
-        userNameTV = (TextView) findViewById(R.id.userNameTV);
-        userNumTV = (TextView) findViewById(R.id.userNumTV);
-        userEmailTV = (TextView) findViewById(R.id.userEmailTV);
+        userNameTV = findViewById(R.id.userNameTV);
+        userNumTV = findViewById(R.id.userNumTV);
+        userEmailTV = findViewById(R.id.userEmailTV);
 
         String phoneNo, authId, email, userName;
-        phoneNo = SharedPref.getString(getApplicationContext(), "phone_number");
+        phoneNo = SharedPref.getString(getApplicationContext(), "phoneNumber");
         authId = SharedPref.getString(getApplicationContext(), "authId");
         email = SharedPref.getString(getApplicationContext(), "userEmail");
         userName = SharedPref.getString(getApplicationContext(), "userName");

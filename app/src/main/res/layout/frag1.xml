@@ -8,7 +8,7 @@
         android:id="@+id/frag1IV"
         android:src="@mipmap/ic_launcher"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_450sdp"
+        android:layout_height="@dimen/_420sdp"
         android:layout_centerHorizontal="true"/>
 
     <TextView

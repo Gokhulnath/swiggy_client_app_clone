@@ -64,8 +64,8 @@ public class RecyclerViewCollegeListAdapter extends RecyclerView.Adapter<Recycle
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPref.putString(context, "selected_college", collegeModel.getName());
-                SharedPref.putInt(context, "selected_college_id", collegeModel.getId());
+                SharedPref.putString(context, "selectedCollege", collegeModel.getName());
+                SharedPref.putInt(context, "selectedCollegeId", collegeModel.getId());
                 ((CollegeListActivity) context).onBackPressed();
             }
         });

@@ -38,7 +38,7 @@ public class CollegeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_college_list);
 
-        collegeName = (EditText) findViewById(R.id.collegeNameET);
+        collegeName = findViewById(R.id.collegeNameET);
         collegeAdapter = new RecyclerViewCollegeListAdapter(new ArrayList<>(), this);
         itemListRV = findViewById(R.id.itemListRV);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -66,8 +66,8 @@ public class CollegeListActivity extends AppCompatActivity {
             }
         });
 
-        //todo shared pref use dont use _
-        String phoneNumber = SharedPref.getString(getApplicationContext(), "phone_number");
+        //todo shared pref use dont use _  DONE G
+        String phoneNumber = SharedPref.getString(getApplicationContext(), "phoneNumber");
         String authid = SharedPref.getString(getApplicationContext(),"authId");
         MainRepository.getCollegeService().getAllColleges(authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {
             @Override
