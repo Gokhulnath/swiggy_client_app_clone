@@ -14,17 +14,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:gravity="right">
+
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_250sdp"
                 android:layout_height="wrap_content"
-                android:text="Search"/>
+                android:hint="Search"
+                android:drawableLeft="@drawable/ic_search_"/>
+
             <Button
                 android:id="@+id/accountB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="account"
-                android:gravity="right"/>
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/ic_account_box" />
         </LinearLayout>
     </LinearLayout>
 
