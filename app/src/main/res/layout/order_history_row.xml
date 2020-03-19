@@ -15,13 +15,13 @@
             android:id="@+id/hotelRV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp">
+            android:padding="@dimen/_3sdp">
 
             <TextView
                 android:id="@+id/hotelNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:text="Gangotree"
                 android:textSize="@dimen/_20sdp"
                 android:textStyle="bold" />
@@ -87,7 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/orderDateTV"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:background="#fff"
                 android:padding="@dimen/_8sdp"
                 android:text="REORDER"
@@ -99,11 +100,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/orderDateTV"
                 android:layout_marginLeft="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:layout_toRightOf="@+id/reorderBT"
+
                 android:background="#fff"
-                android:padding="@dimen/_8sdp"
                 android:onClick="showDialog"
+                android:padding="@dimen/_8sdp"
                 android:text="RATE FOOD" />
 
             <TextView
@@ -139,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_4sdp"
             android:layout_below="@+id/orderDetailsRV"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="-1dp"
             android:layout_marginBottom="-2dp"
             android:background="#000" />

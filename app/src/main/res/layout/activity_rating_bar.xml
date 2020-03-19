@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
     
     <RelativeLayout
+        android:id="@+id/ratingRV"
         android:layout_width="@dimen/_250sdp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -25,13 +26,25 @@
             android:paddingTop="@dimen/_10sdp"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/_20ssp"
+            android:textColor="#000"
             android:text="Rate your meal">
 
         </TextView>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_below="@+id/ratingBar"
+    android:text="Your rating will appear here"
+    android:paddingTop="@dimen/_10sdp"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/ratingDisplayTV"
+    android:layout_height="wrap_content">
 
+</TextView>
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
+            android:numStars="5"
+            android:stepSize=".5"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true" />
     </RelativeLayout>

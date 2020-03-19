@@ -21,9 +21,10 @@ import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
 
+
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderHolder> {
 
-    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    hh:mm:ss a");
     List<OrderItemListModel> itemList;
     Context context;
 
@@ -46,7 +47,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         final OrderItemListModel orderItemListModel = itemList.get(position);
 
         holder.hotelNameTV.setText(orderItemListModel.getOrderModel().getShopModel().getName());
-        holder.hotelPriceTV.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
+        holder.hotelPriceTV.setText("₹"+ String.valueOf(orderItemListModel.getOrderModel().getPrice()));
         holder.hotelStatusTV.setText(String.valueOf(orderItemListModel.getOrderModel().getOrderStatus()));
         holder.orderDateTV.setText(dateFormat.format(orderItemListModel.getOrderModel().getDate()));
         String itemName, item, Quantity, tempItem;
@@ -55,7 +56,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         for (int i = 0; i < orderItemList.size(); i++) {
             Quantity = orderItemList.get(i).getQuantity().toString();
             itemName = orderItemList.get(i).getItemModel().getName();
-            tempItem = itemName + "x" + Quantity + "   ";
+            tempItem = itemName + " x " + Quantity + "   ";
             item = item.concat(tempItem);
         }
         holder.orderItemTV.setText(item);
@@ -73,7 +74,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             holder.orderRateTV.setVisibility(View.VISIBLE);
         }
     }
-    //todo don't show star when food rating not available
+    //todo don't show star when food rating not available---done
 
     @Override
     public int getItemCount() {
@@ -107,23 +108,20 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             rateBT.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AlertDialog.Builder dialogBuilder= new AlertDialog.Builder(context);
+
+                    AlertDialog.Builder dialogBuilder= new AlertDialog.Builder(context); //OrderHitoryActivity.this or here
                     View v=LayoutInflater.from(context).inflate(R.layout.activity_rating_bar,null);
-
+                   // new android.support.v7.app.AlertDialog.Builder(this);
                     Button submitRatingBT = v.findViewById(R.id.submitRatingBT);
-                    final RatingBar ratingBar =v.findViewById(R.id.ratingBar);
-
-                    ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                        @Override
-                        public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                            Toast.makeText(context, String.valueOf(rating), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    final RatingBar ratingBar =(RatingBar) v.findViewById(R.id.ratingBar);
+                    final TextView ratingDisplayTV=v.findViewById(R.id.ratingDisplayTV);
 
                     submitRatingBT.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Toast.makeText(context, "done", Toast.LENGTH_SHORT).show();
+                            orderRatingTV.setText(String.valueOf(ratingBar.getRating()));
+                            ratingDisplayTV.setText("Your rating is " + String.valueOf(ratingBar.getRating()));
                         }
                     });
 

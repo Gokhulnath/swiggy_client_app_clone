@@ -91,7 +91,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/orderListRV"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_350sdp"
+            android:layout_height="@dimen/_375sdp"
             android:layout_below="@+id/pastOrdersTV" />
 
         <RelativeLayout
@@ -131,7 +131,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/viewMoreBT"
-                android:layout_alignParentBottom="true"
                 android:background="#fff"
                 android:paddingLeft="@dimen/_8sdp"
                 android:text="LOGOUT"
