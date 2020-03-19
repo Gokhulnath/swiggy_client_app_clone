@@ -13,7 +13,7 @@ import golhar.cocomo.zinger.fragment.Frag1;
 import golhar.cocomo.zinger.fragment.Frag2;
 import golhar.cocomo.zinger.fragment.Frag3;
 
-public class MainActivity extends AppCompatActivity {
+public class OnBoardingActivity extends AppCompatActivity {
 
 
     Button loginBT;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_onboarding);
         ViewPager viewPager = findViewById(R.id.viewPager);
         ViewPageAdapter adpater = new ViewPageAdapter(getSupportFragmentManager());
 
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         loginBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent login = new Intent(MainActivity.this, LoginActivity.class);
+                Intent login = new Intent(OnBoardingActivity.this, LoginActivity.class);
                 startActivity(login);
             }
         });

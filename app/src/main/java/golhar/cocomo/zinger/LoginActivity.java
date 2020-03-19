@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import golhar.cocomo.zinger.utils.Constants;
 import golhar.cocomo.zinger.utils.SharedPref;
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String phNumber = phoneNumberTIET.getText().toString();
                 if (phNumber.length() == 10 && phNumber != null) {
-                    SharedPref.putString(getApplicationContext(), "phoneNumber", phNumber);
+                    SharedPref.putString(getApplicationContext(), Constants.phoneNumber, phNumber);
                     Intent otp = new Intent(LoginActivity.this, OtpVerificationActivity.class);
                     startActivity(otp);
                 } else {

@@ -17,10 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import golhar.cocomo.zinger.adapter.RecyclerViewCollegeListAdapter;
+import golhar.cocomo.zinger.adapter.CollegeListAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.CollegeModel;
 import golhar.cocomo.zinger.service.MainRepository;
+import golhar.cocomo.zinger.utils.Constants;
 import golhar.cocomo.zinger.utils.ErrorLog;
 import golhar.cocomo.zinger.utils.Response;
 import golhar.cocomo.zinger.utils.SharedPref;
@@ -29,7 +30,7 @@ import retrofit2.Callback;
 
 public class CollegeListActivity extends AppCompatActivity {
     RecyclerView itemListRV;
-    RecyclerViewCollegeListAdapter collegeAdapter;
+    CollegeListAdapter collegeAdapter;
     EditText collegeName;
     ArrayList<CollegeModel> collegeList;
 
@@ -39,7 +40,7 @@ public class CollegeListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_college_list);
 
         collegeName = findViewById(R.id.collegeNameET);
-        collegeAdapter = new RecyclerViewCollegeListAdapter(new ArrayList<>(), this);
+        collegeAdapter = new CollegeListAdapter(new ArrayList<>(), this);
         itemListRV = findViewById(R.id.itemListRV);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -66,9 +67,9 @@ public class CollegeListActivity extends AppCompatActivity {
             }
         });
 
-        //todo shared pref use dont use _  DONE G
-        String phoneNumber = SharedPref.getString(getApplicationContext(), "phoneNumber");
-        String authid = SharedPref.getString(getApplicationContext(),"authId");
+        //todo shared pref name change to constant
+        String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
+        String authid = SharedPref.getString(getApplicationContext(),Constants.authId);
         MainRepository.getCollegeService().getAllColleges(authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {
             @Override
             public void onResponse(Call<Response<List<CollegeModel>>> call, retrofit2.Response<Response<List<CollegeModel>>> response) {
@@ -86,7 +87,7 @@ public class CollegeListActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Response<List<CollegeModel>>> call, Throwable t) {
                 Log.d("ResponseFail", t.getMessage());
-                Toast.makeText(CollegeListActivity.this, "Unable to reach the server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CollegeListActivity.this, "Unable to reach the server"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

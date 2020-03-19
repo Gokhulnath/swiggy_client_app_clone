@@ -19,11 +19,11 @@ import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.model.CollegeModel;
 import golhar.cocomo.zinger.utils.SharedPref;
 
-public class RecyclerViewCollegeListAdapter extends RecyclerView.Adapter<RecyclerViewCollegeListAdapter.CollegeNameHolder> {
+public class CollegeListAdapter extends RecyclerView.Adapter<CollegeListAdapter.CollegeNameHolder> {
     ArrayList<CollegeModel> collegeArrayList;
     Context context;
 
-    public RecyclerViewCollegeListAdapter(ArrayList<CollegeModel> itemsArrayList, Context context) {
+    public CollegeListAdapter(ArrayList<CollegeModel> itemsArrayList, Context context) {
         this.collegeArrayList = itemsArrayList;
         this.context = context;
     }
