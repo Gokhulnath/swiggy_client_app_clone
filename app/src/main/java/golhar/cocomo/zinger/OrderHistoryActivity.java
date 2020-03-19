@@ -71,7 +71,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 Response<List<OrderItemListModel>> responseFromServer = response.body();
                 if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)) {
                     Log.d("RetroFit", responseFromServer.toString());
-                    orderHistoryAdapter = new OrderHistoryAdapter(responseFromServer.getData(), getApplicationContext());
+                    orderHistoryAdapter = new OrderHistoryAdapter(responseFromServer.getData(), getApplicationContext(), OrderHistoryActivity.this);
                     orderListRV.setAdapter(orderHistoryAdapter);
 
                 } else {

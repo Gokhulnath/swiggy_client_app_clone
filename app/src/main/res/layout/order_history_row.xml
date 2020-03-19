@@ -102,7 +102,6 @@
                 android:layout_marginLeft="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_toRightOf="@+id/reorderBT"
-
                 android:background="#fff"
                 android:onClick="showDialog"
                 android:padding="@dimen/_8sdp"
