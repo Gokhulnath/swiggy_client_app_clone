@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,19 +13,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_15sdp">
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/_15sdp">
 
             <EditText
                 android:id="@+id/searchShopET"
                 android:layout_width="@dimen/_240sdp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_15ssp"
-                android:hint="Search"
                 android:drawableLeft="@drawable/ic_search_"
-                />
+                android:hint="Search"
+                android:textSize="@dimen/_15ssp" />
 
             <Button
                 android:id="@+id/accountBT"
@@ -34,6 +32,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/ic_account_box" />
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shopListRV"
             android:layout_width="match_parent"

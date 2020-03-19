@@ -58,7 +58,6 @@ public class RecyclerViewShopListAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewShopListAdapter.ShopNameHolder holder, int position) {
         final RatingModel ratingModel = ratingModelArrayList.get(position);
-
         holder.restaurantNameTV.setText(ratingModel.getShopModel().getName());
         Date closingTime = ratingModel.getShopModel().getClosingTime();
         Date openingTime = ratingModel.getShopModel().getOpeningTime();
@@ -68,7 +67,7 @@ public class RecyclerViewShopListAdapter extends RecyclerView.Adapter<RecyclerVi
             holder.statusTV.setText("Closed");
         }
         holder.ratingTV.setText(ratingModel.getRating().toString());
-        holder.numberOfRatingTV.setText(ratingModel.getUserCount()+" ratings");
+        holder.numberOfRatingTV.setText(ratingModel.getUserCount() + " ratings");
         Glide.with(context)
                 .load(ratingModel.getShopModel().getPhotoUrl())
                 .into(holder.shopIconIV);

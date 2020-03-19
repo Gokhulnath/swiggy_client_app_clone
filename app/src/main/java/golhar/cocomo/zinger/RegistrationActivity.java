@@ -59,7 +59,7 @@ public class RegistrationActivity extends AppCompatActivity {
         collegeTV.setText(collegeName);
         SharedPref.remove(getApplicationContext(), "selectedCollege");
         SharedPref.remove(getApplicationContext(), "selectedCollegeId");
-//todo put toast for college value null
+//todo put toast for college value null  Done G
         registerBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +108,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<Response<String>> call, Throwable t) {
-
+                                    Toast.makeText(RegistrationActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
