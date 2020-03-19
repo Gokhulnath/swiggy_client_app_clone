@@ -13,7 +13,7 @@ import golhar.cocomo.zinger.utils.SharedPref;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button verifyB;
+    Button verifyBT;
     TextInputEditText phoneNumberTIET;
 
     @Override
@@ -21,14 +21,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        phoneNumberTIET = (TextInputEditText) findViewById(R.id.phoneNumberTIET);
-        verifyB = (Button) findViewById(R.id.verifyB);
-        verifyB.setOnClickListener(new View.OnClickListener() {
+        phoneNumberTIET = findViewById(R.id.phoneNumberTIET);
+        verifyBT = findViewById(R.id.verifyBT);
+        verifyBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phNumber = phoneNumberTIET.getText().toString();
                 if (phNumber.length() == 10 && phNumber != null) {
-                    SharedPref.putString(getApplicationContext(), "phone_number", phNumber);
+                    SharedPref.putString(getApplicationContext(), "phoneNumber", phNumber);
                     Intent otp = new Intent(LoginActivity.this, OtpVerificationActivity.class);
                     startActivity(otp);
                 } else {

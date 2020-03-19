@@ -1,15 +1,5 @@
 package golhar.cocomo.zinger.utils;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.Toast;
-
-import golhar.cocomo.zinger.R;
-import golhar.cocomo.zinger.fragment.CustomDialog;
-import golhar.cocomo.zinger.service.DialogCallback;
 //
 //public class GlobalUtilsActivity {
 //    public static void showDialog(Context context, DialogCallback dialogCallback){

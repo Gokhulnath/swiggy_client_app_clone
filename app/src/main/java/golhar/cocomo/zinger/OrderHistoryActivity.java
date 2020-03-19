@@ -3,14 +3,17 @@ package golhar.cocomo.zinger;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import golhar.cocomo.zinger.adapter.OrderHistoryAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.OrderItemListModel;
@@ -28,7 +31,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
     TextView userNumTV;
     TextView userEmailTV;
     Button logoutBT;
-    Button rateBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +39,28 @@ public class OrderHistoryActivity extends AppCompatActivity {
         userNameTV = findViewById(R.id.userNameTV);
         userNumTV = findViewById(R.id.userNumTV);
         userEmailTV = findViewById(R.id.userEmailTV);
-        rateBT = findViewById(R.id.rateBT);
 
         String phoneNo, authId, email, userName;
-        phoneNo = SharedPref.getString(getApplicationContext(), "phone_number");
+        phoneNo = SharedPref.getString(getApplicationContext(), "phoneNumber");
         authId = SharedPref.getString(getApplicationContext(), "authId");
         email = SharedPref.getString(getApplicationContext(), "userEmail");
         userName = SharedPref.getString(getApplicationContext(), "userName");
         userNameTV.setText(userName);
         userEmailTV.setText(email);
         userNumTV.setText(phoneNo);
+        ArrayList<OrderItemListModel> orderItemListModelArrayList = new ArrayList<>();
         orderListRV = findViewById(R.id.orderListRV);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         orderListRV.setLayoutManager(linearLayoutManager);
-        logoutBT = findViewById(R.id.logoutBT);
-        logoutBT.setOnClickListener(view -> {
-            SharedPref.putInt(getApplicationContext(), "loginStatus", 0);
-            Intent MainActivity = new Intent(OrderHistoryActivity.this, golhar.cocomo.zinger.MainActivity.class);
-            startActivity(MainActivity);
+        logoutBT = (Button) findViewById(R.id.logoutBT);
+        logoutBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPref.putInt(getApplicationContext(), "loginStatus", 0);
+                Intent MainActivity = new Intent(OrderHistoryActivity.this, golhar.cocomo.zinger.MainActivity.class);
+                startActivity(MainActivity);
+            }
         });
 
         MainRepository.getOrderService().getOrderByMobile(phoneNo, 1, 5, authId,
@@ -79,12 +84,5 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 Log.d("RetroFit", "error");
             }
         });
-
-
     }
-};
-
-
-
-
-
+}

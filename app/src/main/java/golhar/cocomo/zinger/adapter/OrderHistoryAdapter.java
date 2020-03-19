@@ -16,7 +16,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-import golhar.cocomo.zinger.OrderHistoryActivity;
+
 import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
@@ -27,7 +27,6 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    hh:mm:ss a");
     List<OrderItemListModel> itemList;
     Context context;
-
 
     public OrderHistoryAdapter(List<OrderItemListModel> itemList, Context context) {
         this.itemList = itemList;
@@ -60,7 +59,6 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             item = item.concat(tempItem);
         }
         holder.orderItemTV.setText(item);
-
         holder.orderRatingTV.setText(String.valueOf(orderItemListModel.getOrderModel().getRating()));
         if (String.valueOf(holder.orderRatingTV.getText()).equals("0.0")) {
             holder.rateBT.setVisibility(View.VISIBLE);
@@ -74,7 +72,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             holder.orderRateTV.setVisibility(View.VISIBLE);
         }
     }
-    //todo don't show star when food rating not available---done
+    //todo don't show star when food rating not available---done M
 
     @Override
     public int getItemCount() {
@@ -109,11 +107,11 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                 @Override
                 public void onClick(View view) {
 
-                    AlertDialog.Builder dialogBuilder= new AlertDialog.Builder(context); //OrderHitoryActivity.this or here
-                    View v=LayoutInflater.from(context).inflate(R.layout.activity_rating_bar,null);
+                    AlertDialog.Builder dialogBuilder= new AlertDialog.Builder(context); //classname.this or here
+                    View v = LayoutInflater.from(context).inflate(R.layout.activity_rating_bar,null);
                    // new android.support.v7.app.AlertDialog.Builder(this);
                     Button submitRatingBT = v.findViewById(R.id.submitRatingBT);
-                    final RatingBar ratingBar =(RatingBar) v.findViewById(R.id.ratingBar);
+                    final RatingBar ratingBar =(RatingBar) v.findViewById(R.id.ratingBarRB);
                     final TextView ratingDisplayTV=v.findViewById(R.id.ratingDisplayTV);
 
                     submitRatingBT.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +129,5 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                 }
             });
         }
-
     }
 }

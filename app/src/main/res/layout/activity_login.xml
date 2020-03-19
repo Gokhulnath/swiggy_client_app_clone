@@ -47,13 +47,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="10 digit mobile number"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:maxLength="10"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/verifyB"
+            android:id="@+id/verifyBT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

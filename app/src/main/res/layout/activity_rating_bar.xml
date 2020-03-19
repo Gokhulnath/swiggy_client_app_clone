@@ -1,53 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rating"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
     <RelativeLayout
         android:id="@+id/ratingRV"
         android:layout_width="@dimen/_250sdp"
-        android:layout_centerVertical="true"
+        android:layout_height="@dimen/_200sdp"
         android:layout_centerHorizontal="true"
-        android:layout_height="@dimen/_200sdp">
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SUBMIT RATING"
-        android:id="@+id/submitRatingBT"
-        android:layout_alignParentBottom="true"
-        android:background="#FF6600"
-        android:textColor="#fff">
+        android:layout_centerVertical="true">
 
-    </Button>
+        <Button
+            android:id="@+id/submitRatingBT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#FF6600"
+            android:text="SUBMIT RATING"
+            android:textColor="#fff" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/_10sdp"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/_20ssp"
+            android:paddingTop="@dimen/_10sdp"
+            android:text="Rate your meal"
             android:textColor="#000"
-            android:text="Rate your meal">
+            android:textSize="@dimen/_20ssp" />
 
-        </TextView>
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_below="@+id/ratingBar"
-    android:text="Your rating will appear here"
-    android:paddingTop="@dimen/_10sdp"
-    android:layout_centerHorizontal="true"
-    android:id="@+id/ratingDisplayTV"
-    android:layout_height="wrap_content">
-
-</TextView>
-        <RatingBar
-            android:id="@+id/ratingBar"
+        <TextView
+            android:id="@+id/ratingDisplayTV"
             android:layout_width="wrap_content"
-            android:numStars="5"
-            android:stepSize=".5"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
+            android:layout_below="@+id/ratingBarRB"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="@dimen/_10sdp"
+            android:text="Your rating will appear here" />
 
+        <RatingBar
+            android:id="@+id/ratingBarRB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:numStars="5"
+            android:stepSize=".5" />
+    </RelativeLayout>
 </RelativeLayout>
    

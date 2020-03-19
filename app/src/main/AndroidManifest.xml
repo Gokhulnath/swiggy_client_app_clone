@@ -11,14 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ShopListActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".ShopListActivity" />
         <activity android:name=".OrderHistoryActivity" />
         <activity android:name=".CollegeListActivity" />
         <activity android:name=".RecyclerViewDemoActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".OtpVerificationActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
