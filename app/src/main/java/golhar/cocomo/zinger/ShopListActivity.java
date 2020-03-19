@@ -39,6 +39,7 @@ public class ShopListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_list);
 
+
         searchShopET = findViewById(R.id.searchShopET);
         try {
             shopListAdapter = new RecyclerViewShopListAdapter(new ArrayList<>(), this);
@@ -80,7 +81,7 @@ public class ShopListActivity extends AppCompatActivity {
         CollegeModel collegeModel = new CollegeModel();
         collegeModel.setId(collegeId);
         collegeModel.setName(collegeName);
-/*
+        /*
         MainRepository.getShopService().getShopsByCollegeId(collegeModel, authId, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<ShopConfigurationModel>>>() {
             @Override
             public void onResponse(Call<Response<List<ShopConfigurationModel>>> call, retrofit2.Response<Response<List<ShopConfigurationModel>>> response) {
@@ -97,8 +98,6 @@ public class ShopListActivity extends AppCompatActivity {
                 Log.d("ResponseFail", t.getMessage());
             }
         });*/
-
-
         accountBT = findViewById(R.id.accountBT);
         accountBT.setOnClickListener(new View.OnClickListener() {
             @Override

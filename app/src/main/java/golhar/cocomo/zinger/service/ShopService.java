@@ -13,7 +13,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface ShopService {
 
@@ -22,7 +21,7 @@ public interface ShopService {
                                              @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);
 
     @GET(value = "/shop/college")
-    public Call<Response<List<ShopConfigurationModel>>> getShopsByCollegeId(@Query("college") CollegeModel collegeModel,
+    public Call<Response<List<ShopConfigurationModel>>> getShopsByCollegeId(@Body CollegeModel collegeModel,
                                                                             @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);
 
     @PATCH(value = "/shop/config")
