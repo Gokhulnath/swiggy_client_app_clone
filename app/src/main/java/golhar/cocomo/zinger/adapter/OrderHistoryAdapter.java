@@ -5,12 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+import golhar.cocomo.zinger.OrderHistoryActivity;
 import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
@@ -20,6 +26,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
     List<OrderItemListModel> itemList;
     Context context;
+
 
     public OrderHistoryAdapter(List<OrderItemListModel> itemList, Context context) {
         this.itemList = itemList;
@@ -52,16 +59,21 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             item = item.concat(tempItem);
         }
         holder.orderItemTV.setText(item);
+
         holder.orderRatingTV.setText(String.valueOf(orderItemListModel.getOrderModel().getRating()));
         if (String.valueOf(holder.orderRatingTV.getText()).equals("0.0")) {
             holder.rateBT.setVisibility(View.VISIBLE);
             holder.orderRatingTV.setVisibility(View.GONE);
+            holder.starImgIV.setVisibility(View.GONE);
+            holder.orderRateTV.setVisibility(View.GONE);
         } else {
             holder.rateBT.setVisibility(View.GONE);
             holder.orderRatingTV.setVisibility(View.VISIBLE);
+            holder.starImgIV.setVisibility(View.VISIBLE);
+            holder.orderRateTV.setVisibility(View.VISIBLE);
         }
     }
-    //todo don"t show star when food rating not available
+    //todo don't show star when food rating not available
 
     @Override
     public int getItemCount() {
@@ -77,6 +89,8 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         TextView orderDateTV;
         TextView orderRatingTV;
         Button rateBT;
+        ImageView starImgIV;
+        TextView orderRateTV;
 
         public OrderHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,7 +101,38 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             orderDateTV = itemView.findViewById(R.id.orderDateTV);
             orderRatingTV = itemView.findViewById(R.id.orderRatingTV);
             rateBT = itemView.findViewById(R.id.rateBT);
+            starImgIV=itemView.findViewById(R.id.starImgIV);
+            orderRateTV=itemView.findViewById(R.id.orderRateTV);
 
+            rateBT.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder dialogBuilder= new AlertDialog.Builder(context);
+                    View v=LayoutInflater.from(context).inflate(R.layout.activity_rating_bar,null);
+
+                    Button submitRatingBT = v.findViewById(R.id.submitRatingBT);
+                    final RatingBar ratingBar =v.findViewById(R.id.ratingBar);
+
+                    ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                        @Override
+                        public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                            Toast.makeText(context, String.valueOf(rating), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    submitRatingBT.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(context, "done", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    dialogBuilder.setView(v);
+                    AlertDialog dialog = dialogBuilder.create();
+                    dialog.show();
+                }
+            });
         }
+
     }
 }

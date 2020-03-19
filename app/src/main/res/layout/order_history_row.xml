@@ -103,6 +103,7 @@
                 android:layout_toRightOf="@+id/reorderBT"
                 android:background="#fff"
                 android:padding="@dimen/_8sdp"
+                android:onClick="showDialog"
                 android:text="RATE FOOD" />
 
             <TextView
@@ -114,7 +115,7 @@
                 android:text="Your food rating" />
 
             <ImageView
-                android:id="@+id/StarImgIV"
+                android:id="@+id/starImgIV"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_below="@id/orderRateTV"

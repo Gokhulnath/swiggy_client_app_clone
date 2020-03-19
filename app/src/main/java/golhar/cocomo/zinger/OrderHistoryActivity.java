@@ -1,12 +1,18 @@
 package golhar.cocomo.zinger;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +22,12 @@ import java.util.List;
 
 import golhar.cocomo.zinger.adapter.OrderHistoryAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
+import golhar.cocomo.zinger.fragment.CustomDialog;
 import golhar.cocomo.zinger.model.OrderItemListModel;
+import golhar.cocomo.zinger.service.DialogCallback;
 import golhar.cocomo.zinger.service.MainRepository;
 import golhar.cocomo.zinger.utils.ErrorLog;
+
 import golhar.cocomo.zinger.utils.Response;
 import golhar.cocomo.zinger.utils.SharedPref;
 import retrofit2.Call;
@@ -31,14 +40,16 @@ public class OrderHistoryActivity extends AppCompatActivity {
     TextView userNumTV;
     TextView userEmailTV;
     Button logoutBT;
+    Button rateBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
         userNameTV = findViewById(R.id.userNameTV);
-        userNumTV =  findViewById(R.id.userNumTV);
+        userNumTV = findViewById(R.id.userNumTV);
         userEmailTV = findViewById(R.id.userEmailTV);
+        rateBT = findViewById(R.id.rateBT);
 
         String phoneNo, authId, email, userName;
         phoneNo = SharedPref.getString(getApplicationContext(), "phone_number");
@@ -80,5 +91,12 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 Log.d("RetroFit", "error");
             }
         });
+
+
     }
-}
+};
+
+
+
+
+
