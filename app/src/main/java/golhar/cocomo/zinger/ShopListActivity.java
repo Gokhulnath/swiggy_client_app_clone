@@ -52,17 +52,12 @@ public class ShopListActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
         shopListAdapter.setShopConfigurationModelArrayList(shopConfigurationModelArrayList);
         shopListRV = findViewById(R.id.shopListRV);
-
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         shopListRV.setLayoutManager(linearLayoutManager);
         shopListRV.setAdapter(shopListAdapter);
-
         searchShopET.addTextChangedListener(new TextWatcher() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -83,13 +78,10 @@ public class ShopListActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
-
-
         String collegeName = SharedPref.getString(getApplicationContext(), Constants.collegeName);
         int collegeId = SharedPref.getInt(getApplicationContext(), Constants.collegeId);
         String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
         String authId = SharedPref.getString(getApplicationContext(), Constants.authId);
-
         MainRepository.getShopService().getShopsByCollegeId(Integer.toString(collegeId), authId, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<ShopConfigurationModel>>>() {
             @Override
             public void onResponse(Call<Response<List<ShopConfigurationModel>>> call, retrofit2.Response<Response<List<ShopConfigurationModel>>> response) {
@@ -97,7 +89,7 @@ public class ShopListActivity extends AppCompatActivity {
                 if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)) {
                     shopListAdapter.setShopConfigurationModelArrayList((ArrayList<ShopConfigurationModel>) responseFromServer.getData());
                     shopListAdapter.notifyDataSetChanged();
-                    shopConfigurationModelArrayList=(ArrayList<ShopConfigurationModel>) responseFromServer.getData();
+                    shopConfigurationModelArrayList = (ArrayList<ShopConfigurationModel>) responseFromServer.getData();
                 } else {
                     Log.d("RetroFit2", "failure");
                 }
@@ -135,5 +127,10 @@ public class ShopListActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

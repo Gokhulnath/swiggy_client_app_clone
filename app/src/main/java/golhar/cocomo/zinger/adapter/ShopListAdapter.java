@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import golhar.cocomo.zinger.R;
-import golhar.cocomo.zinger.ShopItemList;
+import golhar.cocomo.zinger.ShopItemListActivity;
 import golhar.cocomo.zinger.model.ShopConfigurationModel;
 
 import static android.graphics.Color.parseColor;
@@ -80,8 +80,6 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopNa
             holder.statusTV.setTextColor(parseColor("#ff0000"));
             holder.cliclableLL.setBackgroundColor(Color.parseColor("#EBEBEB"));
         }
-
-
         holder.ratingTV.setText(shopConfigurationModel.getRatingModel().getRating().toString());
         holder.numberOfRatingTV.setText("(" + shopConfigurationModel.getRatingModel().getUserCount().toString() + ")");
         Glide.with(context)
@@ -90,8 +88,8 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopNa
         holder.cliclableLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent shopItemList = new Intent(context, ShopItemList.class);
-                //shopItemList.putParcelableArrayListExtra("shopDetails", (ArrayList<? extends Parcelable>) shopConfigurationModelArrayList);
+                Intent shopItemList = new Intent(context, ShopItemListActivity.class);
+                shopItemList.putExtra("shopDetails",shopConfigurationModel);
                 context.startActivity(shopItemList);
             }
         });
