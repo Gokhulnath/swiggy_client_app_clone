@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/orderRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/backArrowIV"
+            android:layout_width="54dp"
+            android:layout_height="45dp"
+            android:paddingLeft="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:src="@drawable/ic_arrow_back" />
+
+
+        <TextView
+            android:id="@+id/orderNumTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/backArrowIV"
+            android:text="ORDER #943615472034"
+            android:textColor="#000"
+            android:textSize="@dimen/_15sdp" />
+
+        <TextView
+            android:id="@+id/statusTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderNumTV"
+            android:layout_toRightOf="@+id/backArrowIV"
+            android:text="Delivered  |" />
+
+        <TextView
+            android:id="@+id/itemNumTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderNumTV"
+            android:layout_toRightOf="@+id/statusTV"
+            android:text="3 items" />
+
+        <TextView
+            android:id="@+id/itemCostTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderNumTV"
+            android:layout_toRightOf="@+id/itemNumTV"
+            android:paddingLeft="@dimen/_5sdp"
+            android:text="₹250" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_4sdp"
+            android:layout_below="@+id/itemCostTV"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="-1dp"
+            android:layout_marginBottom="-2dp"
+            android:background="#4A4848" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/deliveryRV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_below="@+id/orderRV">
+
+        <ImageView
+            android:id="@+id/deliveryIV"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:src="@drawable/delivery" />
+
+        <RelativeLayout
+            android:id="@+id/fromAddRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/deliveryIV"
+            android:paddingTop="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/hotelTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sathyas"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp" />
+
+            <TextView
+                android:id="@+id/collegeNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hotelTV"
+                android:text="SSN College of Engineering" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/fromAddRV"
+            android:id="@+id/toAddRV"
+
+            android:layout_toRightOf="@+id/deliveryIV">
+
+            <TextView
+                android:id="@+id/toTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IT Department"
+                android:paddingTop="@dimen/_8sdp"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp" />
+            <TextView
+                android:id="@+id/toAddTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toTV"
+                android:text="SSN College of Engineering" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/deliveryStatusRV"
+        android:layout_below="@+id/deliveryRV"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:id="@+id/checkIV"
+            android:src="@drawable/ic_check" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/checkIV"
+            android:text="Order Delivered on March 4 5:30 PM"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/bilDetailsTV"
+        android:layout_below="@+id/deliveryStatusRV"
+        android:background="#EFEFEF"
+        android:layout_height="@dimen/_40sdp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="BILL DETAILS"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/_10sdp"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:text="REORDER"
+        android:textColor="#ff9703">
+
+    </Button>
+</RelativeLayout>

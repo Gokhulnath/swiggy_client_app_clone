@@ -122,7 +122,8 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                         orderRatingTV.setText(String.valueOf(ratingBar.getRating()));
                         ratingDisplayTV.setText("Your rating is " + String.valueOf(ratingBar.getRating()));
                         dialog.dismiss();
-                        //todo call API
+                        //todo call API(not for now)
+                        //todo make rating below rateBT in ui --done M
                     }
                 });
             });
