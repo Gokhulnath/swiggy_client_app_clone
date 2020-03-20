@@ -48,6 +48,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
 
+
     implementation 'com.google.firebase:firebase-auth:19.3.0'
 
 }

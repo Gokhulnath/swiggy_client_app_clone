@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -67,7 +66,7 @@ public class CollegeListActivity extends AppCompatActivity {
             }
         });
 
-        //todo shared pref name change to constant
+        //todo shared pref name change to constant DONE G
         String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
         String authid = SharedPref.getString(getApplicationContext(),Constants.authId);
         MainRepository.getCollegeService().getAllColleges(authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {
@@ -79,14 +78,12 @@ public class CollegeListActivity extends AppCompatActivity {
                     collegeAdapter.notifyDataSetChanged();
                     collegeList = (ArrayList<CollegeModel>) responseFromServer.getData();
                 } else {
-                    Log.d("RetroFit", "failure");
                     Toast.makeText(CollegeListActivity.this, responseFromServer.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Response<List<CollegeModel>>> call, Throwable t) {
-                Log.d("ResponseFail", t.getMessage());
                 Toast.makeText(CollegeListActivity.this, "Unable to reach the server"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

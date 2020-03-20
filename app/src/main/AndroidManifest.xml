@@ -3,6 +3,7 @@
     package="golhar.cocomo.zinger">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ShopItemList"></activity>
+        <activity android:name=".ShopItemListActivity"></activity>
         <activity android:name=".OnBoardingActivity" />
         <activity android:name=".ShopListActivity" />
         <activity android:name=".OrderHistoryActivity" />
