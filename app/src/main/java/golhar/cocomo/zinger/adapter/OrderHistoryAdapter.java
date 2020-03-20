@@ -24,7 +24,7 @@ import golhar.cocomo.zinger.model.OrderItemModel;
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderHolder> {
 
-    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    hh:mm:ss A");
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    hh:mm:ss a");
     List<OrderItemListModel> itemList;
     Context context, activityContext;
 

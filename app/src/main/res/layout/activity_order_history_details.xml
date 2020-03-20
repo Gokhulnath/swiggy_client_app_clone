@@ -17,7 +17,6 @@
             android:paddingRight="@dimen/_5sdp"
             android:src="@drawable/ic_arrow_back" />
 
-
         <TextView
             android:id="@+id/orderNumTV"
             android:layout_width="wrap_content"
@@ -33,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/orderNumTV"
             android:layout_toRightOf="@+id/backArrowIV"
-            android:text="Delivered  |" />
+            android:text="Delivered  | " />
 
         <TextView
             android:id="@+id/itemNumTV"
@@ -100,10 +99,10 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/toAddRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/fromAddRV"
-            android:id="@+id/toAddRV"
 
             android:layout_toRightOf="@+id/deliveryIV">
 
@@ -111,10 +110,11 @@
                 android:id="@+id/toTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="IT Department"
                 android:paddingTop="@dimen/_8sdp"
+                android:text="IT Department"
                 android:textColor="#000"
                 android:textSize="@dimen/_15sdp" />
+
             <TextView
                 android:id="@+id/toAddTV"
                 android:layout_width="wrap_content"
@@ -124,38 +124,42 @@
 
         </RelativeLayout>
     </RelativeLayout>
+
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/deliveryStatusRV"
-        android:layout_below="@+id/deliveryRV"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/deliveryRV">
 
         <ImageView
+            android:id="@+id/checkIV"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:id="@+id/checkIV"
             android:src="@drawable/ic_check" />
+
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/checkIV"
-            android:text="Order Delivered on March 4 5:30 PM"
-            android:layout_height="wrap_content"/>
+            android:text="Order Delivered on March 4 5:30 PM" />
 
     </RelativeLayout>
+
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/bilDetailsTV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
         android:layout_below="@+id/deliveryStatusRV"
-        android:background="#EFEFEF"
-        android:layout_height="@dimen/_40sdp">
+        android:background="#EFEFEF">
+
         <TextView
             android:layout_width="wrap_content"
-            android:text="BILL DETAILS"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="@dimen/_10sdp"
-            android:layout_height="wrap_content"/>
+            android:text="BILL DETAILS" />
     </RelativeLayout>
 
     <RelativeLayout
