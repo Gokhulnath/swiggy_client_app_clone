@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
+import golhar.cocomo.zinger.utils.Constants;
 import golhar.cocomo.zinger.utils.SharedPref;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -32,13 +33,13 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                int loginStatus = SharedPref.getInt(getApplicationContext(), "loginStatus");
+                int loginStatus = SharedPref.getInt(getApplicationContext(), Constants.loginStatus);
                 if (loginStatus == 1) {
                     Intent shopList = new Intent(SplashScreenActivity.this, ShopListActivity.class);
                     startActivity(shopList);
                     finish();
                 } else {
-                    Intent main = new Intent(SplashScreenActivity.this, MainActivity.class);
+                    Intent main = new Intent(SplashScreenActivity.this, OnBoardingActivity.class);
                     startActivity(main);
                     finish();
                 }

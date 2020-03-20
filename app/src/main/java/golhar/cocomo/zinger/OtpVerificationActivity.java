@@ -28,6 +28,7 @@ import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.UserCollegeModel;
 import golhar.cocomo.zinger.model.UserModel;
 import golhar.cocomo.zinger.service.MainRepository;
+import golhar.cocomo.zinger.utils.Constants;
 import golhar.cocomo.zinger.utils.ErrorLog;
 import golhar.cocomo.zinger.utils.Response;
 import golhar.cocomo.zinger.utils.SharedPref;
@@ -40,7 +41,6 @@ public class OtpVerificationActivity extends AppCompatActivity {
     private PhoneAuthProvider phoneAuth;
     private String verificationId;
 
-    //todo use BT instead of B  Done G
     Button otpVerifiedBT;
     Button sendOtpBT;
     TextView numberTV;
@@ -55,8 +55,8 @@ public class OtpVerificationActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         phoneAuth = PhoneAuthProvider.getInstance();
-        phNumber = SharedPref.getString(getApplicationContext(), "phoneNumber");
-        otpVerifiedBT = findViewById(R.id.otpVerifiedBT); //todo remove all typecast  Done G
+        phNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
+        otpVerifiedBT = findViewById(R.id.otpVerifiedBT);
         numberTV = findViewById(R.id.numberTV);
         numberTV.setText("OTP sent to " + phNumber);
         otpTIET = findViewById(R.id.otpTIET);
@@ -141,7 +141,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(OtpVerificationActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                     authId = FirebaseAuth.getInstance().getUid();
-                    SharedPref.putString(getApplicationContext(), "authId", authId);
+                    SharedPref.putString(getApplicationContext(), Constants.authId, authId);
                     UserModel userModel = new UserModel();
                     userModel.setMobile(phNumber);
                     userModel.setOauthId(authId);
@@ -151,29 +151,28 @@ public class OtpVerificationActivity extends AppCompatActivity {
                         public void onResponse(Call<Response<UserCollegeModel>> call, retrofit2.Response<Response<UserCollegeModel>> response) {
                             Response<UserCollegeModel> userDataResponse = response.body();
                             if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.Success)) {
-                                SharedPref.putString(getApplicationContext(), "userName", userDataResponse.getData().getUserModel().getName());
-                                SharedPref.putString(getApplicationContext(), "userEmail", userDataResponse.getData().getUserModel().getEmail());
-                                SharedPref.putInt(getApplicationContext(), "collegeId", userDataResponse.getData().getCollegeModel().getId());
-                                SharedPref.putString(getApplicationContext(),"collegeName",userDataResponse.getData().getCollegeModel().getName());
-                                SharedPref.putString(getApplicationContext(),"collegeAddress",userDataResponse.getData().getCollegeModel().getAddress());
-                                SharedPref.putString(getApplicationContext(),"collegeUrl",userDataResponse.getData().getCollegeModel().getIconUrl());
-                                SharedPref.putInt(getApplicationContext(), "loginStatus", 1);
+                                SharedPref.putString(getApplicationContext(), Constants.userName, userDataResponse.getData().getUserModel().getName());
+                                SharedPref.putString(getApplicationContext(), Constants.userEmail, userDataResponse.getData().getUserModel().getEmail());
+                                SharedPref.putInt(getApplicationContext(), Constants.collegeId, userDataResponse.getData().getCollegeModel().getId());
+                                SharedPref.putString(getApplicationContext(), Constants.collegeName, userDataResponse.getData().getCollegeModel().getName());
+                                SharedPref.putString(getApplicationContext(), Constants.collegeAddress, userDataResponse.getData().getCollegeModel().getAddress());
+                                SharedPref.putString(getApplicationContext(), Constants.collegeUrl, userDataResponse.getData().getCollegeModel().getIconUrl());
+                                SharedPref.putInt(getApplicationContext(), Constants.loginStatus, 1);
                                 Intent shopList = new Intent(OtpVerificationActivity.this, ShopListActivity.class);
                                 startActivity(shopList);
+                            } else if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.CollegeDetailNotAvailable)) {
+                                SharedPref.putString(getApplicationContext(), Constants.authId, authId);
+                                Intent registration = new Intent(OtpVerificationActivity.this, RegistrationActivity.class);
+                                startActivity(registration);
                             } else {
-                                if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.CollegeDetailNotAvailable)) {
-                                    SharedPref.putString(getApplicationContext(), "AuthId", authId);
-                                    Intent registration = new Intent(OtpVerificationActivity.this, RegistrationActivity.class);
-                                    startActivity(registration);
-                                } else {
-                                    Toast.makeText(OtpVerificationActivity.this, "ERROR OCCURRED", Toast.LENGTH_SHORT).show();
-                                }
+                                Toast.makeText(OtpVerificationActivity.this, "ERROR OCCURRED", Toast.LENGTH_SHORT).show();
                             }
                         }
 
+
                         @Override
                         public void onFailure(Call<Response<UserCollegeModel>> call, Throwable t) {
-                            Toast.makeText(OtpVerificationActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(OtpVerificationActivity.this, "Failure" + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {

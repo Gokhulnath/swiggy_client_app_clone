@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import golhar.cocomo.zinger.adapter.OrderHistoryAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.service.MainRepository;
+import golhar.cocomo.zinger.utils.Constants;
 import golhar.cocomo.zinger.utils.ErrorLog;
 import golhar.cocomo.zinger.utils.Response;
 import golhar.cocomo.zinger.utils.SharedPref;
@@ -41,10 +44,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
         userEmailTV = findViewById(R.id.userEmailTV);
 
         String phoneNo, authId, email, userName;
-        phoneNo = SharedPref.getString(getApplicationContext(), "phoneNumber");
-        authId = SharedPref.getString(getApplicationContext(), "authId");
-        email = SharedPref.getString(getApplicationContext(), "userEmail");
-        userName = SharedPref.getString(getApplicationContext(), "userName");
+        phoneNo = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
+        authId = SharedPref.getString(getApplicationContext(), Constants.authId);
+        email = SharedPref.getString(getApplicationContext(), Constants.userEmail);
+        userName = SharedPref.getString(getApplicationContext(), Constants.userName);
         userNameTV.setText(userName);
         userEmailTV.setText(email);
         userNumTV.setText(phoneNo);
@@ -57,8 +60,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
         logoutBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPref.putInt(getApplicationContext(), "loginStatus", 0);
-                Intent MainActivity = new Intent(OrderHistoryActivity.this, golhar.cocomo.zinger.MainActivity.class);
+                SharedPref.removeAll(getApplicationContext());
+                FirebaseAuth.getInstance().signOut();
+                Intent MainActivity = new Intent(OrderHistoryActivity.this, OnBoardingActivity.class);
                 startActivity(MainActivity);
             }
         });
