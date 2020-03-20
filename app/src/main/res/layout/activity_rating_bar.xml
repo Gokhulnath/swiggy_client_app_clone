@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#FF6600"
+            android:background="#ff9703"
             android:text="SUBMIT RATING"
             android:textColor="#fff" />
 

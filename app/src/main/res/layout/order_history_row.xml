@@ -107,33 +107,41 @@
                 android:padding="@dimen/_8sdp"
                 android:text="RATE FOOD" />
 
-            <TextView
-                android:id="@+id/orderRateTV"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/reorderBT"
-                android:padding="@dimen/_5sdp"
-                android:text="Your food rating" />
+                android:layout_below="@id/rateBT"
+                android:id="@+id/rateRV"
+                android:layout_marginLeft="@dimen/_150sdp"
+               >
 
-            <ImageView
-                android:id="@+id/starImgIV"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_below="@id/orderRateTV"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:src="@drawable/ic_star" />
+                <TextView
+                    android:id="@+id/orderRateTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Your food rating" />
 
-            <TextView
-                android:id="@+id/orderRatingTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/orderRateTV"
-                android:layout_marginLeft="-57dp"
-                android:layout_toRightOf="@id/orderRateTV"
-                android:text="4"
-                android:textSize="@dimen/_18ssp"
-                android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/starImgIV"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_below="@id/orderRateTV"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:src="@drawable/ic_star" />
+
+                <TextView
+                    android:id="@+id/orderRatingTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/orderRateTV"
+                    android:layout_marginLeft="-57dp"
+                    android:layout_toRightOf="@id/orderRateTV"
+                    android:text="4"
+                    android:textSize="@dimen/_18ssp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </RelativeLayout>
 
         <View
