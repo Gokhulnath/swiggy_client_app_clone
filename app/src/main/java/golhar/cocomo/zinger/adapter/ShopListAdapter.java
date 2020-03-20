@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import golhar.cocomo.zinger.R;
-import golhar.cocomo.zinger.ShopItemListActivity;
+import golhar.cocomo.zinger.ShopMenuItemListActivity;
 import golhar.cocomo.zinger.model.ShopConfigurationModel;
 
 import static android.graphics.Color.parseColor;
@@ -88,7 +88,7 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopNa
         holder.cliclableLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent shopItemList = new Intent(context, ShopItemListActivity.class);
+                Intent shopItemList = new Intent(context, ShopMenuItemListActivity.class);
                 shopItemList.putExtra("shopDetails",shopConfigurationModel);
                 context.startActivity(shopItemList);
             }

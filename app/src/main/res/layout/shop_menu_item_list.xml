@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_150sdp"
+    android:layout_height="@dimen/_210sdp"
+    android:orientation="vertical"
+    android:padding="@dimen/_10sdp">
+
+    <ImageView
+        android:id="@+id/itemIconIV"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:src="@drawable/food" />
+
+    <TextView
+        android:id="@+id/categoryTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Starters"
+        android:textSize="@dimen/_8ssp" />
+
+    <TextView
+        android:id="@+id/itemNameTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_vegetarian_mark"
+        android:text="Chicken Fried Rice"
+        android:textColor="#000000"
+        android:textSize="@dimen/_12ssp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/priceTV"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="wrap_content"
+            android:text="₹100"
+            android:textSize="@dimen/_11ssp" />
+
+        <Button
+            android:id="@+id/addItemBT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#D21F3C"
+            android:text="ADD"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout>

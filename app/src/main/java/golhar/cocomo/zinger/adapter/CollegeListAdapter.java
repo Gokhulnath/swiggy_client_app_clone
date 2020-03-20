@@ -55,7 +55,6 @@ public class CollegeListAdapter extends RecyclerView.Adapter<CollegeListAdapter.
     @Override
     public void onBindViewHolder(@NonNull CollegeNameHolder holder, int position) {
         final CollegeModel collegeModel = collegeArrayList.get(position);
-
         holder.collegeNameTV.setText(collegeModel.getName());
         holder.collegeAddressTV.setText(collegeModel.getAddress());
         Glide.with(context)

@@ -18,12 +18,15 @@
             android:orientation="horizontal"
             android:paddingHorizontal="@dimen/_15sdp">
 
-            <EditText
+            <TextView
                 android:id="@+id/searchShopET"
                 android:layout_width="@dimen/_240sdp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_26sdp"
+                android:background="@drawable/myborder"
+                android:clickable="true"
                 android:drawableLeft="@drawable/ic_search_"
                 android:hint="Search"
+                android:paddingLeft="@dimen/_7sdp"
                 android:textSize="@dimen/_15ssp" />
 
             <Button

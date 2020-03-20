@@ -61,6 +61,16 @@ public class MainRepository {
         return (ShopService) retrofit.create(ShopService.class);
     }
 
+    public static ItemService getItemService(){
+        Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new DateTypeDeserializer()).create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        return (ItemService) retrofit.create(ItemService.class);
+    }
+
     public static class DateTypeDeserializer implements JsonDeserializer<Date> {
         private final String[] DATE_FORMATS = new String[]{"dd/MM/yyyy HH:mm:ss", "HH:mm:ss"};
         @Override
