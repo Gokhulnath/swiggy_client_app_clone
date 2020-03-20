@@ -31,7 +31,7 @@ public class ShopItemListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_item_list);
         Intent shop = getIntent();
-        ShopConfigurationModel shopConfigurationModel = (ShopConfigurationModel) shop.getParcelableExtra("shopDetails");
+        ShopConfigurationModel shopConfigurationModel = shop.getParcelableExtra("shopDetails");
         restaurantNameTV = findViewById(R.id.restaurantNameTV);
         ratingTV = findViewById(R.id.ratingTV);
         numberOfRatingTV = findViewById(R.id.numberOfRatingTV);

@@ -66,7 +66,7 @@ public class CollegeListActivity extends AppCompatActivity {
             }
         });
 
-        //todo shared pref name change to constant
+        //todo shared pref name change to constant DONE G
         String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
         String authid = SharedPref.getString(getApplicationContext(),Constants.authId);
         MainRepository.getCollegeService().getAllColleges(authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {
