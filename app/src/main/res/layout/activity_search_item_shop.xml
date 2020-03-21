@@ -12,12 +12,12 @@
         android:layout_height="@dimen/_30sdp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/myborder"
         android:drawableRight="@drawable/ic_search_"
         android:hint="Search for food and restaurants"
-        android:background="@drawable/myborder"
-        android:textSize="@dimen/_15ssp"
+        android:lines="1"
         android:paddingHorizontal="@dimen/_10sdp"
-        android:maxLines="1"/>
+        android:textSize="@dimen/_15ssp" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -28,16 +28,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/shopMenuItemListRV"
+                android:id="@+id/shopListRV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/shopListRV"
+                android:id="@+id/shopMenuItemListRV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp" />

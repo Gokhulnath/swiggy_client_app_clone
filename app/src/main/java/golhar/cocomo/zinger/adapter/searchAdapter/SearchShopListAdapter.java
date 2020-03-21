@@ -2,6 +2,8 @@ package golhar.cocomo.zinger.adapter.searchAdapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,16 +65,17 @@ public class SearchShopListAdapter extends RecyclerView.Adapter<SearchShopListAd
         final ShopConfigurationModel shopConfigurationModel = shopConfigurationModelArrayList.get(position);
         holder.specialItemLL.setVisibility(View.GONE);
         holder.nameTV.setText(shopConfigurationModel.getShopModel().getName());
-        holder.nameTV.setCompoundDrawablesWithIntrinsicBounds(null,null,null,null);
+        holder.nameTV.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         Glide.with(context)
                 .load(shopConfigurationModel.getShopModel().getPhotoUrl())
+                .placeholder(new ColorDrawable(Color.parseColor("#000000")))
                 .into(holder.iconIV);
         holder.typeTV.setText("Restaurant");
         holder.clickableLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent shopItemList = new Intent(context, ShopMenuItemListActivity.class);
-                shopItemList.putExtra("shopDetails",shopConfigurationModel);
+                shopItemList.putExtra("shopDetails", shopConfigurationModel);
                 context.startActivity(shopItemList);
             }
         });
@@ -96,8 +99,8 @@ public class SearchShopListAdapter extends RecyclerView.Adapter<SearchShopListAd
             nameTV = itemView.findViewById(R.id.nameTV);
             typeTV = itemView.findViewById(R.id.typeTV);
             iconIV = itemView.findViewById(R.id.iconIV);
-            clickableLL=itemView.findViewById(R.id.clickableLL);
-            specialItemLL=itemView.findViewById(R.id.specialItemLL);
+            clickableLL = itemView.findViewById(R.id.clickableLL);
+            specialItemLL = itemView.findViewById(R.id.specialItemLL);
         }
     }
 }

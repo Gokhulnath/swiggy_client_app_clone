@@ -1,6 +1,8 @@
 package golhar.cocomo.zinger.adapter.searchAdapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -55,16 +59,17 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
     @Override
     public void onBindViewHolder(@NonNull ItemNameHolder holder, int position) {
         final ItemModel itemModel = itemModelArrayList.get(position);
-        holder.nameTV.setText(" "+itemModel.getName());
+        holder.nameTV.setText(" " + itemModel.getName());
         if (itemModel.getIsVeg() == 0) {
             Drawable img = context.getResources().getDrawable(R.drawable.ic_non_vegetarian_mark);
             holder.nameTV.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
         }
-        /*Glide.with(context)
+        Glide.with(context)
                 .load(itemModel.getPhotoUrl())
-                .into(holder.iconIV);*/
+                .placeholder(new ColorDrawable(Color.parseColor("#000000")))
+                .into(holder.iconIV);
         holder.typeTV.setText(itemModel.getShopModel().getName());
-        holder.priceTV.setText("₹"+itemModel.getPrice());
+        holder.priceTV.setText("₹" + itemModel.getPrice());
         if (itemModel.getIsAvailable() == 0) {
             holder.addItemBT.setEnabled(false);
         }
@@ -90,9 +95,9 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
             nameTV = itemView.findViewById(R.id.nameTV);
             typeTV = itemView.findViewById(R.id.typeTV);
             iconIV = itemView.findViewById(R.id.iconIV);
-            clickableLL=itemView.findViewById(R.id.clickableLL);
-            priceTV=itemView.findViewById(R.id.priceTV);
-            addItemBT=itemView.findViewById(R.id.addItemBT);
+            clickableLL = itemView.findViewById(R.id.clickableLL);
+            priceTV = itemView.findViewById(R.id.priceTV);
+            addItemBT = itemView.findViewById(R.id.addItemBT);
         }
     }
 }

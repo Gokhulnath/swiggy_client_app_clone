@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingVertical="@dimen/_10sdp"
-        android:gravity="center_vertical">
+        android:paddingVertical="@dimen/_10sdp">
 
         <ImageView
             android:id="@+id/shopIconIV"
@@ -28,11 +28,11 @@
                 android:id="@+id/restaurantNameTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="2"
                 android:text="Restaurant Name\n"
                 android:textColor="#000000"
                 android:textSize="@dimen/_20ssp"
-                android:textStyle="bold"
-                android:maxLines="2"/>
+                android:textStyle="bold" />
 
 
             <TextView
