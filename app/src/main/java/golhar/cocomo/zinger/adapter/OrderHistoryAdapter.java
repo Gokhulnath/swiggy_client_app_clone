@@ -81,6 +81,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             public void onClick(View view) {
                 Intent history = new Intent(activityContext, OrderHistoryItemDetailActivity.class );
                 history.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                history.putExtra("FullOrderDetails",orderItemListModel);
                 //todo pass the current clicked orderitemlist to next class
                 context.startActivity(history);
             }
