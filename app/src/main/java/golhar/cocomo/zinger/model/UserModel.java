@@ -1,9 +1,12 @@
 package golhar.cocomo.zinger.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import golhar.cocomo.zinger.enums.UserRole;
 
-public class UserModel {
+public class UserModel implements Parcelable {
     private String mobile;
     private String name;
     private String email;
@@ -13,6 +16,31 @@ public class UserModel {
 
     public UserModel() {
     }
+
+    protected UserModel(Parcel in) {
+        mobile = in.readString();
+        name = in.readString();
+        email = in.readString();
+        oauthId = in.readString();
+        role = role.values()[in.readInt()];
+        if (in.readByte() == 0) {
+            isDelete = null;
+        } else {
+            isDelete = in.readInt();
+        }
+    }
+
+    public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
+        @Override
+        public UserModel createFromParcel(Parcel in) {
+            return new UserModel(in);
+        }
+
+        @Override
+        public UserModel[] newArray(int size) {
+            return new UserModel[size];
+        }
+    };
 
     public String getMobile() {
         return mobile;
@@ -72,5 +100,25 @@ public class UserModel {
                 ", role=" + role +
                 ", isDelete=" + isDelete +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mobile);
+        dest.writeString(name);
+        dest.writeString(email);
+        dest.writeString(oauthId);
+        dest.writeInt(role.ordinal());
+        if (isDelete == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(isDelete);
+        }
     }
 }

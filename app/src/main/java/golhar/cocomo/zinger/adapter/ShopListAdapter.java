@@ -3,6 +3,7 @@ package golhar.cocomo.zinger.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import golhar.cocomo.zinger.R;
-import golhar.cocomo.zinger.ShopItemListActivity;
+import golhar.cocomo.zinger.ShopMenuItemListActivity;
 import golhar.cocomo.zinger.model.ShopConfigurationModel;
 
 import static android.graphics.Color.parseColor;
@@ -80,15 +81,22 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopNa
             holder.statusTV.setTextColor(parseColor("#ff0000"));
             holder.cliclableLL.setBackgroundColor(Color.parseColor("#EBEBEB"));
         }
-        holder.ratingTV.setText(shopConfigurationModel.getRatingModel().getRating().toString());
-        holder.numberOfRatingTV.setText("(" + shopConfigurationModel.getRatingModel().getUserCount().toString() + ")");
+        if(shopConfigurationModel.getRatingModel()==null || shopConfigurationModel.getRatingModel().getRating().equals(0) || shopConfigurationModel.getRatingModel().getUserCount().equals(0)) {
+            holder.ratingTV.setText("No ratings");
+            holder.numberOfRatingTV.setVisibility(View.INVISIBLE);
+        }
+        else{
+            holder.ratingTV.setText(shopConfigurationModel.getRatingModel().getRating().toString());
+            holder.numberOfRatingTV.setText("(" + shopConfigurationModel.getRatingModel().getUserCount().toString() + ")");
+        }
         Glide.with(context)
                 .load(shopConfigurationModel.getShopModel().getPhotoUrl())
+                .placeholder(new ColorDrawable(Color.parseColor("#000000")))
                 .into(holder.shopIconIV);
         holder.cliclableLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent shopItemList = new Intent(context, ShopItemListActivity.class);
+                Intent shopItemList = new Intent(context, ShopMenuItemListActivity.class);
                 shopItemList.putExtra("shopDetails",shopConfigurationModel);
                 context.startActivity(shopItemList);
             }

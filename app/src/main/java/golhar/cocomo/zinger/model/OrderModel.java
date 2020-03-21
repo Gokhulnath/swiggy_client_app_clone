@@ -1,10 +1,13 @@
 package golhar.cocomo.zinger.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 import golhar.cocomo.zinger.enums.OrderStatus;
 
-public class OrderModel {
+public class OrderModel implements Parcelable {
     private String id;
     private UserModel userModel;
     private TransactionModel transactionModel;
@@ -24,6 +27,46 @@ public class OrderModel {
         transactionModel = new TransactionModel();
         shopModel = new ShopModel();
     }
+
+    protected OrderModel(Parcel in) {
+        id = in.readString();
+        userModel = in.readParcelable(UserModel.class.getClassLoader());
+        transactionModel = in.readParcelable(TransactionModel.class.getClassLoader());
+        shopModel = in.readParcelable(ShopModel.class.getClassLoader());
+        date = (java.util.Date) in.readSerializable();
+        orderStatus=orderStatus.values()[in.readInt()];
+        lastStatusUpdatedTime=(java.util.Date) in.readSerializable();
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            deliveryPrice = null;
+        } else {
+            deliveryPrice = in.readDouble();
+        }
+        deliveryLocation = in.readString();
+        cookingInfo = in.readString();
+        if (in.readByte() == 0) {
+            rating = null;
+        } else {
+            rating = in.readDouble();
+        }
+        secretKey = in.readString();
+    }
+
+    public static final Creator<OrderModel> CREATOR = new Creator<OrderModel>() {
+        @Override
+        public OrderModel createFromParcel(Parcel in) {
+            return new OrderModel(in);
+        }
+
+        @Override
+        public OrderModel[] newArray(int size) {
+            return new OrderModel[size];
+        }
+    };
 
     public String  getId() {
         return id;
@@ -146,5 +189,42 @@ public class OrderModel {
                 ", rating=" + rating +
                 ", secretKey='" + secretKey + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeParcelable(userModel, flags);
+        dest.writeParcelable(transactionModel, flags);
+        dest.writeParcelable(shopModel, flags);
+        dest.writeSerializable(date);
+        dest.writeInt(orderStatus.ordinal());
+        dest.writeSerializable(lastStatusUpdatedTime);
+        if (price == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(price);
+        }
+        if (deliveryPrice == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(deliveryPrice);
+        }
+        dest.writeString(deliveryLocation);
+        dest.writeString(cookingInfo);
+        if (rating == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(rating);
+        }
+        dest.writeString(secretKey);
     }
 }

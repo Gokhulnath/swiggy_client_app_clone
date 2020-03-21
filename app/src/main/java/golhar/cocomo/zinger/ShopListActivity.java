@@ -1,18 +1,14 @@
 package golhar.cocomo.zinger;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import golhar.cocomo.zinger.adapter.ShopListAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
@@ -38,7 +33,7 @@ public class ShopListActivity extends AppCompatActivity {
     Button accountBT;
     RecyclerView shopListRV;
     ShopListAdapter shopListAdapter;
-    EditText searchShopET;
+    TextView searchShopET;
     ArrayList<ShopConfigurationModel> shopConfigurationModelArrayList;
 
     @Override
@@ -58,27 +53,6 @@ public class ShopListActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         shopListRV.setLayoutManager(linearLayoutManager);
         shopListRV.setAdapter(shopListAdapter);
-        searchShopET.addTextChangedListener(new TextWatcher() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                ArrayList<ShopConfigurationModel> modifiedShopList = (ArrayList<ShopConfigurationModel>) shopConfigurationModelArrayList
-                        .stream()
-                        .filter(shopConfigurationModel -> shopConfigurationModel.getShopModel().getName().toLowerCase().contains(s.toString().toLowerCase()))
-                        .collect(Collectors.toList());
-                shopListAdapter.setShopConfigurationModelArrayList(modifiedShopList);
-                shopListAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        String collegeName = SharedPref.getString(getApplicationContext(), Constants.collegeName);
         int collegeId = SharedPref.getInt(getApplicationContext(), Constants.collegeId);
         String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
         String authId = SharedPref.getString(getApplicationContext(), Constants.authId);
@@ -98,6 +72,17 @@ public class ShopListActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Response<List<ShopConfigurationModel>>> call, Throwable t) {
                 Log.d("ResponseFail", t.getMessage());
+            }
+        });
+
+        searchShopET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent search = new Intent(ShopListActivity.this, SearchItemShopActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("Shopdetails", shopConfigurationModelArrayList);
+                search.putExtras(bundle);
+                startActivity(search);
             }
         });
         accountBT = findViewById(R.id.accountBT);
@@ -127,10 +112,5 @@ public class ShopListActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 }
