@@ -1,6 +1,9 @@
 package golhar.cocomo.zinger.model;
 
-public class OrderItemModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class OrderItemModel implements Parcelable {
     private OrderModel orderModel;
     private ItemModel itemModel;
     private Integer quantity;
@@ -10,6 +13,33 @@ public class OrderItemModel {
         orderModel = new OrderModel();
         itemModel = new ItemModel();
     }
+
+    protected OrderItemModel(Parcel in) {
+        orderModel = in.readParcelable(OrderModel.class.getClassLoader());
+        itemModel = in.readParcelable(ItemModel.class.getClassLoader());
+        if (in.readByte() == 0) {
+            quantity = null;
+        } else {
+            quantity = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readDouble();
+        }
+    }
+
+    public static final Creator<OrderItemModel> CREATOR = new Creator<OrderItemModel>() {
+        @Override
+        public OrderItemModel createFromParcel(Parcel in) {
+            return new OrderItemModel(in);
+        }
+
+        @Override
+        public OrderItemModel[] newArray(int size) {
+            return new OrderItemModel[size];
+        }
+    };
 
     public OrderModel getOrderModel() {
         return orderModel;
@@ -51,5 +81,28 @@ public class OrderItemModel {
                 ", quantity=" + quantity +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(orderModel, flags);
+        dest.writeParcelable(itemModel, flags);
+        if (quantity == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(quantity);
+        }
+        if (price == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(price);
+        }
     }
 }

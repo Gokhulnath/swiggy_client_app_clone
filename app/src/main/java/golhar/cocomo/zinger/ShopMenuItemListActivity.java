@@ -55,12 +55,22 @@ public class ShopMenuItemListActivity extends AppCompatActivity {
         backIB = findViewById(R.id.backIB);
         callShopIB = findViewById(R.id.shopCallIB);
         restaurantNameTV.setText(shopConfigurationModel.getShopModel().getName());
-        ratingTV.setText(shopConfigurationModel.getRatingModel().getRating().toString());
-        numberOfRatingTV.setText(shopConfigurationModel.getRatingModel().getUserCount() + "\nRatings");
+        if(shopConfigurationModel.getRatingModel()==null || shopConfigurationModel.getRatingModel().getRating().equals(0) || shopConfigurationModel.getRatingModel().getUserCount().equals(0)) {
+            ratingTV.setText("No ratings");
+            numberOfRatingTV.setVisibility(View.GONE);
+        }
+        else{
+            ratingTV.setText(shopConfigurationModel.getRatingModel().getRating().toString());
+            numberOfRatingTV.setText("(" + shopConfigurationModel.getRatingModel().getUserCount().toString() + ")"+"\nRatings");
+        }
         Drawable img = getApplicationContext().getResources().getDrawable(R.drawable.ic_no_delivery);
         if (shopConfigurationModel.getConfigurationModel().getIsDeliveryAvailable() == 0) {
             deliveryTV.setText("No Delivery");
             deliveryTV.setCompoundDrawables(null, img, null, null);
+        }
+        else
+        {
+            deliveryTV.setText("₹"+shopConfigurationModel.getConfigurationModel().getDeliveryPrice().toString()+"\nDelivery");
         }
         backIB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,12 +97,12 @@ public class ShopMenuItemListActivity extends AppCompatActivity {
         shopMenuItemListRV.setAdapter(shopMenuItemAdapter);
         String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
         String authid = SharedPref.getString(getApplicationContext(), Constants.authId);
-        int collegeId = SharedPref.getInt(getApplicationContext(), Constants.collegeId);
+        int shopId = shopConfigurationModel.getShopModel().getId();
 
 
 
 
-        MainRepository.getItemService().getItemsByShopId(collegeId, authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<ItemModel>>>() {
+        MainRepository.getItemService().getItemsByShopId(shopId, authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<ItemModel>>>() {
             @Override
             public void onResponse(Call<Response<List<ItemModel>>> call, retrofit2.Response<Response<List<ItemModel>>> response) {
                 Response<List<ItemModel>> responseFromServer = response.body();

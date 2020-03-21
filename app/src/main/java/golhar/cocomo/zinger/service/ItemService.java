@@ -18,8 +18,8 @@ public interface ItemService {
     public Call<Response<String>> insertItem(@Body ItemModel itemModel,
                                        @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);
 
-    @GET("/menu/shop/{collegeId}")
-    public Call<Response<List<ItemModel>>> getItemsByShopId(@Path("collegeId") Integer collegeId,
+    @GET("/menu/shop/{shopId}")
+    public Call<Response<List<ItemModel>>> getItemsByShopId(@Path("shopId") Integer shopId,
                                                             @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);
 
     @GET("/menu/{collegeId}/{itemName}")

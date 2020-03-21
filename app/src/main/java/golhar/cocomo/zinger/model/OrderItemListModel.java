@@ -1,9 +1,29 @@
 package golhar.cocomo.zinger.model;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
-public class OrderItemListModel {
+public class OrderItemListModel implements Parcelable {
 
     OrderModel orderModel;
     List<OrderItemModel> orderItemsList;
+
+    protected OrderItemListModel(Parcel in) {
+        orderModel = in.readParcelable(OrderModel.class.getClassLoader());
+        orderItemsList = in.createTypedArrayList(OrderItemModel.CREATOR);
+    }
+
+    public static final Creator<OrderItemListModel> CREATOR = new Creator<OrderItemListModel>() {
+        @Override
+        public OrderItemListModel createFromParcel(Parcel in) {
+            return new OrderItemListModel(in);
+        }
+
+        @Override
+        public OrderItemListModel[] newArray(int size) {
+            return new OrderItemListModel[size];
+        }
+    };
 
     public OrderModel getOrderModel() {
         return orderModel;
@@ -27,5 +47,16 @@ public class OrderItemListModel {
                 "orderModel=" + orderModel +
                 ", orderItemsList=" + orderItemsList +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(orderModel, flags);
+        dest.writeTypedList(orderItemsList);
     }
 }

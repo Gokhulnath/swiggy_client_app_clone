@@ -8,13 +8,16 @@
 
     <EditText
         android:id="@+id/searchET"
-        android:layout_width="@dimen/_240sdp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_270sdp"
+        android:layout_height="@dimen/_30sdp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_10sdp"
-        android:drawableLeft="@drawable/ic_search_"
-        android:hint="Search"
-        android:textSize="@dimen/_15ssp" />
+        android:drawableRight="@drawable/ic_search_"
+        android:hint="Search for food and restaurants"
+        android:background="@drawable/myborder"
+        android:textSize="@dimen/_15ssp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:maxLines="1"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -26,8 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/_10sdp">
-
+            >
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/shopMenuItemListRV"
                 android:layout_width="match_parent"

@@ -113,9 +113,4 @@ public class ShopListActivity extends AppCompatActivity {
             }
         }, 2000);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 }

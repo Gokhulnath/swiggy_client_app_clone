@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import golhar.cocomo.zinger.adapter.ShopListAdapter;
-import golhar.cocomo.zinger.adapter.ShopMenuItemAdapter;
+import golhar.cocomo.zinger.adapter.searchAdapter.SearchShopListAdapter;
+import golhar.cocomo.zinger.adapter.searchAdapter.SearchShopMenuItemAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.ItemModel;
 import golhar.cocomo.zinger.model.ShopConfigurationModel;
@@ -33,10 +32,10 @@ import retrofit2.Callback;
 
 public class SearchItemShopActivity extends AppCompatActivity {
 
-    RecyclerView shopMenuItemListRV;
-    ShopMenuItemAdapter shopMenuItemAdapter;
+    RecyclerView searchShopMenuItemListRV;
+    SearchShopMenuItemAdapter searchShopMenuItemAdapter;
     RecyclerView shopListRV;
-    ShopListAdapter shopListAdapter;
+    SearchShopListAdapter searchShopListAdapter;
     EditText searchET;
 
     @Override
@@ -49,61 +48,66 @@ public class SearchItemShopActivity extends AppCompatActivity {
         String authid = SharedPref.getString(getApplicationContext(), Constants.authId);
         int collegeId = SharedPref.getInt(getApplicationContext(), Constants.collegeId);
         //items
-        shopMenuItemAdapter = new ShopMenuItemAdapter(new ArrayList<>(), this);
-        shopMenuItemListRV = findViewById(R.id.shopMenuItemListRV);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        shopMenuItemListRV.setLayoutManager(gridLayoutManager);
-        shopMenuItemListRV.setAdapter(shopMenuItemAdapter);
+        searchShopMenuItemAdapter = new SearchShopMenuItemAdapter(new ArrayList<>(), this);
+        searchShopMenuItemListRV = findViewById(R.id.shopMenuItemListRV);
+        LinearLayoutManager linearLayoutManagerItem = new LinearLayoutManager(this);
+        searchShopMenuItemListRV.setLayoutManager(linearLayoutManagerItem);
+        searchShopMenuItemListRV.setAdapter(searchShopMenuItemAdapter);
         //shop
         try {
-            shopListAdapter = new ShopListAdapter(new ArrayList<>(), this);
+            searchShopListAdapter = new SearchShopListAdapter(new ArrayList<>(), this);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         shopListRV = findViewById(R.id.shopListRV);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        shopListRV.setLayoutManager(linearLayoutManager);
-        shopListRV.setAdapter(shopListAdapter);
+        LinearLayoutManager linearLayoutManagerShop = new LinearLayoutManager(this);
+        linearLayoutManagerShop.setOrientation(RecyclerView.VERTICAL);
+        shopListRV.setLayoutManager(linearLayoutManagerShop);
+        shopListRV.setAdapter(searchShopListAdapter);
         searchET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                if (searchET.toString().trim().isEmpty() || after < 4) {
+                    searchShopListAdapter.setShopConfigurationModelArrayList(new ArrayList<>());
+                    searchShopListAdapter.notifyDataSetChanged();
+                    searchShopMenuItemAdapter.setItemModelArrayList(new ArrayList<>());
+                    searchShopMenuItemAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                ArrayList<ShopConfigurationModel> nullShopList = new ArrayList<ShopConfigurationModel>();
-                ArrayList<ItemModel> nullItemList = new ArrayList<ItemModel>();
-                shopListAdapter.setShopConfigurationModelArrayList(nullShopList);
-                shopListAdapter.notifyDataSetChanged();
-                shopMenuItemAdapter.setItemModelArrayList(nullItemList);
-                shopMenuItemAdapter.notifyDataSetChanged();
+                if (before == 1 && count == 0) {
+                    searchShopListAdapter.setShopConfigurationModelArrayList(new ArrayList<>());
+                    searchShopListAdapter.notifyDataSetChanged();
+                    searchShopMenuItemAdapter.setItemModelArrayList(new ArrayList<>());
+                    searchShopMenuItemAdapter.notifyDataSetChanged();
+                }
             }
+
 
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 2) {
+                ArrayList<ShopConfigurationModel> modifiedShopList = new ArrayList<>();
+                ArrayList<ItemModel> modifiedArraylist = new ArrayList<>();
+                if (s.length() > 3) {
                     //shop
-                    ArrayList<ShopConfigurationModel> modifiedShopList = (ArrayList<ShopConfigurationModel>) shopConfigurationModelArrayList
+                    modifiedShopList = (ArrayList<ShopConfigurationModel>) shopConfigurationModelArrayList
                             .stream()
                             .filter(shopConfigurationModel -> shopConfigurationModel.getShopModel().getName().toLowerCase().contains(s.toString().toLowerCase()))
                             .collect(Collectors.toList());
-                    shopListAdapter.setShopConfigurationModelArrayList(modifiedShopList);
-                    shopListAdapter.notifyDataSetChanged();
-
+                    searchShopListAdapter.setShopConfigurationModelArrayList(modifiedShopList);
+                    searchShopListAdapter.notifyDataSetChanged();
                     //item
                     MainRepository.getItemService().getItemsByName(collegeId, s.toString(), authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<ItemModel>>>() {
                         @Override
                         public void onResponse(Call<Response<List<ItemModel>>> call, retrofit2.Response<Response<List<ItemModel>>> response) {
                             Response<List<ItemModel>> responseFromServer = response.body();
                             if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)) {
-                                shopMenuItemAdapter.setItemModelArrayList((ArrayList<ItemModel>) responseFromServer.getData());
-                                shopMenuItemAdapter.notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(SearchItemShopActivity.this, "first" + responseFromServer.getMessage(), Toast.LENGTH_SHORT).show();
+                                ArrayList<ItemModel> modifiedArraylist = (ArrayList<ItemModel>) responseFromServer.getData();
+                                searchShopMenuItemAdapter.setItemModelArrayList(modifiedArraylist);
+                                searchShopMenuItemAdapter.notifyDataSetChanged();
                             }
                         }
 
@@ -113,6 +117,13 @@ public class SearchItemShopActivity extends AppCompatActivity {
 
                         }
                     });
+                } else {
+                    modifiedShopList.clear();
+                    searchShopListAdapter.setShopConfigurationModelArrayList(modifiedShopList);
+                    searchShopListAdapter.notifyDataSetChanged();
+                    modifiedArraylist.clear();
+                    searchShopMenuItemAdapter.setItemModelArrayList(modifiedArraylist);
+                    searchShopMenuItemAdapter.notifyDataSetChanged();
                 }
             }
         });

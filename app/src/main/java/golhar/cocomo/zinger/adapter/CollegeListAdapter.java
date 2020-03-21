@@ -1,6 +1,8 @@
 package golhar.cocomo.zinger.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +61,7 @@ public class CollegeListAdapter extends RecyclerView.Adapter<CollegeListAdapter.
         holder.collegeAddressTV.setText(collegeModel.getAddress());
         Glide.with(context)
                 .load(collegeModel.getIconUrl())
+                .placeholder(new ColorDrawable(Color.parseColor("#000000")))
                 .into(holder.collegeProfileImageCIV);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

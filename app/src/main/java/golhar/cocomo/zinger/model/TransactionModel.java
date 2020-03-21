@@ -1,7 +1,10 @@
 package golhar.cocomo.zinger.model;
 
 
-public class TransactionModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class TransactionModel implements Parcelable {
     private String transactionId;
     private String bankTransactionId;
     private String currency;
@@ -14,6 +17,30 @@ public class TransactionModel {
 
     public TransactionModel() {
     }
+
+    protected TransactionModel(Parcel in) {
+        transactionId = in.readString();
+        bankTransactionId = in.readString();
+        currency = in.readString();
+        responseCode = in.readString();
+        responseMessage = in.readString();
+        gatewayName = in.readString();
+        bankName = in.readString();
+        paymentMode = in.readString();
+        checksumHash = in.readString();
+    }
+
+    public static final Creator<TransactionModel> CREATOR = new Creator<TransactionModel>() {
+        @Override
+        public TransactionModel createFromParcel(Parcel in) {
+            return new TransactionModel(in);
+        }
+
+        @Override
+        public TransactionModel[] newArray(int size) {
+            return new TransactionModel[size];
+        }
+    };
 
     public String getTransactionId() {
         return transactionId;
@@ -100,5 +127,23 @@ public class TransactionModel {
                 ", paymentMode='" + paymentMode + '\'' +
                 ", checksumHash='" + checksumHash + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(transactionId);
+        dest.writeString(bankTransactionId);
+        dest.writeString(currency);
+        dest.writeString(responseCode);
+        dest.writeString(responseMessage);
+        dest.writeString(gatewayName);
+        dest.writeString(bankName);
+        dest.writeString(paymentMode);
+        dest.writeString(checksumHash);
     }
 }
