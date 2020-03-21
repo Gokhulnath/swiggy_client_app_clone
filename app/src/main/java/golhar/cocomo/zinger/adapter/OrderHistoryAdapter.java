@@ -1,12 +1,14 @@
 package golhar.cocomo.zinger.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
+import golhar.cocomo.zinger.utils.OrderHistoryItemDetailActivity;
 
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderHolder> {
@@ -73,6 +76,15 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             holder.starImgIV.setVisibility(View.VISIBLE);
             holder.orderRateTV.setVisibility(View.VISIBLE);
         }
+        holder.fullOrderRL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent history = new Intent(activityContext, OrderHistoryItemDetailActivity.class );
+                history.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //todo pass the current clicked orderitemlist to next class
+                context.startActivity(history);
+            }
+        });
     }
 
     @Override
@@ -91,6 +103,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         Button rateBT;
         ImageView starImgIV;
         TextView orderRateTV;
+        RelativeLayout fullOrderRL;
+
+        //todo change rv to rl in xml
 
         public OrderHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,7 +118,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             rateBT = itemView.findViewById(R.id.rateBT);
             starImgIV=itemView.findViewById(R.id.starImgIV);
             orderRateTV=itemView.findViewById(R.id.orderRateTV);
+            fullOrderRL=itemView.findViewById(R.id.fullOrderRL);
 
+            //TODO rename OHIDA
             rateBT.setOnClickListener((View.OnClickListener) view -> {
 
                 AlertDialog.Builder dialogBuilder= new AlertDialog.Builder(activityContext);
@@ -123,10 +140,11 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                         ratingDisplayTV.setText("Your rating is " + String.valueOf(ratingBar.getRating()));
                         dialog.dismiss();
                         //todo call API(not for now)
-                        //todo make rating below rateBT in ui --done M
                     }
                 });
             });
+
+
         }
     }
 }

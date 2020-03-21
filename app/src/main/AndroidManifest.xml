@@ -21,6 +21,7 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".OtpVerificationActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".utils.OrderHistoryItemDetailActivity"/>
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

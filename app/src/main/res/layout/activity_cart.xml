@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/restaurantRL"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:id="@+id/resPicIV"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/fastfood" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/resNameTV"
+        android:paddingLeft="@dimen/_5sdp"
+        android:layout_toRightOf="@+id/resPicIV"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Main Canteen"
+        android:textColor="#000"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/resAddTV"
+        android:paddingLeft="@dimen/_5sdp"
+        android:layout_toRightOf="@+id/resPicIV"
+        android:layout_below="@+id/resNameTV"
+        android:text="Ssn College of Engineering"
+        android:textSize="@dimen/_8sdp"
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/orderDetailsRL"
+        android:layout_below="@+id/restaurantRL"
+        android:layout_height="@dimen/_90sdp">
+
+        <ListView
+            android:id="@+id/cartOrdersLV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/resReqRL"
+        android:layout_below="@+id/orderDetailsRL"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/orderReqIV"
+            android:src="@drawable/ic_rest_req"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/orderReqIV"
+            android:layout_centerVertical="true"
+            android:text="Any restaurant request? We will try our best to convey"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_below="@+id/resReqRL"
+    android:background="#EFEFEF"
+    android:id="@+id/greyRL"
+    android:layout_height="@dimen/_10sdp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/greyRL"
+        android:id="@+id/billDetailsRL"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/bilDetailsTV"
+            android:padding="@dimen/_5sdp"
+            android:text="Bill Details"
+            android:textColor="#000"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/bilDetailsTV"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
+            android:text="Item Total"
+            android:id="@+id/itemTotalTV"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
+            android:text="Delivery Fee"
+            android:layout_below="@+id/itemTotalTV"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/itemCostTV"
+            android:paddingRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:text="₹100"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/itemCostTV"
+            android:paddingRight="@dimen/_20sdp"
+            android:text="₹10"
+            android:id="@+id/delFeeTV"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_4sdp"
+            android:layout_below="@+id/delFeeTV"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="-1dp"
+            android:layout_marginBottom="-2dp"
+            android:background="#efefef" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/billDetailsRL"
+        android:id="@+id/toPayRL"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="To Pay"
+            android:textColor="#000"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="@dimen/_20sdp"
+            android:text="₹110"
+            android:textColor="#000"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_4sdp"
+        android:layout_below="@+id/toPayRL"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="-2dp"
+        android:background="#efefef" />
+</RelativeLayout>
