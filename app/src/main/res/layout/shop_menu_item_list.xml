@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/_150sdp"
-    android:layout_height="@dimen/_210sdp"
+    android:layout_height="@dimen/_225sdp"
     android:orientation="vertical"
     android:padding="@dimen/_10sdp">
 
@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_vegetarian_mark"
+        android:maxLines="2"
         android:text="Chicken Fried Rice"
         android:textColor="#000000"
         android:textSize="@dimen/_12ssp" />
@@ -42,12 +43,12 @@
 
         <Button
             android:id="@+id/addItemBT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_64sdp"
+            android:layout_height="@dimen/_35sdp"
             android:backgroundTint="#D21F3C"
             android:text="ADD"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/_11ssp"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold" />
 
     </LinearLayout>

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -58,13 +59,12 @@ public class ShopMenuItemAdapter extends RecyclerView.Adapter<ShopMenuItemAdapte
     @Override
     public void onBindViewHolder(@NonNull ItemNameHolder holder, int position) {
         final ItemModel itemModel = itemModelArrayList.get(position);
-        //todo place holder DONE G
         Glide.with(context)
                 .load(itemModel.getPhotoUrl())
                 .placeholder(new ColorDrawable(Color.parseColor("#000000")))
                 .into(holder.itemIconIV);
         holder.categoryTV.setText(itemModel.getCategory());
-        holder.itemNameTV.setText(" "+itemModel.getName());
+        holder.itemNameTV.setText(" " + itemModel.getName());
         if (itemModel.getIsVeg() == 0) {
             Drawable img = context.getResources().getDrawable(R.drawable.ic_non_vegetarian_mark);
             holder.itemNameTV.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
@@ -72,6 +72,10 @@ public class ShopMenuItemAdapter extends RecyclerView.Adapter<ShopMenuItemAdapte
         holder.priceTv.setText("₹" + itemModel.getPrice().toString());
         if (itemModel.getIsAvailable() == 0) {
             holder.addItemBT.setEnabled(false);
+            holder.addItemBT.setText("Not\nAvailable");
+            holder.addItemBT.setTextSize(10);
+            holder.addItemBT.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.black));
+            holder.addItemBT.setTextColor(Color.WHITE);
         }
     }
 

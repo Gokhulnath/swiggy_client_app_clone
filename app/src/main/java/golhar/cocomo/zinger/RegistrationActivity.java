@@ -77,6 +77,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     userEmail = emailTIET.getText().toString();
                     SharedPref.putString(getApplicationContext(), Constants.userName, userName);
                     SharedPref.putString(getApplicationContext(), Constants.userEmail, userEmail);
+                    SharedPref.putInt(getApplicationContext(),Constants.collegeId,collegeID);
                     UserCollegeModel userCollegeModel = new UserCollegeModel();
                     UserModel userModel = new UserModel();
                     userModel.setName(userName);

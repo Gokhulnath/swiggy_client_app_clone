@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,31 +35,35 @@ public class OrderHistoryActivity extends AppCompatActivity {
     TextView userNumTV;
     TextView userEmailTV;
     Button logoutBT;
+    Button viewMoreBT;
+    ArrayList<OrderItemListModel> orderItemListModels;
+    int pageNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
+        orderItemListModels = new ArrayList<>();
+        pageNum = 1;
         userNameTV = findViewById(R.id.userNameTV);
         userNumTV = findViewById(R.id.userNumTV);
         userEmailTV = findViewById(R.id.userEmailTV);
-        orderHistoryAdapter= new OrderHistoryAdapter(new ArrayList<>(),getApplicationContext(),OrderHistoryActivity.this);
-
-        String phoneNo, authId, email, userName;
+        orderHistoryAdapter = new OrderHistoryAdapter(new ArrayList<>(), getApplicationContext(), OrderHistoryActivity.this);
+        viewMoreBT = findViewById(R.id.viewMoreBT);
+        String phoneNo, email, userName;
         phoneNo = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
-        authId = SharedPref.getString(getApplicationContext(), Constants.authId);
         email = SharedPref.getString(getApplicationContext(), Constants.userEmail);
         userName = SharedPref.getString(getApplicationContext(), Constants.userName);
         userNameTV.setText(userName);
         userEmailTV.setText(email);
         userNumTV.setText(phoneNo);
-        ArrayList<OrderItemListModel> orderItemListModelArrayList = new ArrayList<>();
         orderListRV = findViewById(R.id.orderListRV);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         orderListRV.setLayoutManager(linearLayoutManager);
         orderListRV.setAdapter(orderHistoryAdapter);
-        logoutBT = (Button) findViewById(R.id.logoutBT);
+
+        logoutBT = findViewById(R.id.logoutBT);
         logoutBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,18 +74,52 @@ public class OrderHistoryActivity extends AppCompatActivity {
             }
         });
 
-        MainRepository.getOrderService().getOrderByMobile(phoneNo, 1, 5, authId,
+
+        getOrderListByPage(1);
+
+        viewMoreBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (orderItemListModels.size() < 5 && orderItemListModels.size() > 0) {
+                    viewMoreBT.setVisibility(View.GONE);
+                } else {
+                    pageNum += 1;
+                    getOrderListByPage(pageNum);
+                }
+            }
+        });
+    }
+
+    public void getOrderListByPage(int pageNumFunc) {
+        RecyclerView.SmoothScroller smoothScroller = new
+                LinearSmoothScroller(getApplicationContext()) {
+                    @Override
+                    protected int getVerticalSnapPreference() {
+                        return LinearSmoothScroller.SNAP_TO_START;
+                    }
+                };
+        String phoneNo = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
+        String authId = SharedPref.getString(getApplicationContext(), Constants.authId);
+        MainRepository.getOrderService().getOrderByMobile(phoneNo, pageNumFunc, 5, authId,
                 phoneNo, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<OrderItemListModel>>>() {
             @Override
             public void onResponse(Call<Response<List<OrderItemListModel>>> call, retrofit2.Response<Response<List<OrderItemListModel>>> response) {
 
                 Response<List<OrderItemListModel>> responseFromServer = response.body();
                 if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)) {
-                    Log.d("RetroFit", responseFromServer.toString());
-                    orderHistoryAdapter.setItemList(responseFromServer.getData());
+                    ArrayList<OrderItemListModel> tempOrderItemListModels = (ArrayList<OrderItemListModel>) responseFromServer.getData();
+                    for (OrderItemListModel orderItemListModel : tempOrderItemListModels)
+                        orderItemListModels.add(orderItemListModel);
+                    orderHistoryAdapter.setItemList(orderItemListModels);
                     orderHistoryAdapter.notifyDataSetChanged();
+                    if (orderItemListModels.size() < (pageNumFunc * 5)) {
+                        viewMoreBT.setVisibility(View.GONE);
+                    }
+                    smoothScroller.setTargetPosition(((pageNumFunc - 1) * 5));
+                    orderListRV.getLayoutManager().startSmoothScroll(smoothScroller);
+
                 } else {
-                    Log.d("RetroFit", "error");
+                    viewMoreBT.setVisibility(View.GONE);
                 }
             }
 

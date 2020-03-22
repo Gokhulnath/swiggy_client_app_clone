@@ -2,7 +2,6 @@ package golhar.cocomo.zinger.service;
 
 import java.util.List;
 
-import golhar.cocomo.zinger.model.CollegeModel;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.model.OrderModel;
 import golhar.cocomo.zinger.utils.Response;
@@ -40,9 +39,13 @@ public interface OrderService {
     public Call<Response<OrderModel>> getOrderById(@Path("id") String id,
                                                    @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);
 
-    @PATCH(value = "/order")
-    public Call<Response<String>> updateOrder(@Body OrderModel orderModel,
+    @PATCH(value = "/order/rating")
+    public Call<Response<String>> updateOrderRating(@Body OrderModel orderModel,
                                               @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);
+
+    @PATCH(value = "/order/key")
+    public Call<Response<String>> updateOrderKey(@Body OrderModel orderModel,
+                                                    @Header("oauth_id") String oauthId, @Header("mobile") String mobileRh, @Header("role") String role);
 
     @PATCH(value = "/order/status")
     public Call<Response<String>> updateOrderStatus(@Body OrderModel orderModel,

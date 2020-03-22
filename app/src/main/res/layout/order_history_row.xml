@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fullOrderRL"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/fullOrderRL"
     android:padding="@dimen/_10sdp"
     android:visibility="visible">
 
@@ -22,7 +22,8 @@
                 android:id="@+id/hotelNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:lines="1"
                 android:text="Gangotree"
                 android:textSize="@dimen/_20sdp"
                 android:textStyle="bold" />
@@ -35,23 +36,14 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:text="₹250" />
 
-            <ImageView
-                android:id="@+id/hotelTickIV"
-                android:layout_width="@dimen/_12sdp"
-                android:layout_height="@dimen/_12sdp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:src="@drawable/ic_check_circle" />
-
             <TextView
                 android:id="@+id/hotelStatusTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/_15sdp"
-                android:layout_toLeftOf="@id/hotelTickIV"
-                android:text="Picked-up" />
+                android:gravity="center_vertical"
+                android:text="Picked-up"
+                android:textSize="@dimen/_13ssp" />
         </RelativeLayout>
 
         <View
@@ -109,12 +101,11 @@
                 android:text="RATE FOOD" />
 
             <RelativeLayout
+                android:id="@+id/rateRV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rateBT"
-                android:id="@+id/rateRV"
-                android:layout_marginLeft="@dimen/_150sdp"
-               >
+                android:layout_marginLeft="@dimen/_150sdp">
 
                 <TextView
                     android:id="@+id/orderRateTV"

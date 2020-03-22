@@ -1,141 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/_20sdp"
     tools:context=".OrderHistoryActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/userDetailsRV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/userNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MAHIMA S"
+            android:textColor="#000"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/userNumTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userNameTV"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:padding="@dimen/_5sdp"
+            android:text="9090654232" />
+
+        <TextView
+            android:id="@+id/dotTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userNameTV"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_toRightOf="@+id/userNumTV"
+            android:padding="@dimen/_3sdp"
+            android:singleLine="true"
+            android:text="-" />
+
+
+        <TextView
+            android:id="@+id/userEmailTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userNameTV"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_toRightOf="@+id/dotTV"
+            android:padding="@dimen/_3sdp"
+            android:singleLine="true"
+            android:text="welcometozingshkb@gmail.com" />
+
+        <Button
+            android:id="@+id/userEditBT"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_below="@+id/userNameTV"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="#fff"
+            android:text="EDIT"
+            android:textColor="#FF6600" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userDetailsRV">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_4sdp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="-1dp"
+            android:layout_marginBottom="-2dp"
+            android:background="#ff9703" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/pastOrdersTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator"
+        android:background="#EFEFEF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_15sdp"
+            android:text="PAST ORDERS" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_20sdp">
-
-        <RelativeLayout
-            android:id="@+id/userDetailsRV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/userNameTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MAHIMA S"
-                android:textColor="#000"
-                android:textSize="@dimen/_20ssp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/userNumTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/userNameTV"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:padding="@dimen/_5sdp"
-                android:text="9090654232" />
-
-            <TextView
-                android:id="@+id/userEmailTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/userNameTV"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:layout_toRightOf="@+id/userNumTV"
-                android:padding="@dimen/_3sdp"
-                android:singleLine="true"
-                android:text="welcometozingshkb@gmail.com" />
-
-            <Button
-                android:id="@+id/userEditBT"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_below="@+id/userNameTV"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="#fff"
-                android:text="EDIT"
-                android:textColor="#FF6600" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/separator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/userDetailsRV">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_4sdp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="-1dp"
-                android:layout_marginBottom="-2dp"
-                android:background="#ff9703" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/pastOrdersTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/separator"
-            android:background="#EFEFEF">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_15sdp"
-                android:text="PAST ORDERS" />
-        </RelativeLayout>
+        android:layout_above="@id/viewMoreBT"
+        android:layout_below="@id/pastOrdersTV"
+        android:layout_marginBottom="@dimen/_10sdp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/orderListRV"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_375sdp"
-            android:layout_below="@+id/pastOrdersTV" />
-
-        <RelativeLayout
-            android:id="@+id/separator2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/orderListRV">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_4sdp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="-1dp"
-                android:layout_marginBottom="-2dp"
-                android:background="#000" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/moreRV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/separator2"
-            android:layout_alignParentBottom="true">
-
-            <Button
-                android:id="@+id/viewMoreBT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:paddingLeft="@dimen/_8sdp"
-                android:text="VIEW MORE ORDERS"
-                android:textAlignment="textStart"
-                android:textColor="#FF6600" />
-
-            <Button
-                android:id="@+id/logoutBT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/viewMoreBT"
-                android:background="#fff"
-                android:paddingLeft="@dimen/_8sdp"
-                android:text="LOGOUT"
-                android:textAlignment="textStart"
-                android:textColor="#000" />
-        </RelativeLayout>
+            android:layout_height="wrap_content" />
     </RelativeLayout>
-</LinearLayout>
+
+    <Button
+        android:id="@+id/viewMoreBT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/logoutBT"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="#fff"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingLeft="@dimen/_8sdp"
+        android:text="VIEW MORE ORDERS"
+        android:textAlignment="textStart"
+        android:textColor="#FF6600" />
+
+    <Button
+        android:id="@+id/logoutBT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:drawableRight="@drawable/ic_logout"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingLeft="@dimen/_8sdp"
+        android:text="LOGOUT"
+        android:textAlignment="textStart"
+        android:textColor="#000" />
+</RelativeLayout>
