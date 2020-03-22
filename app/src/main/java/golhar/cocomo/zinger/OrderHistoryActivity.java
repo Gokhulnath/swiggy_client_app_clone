@@ -42,6 +42,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         userNameTV = findViewById(R.id.userNameTV);
         userNumTV = findViewById(R.id.userNumTV);
         userEmailTV = findViewById(R.id.userEmailTV);
+        orderHistoryAdapter= new OrderHistoryAdapter(new ArrayList<>(),getApplicationContext(),OrderHistoryActivity.this);
 
         String phoneNo, authId, email, userName;
         phoneNo = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
@@ -56,6 +57,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         orderListRV.setLayoutManager(linearLayoutManager);
+        orderListRV.setAdapter(orderHistoryAdapter);
         logoutBT = (Button) findViewById(R.id.logoutBT);
         logoutBT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +77,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 Response<List<OrderItemListModel>> responseFromServer = response.body();
                 if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)) {
                     Log.d("RetroFit", responseFromServer.toString());
-                    orderHistoryAdapter = new OrderHistoryAdapter(responseFromServer.getData(), getApplicationContext(), OrderHistoryActivity.this);
-                    orderListRV.setAdapter(orderHistoryAdapter);
-
+                    orderHistoryAdapter.setItemList(responseFromServer.getData());
+                    orderHistoryAdapter.notifyDataSetChanged();
                 } else {
                     Log.d("RetroFit", "error");
                 }

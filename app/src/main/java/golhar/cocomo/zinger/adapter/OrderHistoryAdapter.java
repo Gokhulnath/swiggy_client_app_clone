@@ -12,12 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.model.OrderItemListModel;
@@ -36,6 +37,38 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         this.itemList = itemList;
         this.context = context;
         this.activityContext= activityContext;
+    }
+
+    public DateFormat getDateFormat() {
+        return dateFormat;
+    }
+
+    public void setDateFormat(DateFormat dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public List<OrderItemListModel> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<OrderItemListModel> itemList) {
+        this.itemList = itemList;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public Context getActivityContext() {
+        return activityContext;
+    }
+
+    public void setActivityContext(Context activityContext) {
+        this.activityContext = activityContext;
     }
 
     @NonNull
@@ -81,7 +114,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             public void onClick(View view) {
                 Intent history = new Intent(activityContext, OrderHistoryItemDetailActivity.class );
                 history.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-               // history.putExtra("FullOrderDetails",orderItemListModel);
+                history.putExtra("FullOrderDetails",orderItemListModel);
                 //todo pass the current clicked orderitemlist to next class
                 context.startActivity(history);
             }

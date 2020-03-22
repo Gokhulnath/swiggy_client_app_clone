@@ -30,7 +30,7 @@ public class OrderModel implements Parcelable {
 
     protected OrderModel(Parcel in) {
         id = in.readString();
-        userModel = in.readParcelable(UserModel.class.getClassLoader());
+        //userModel = in.readParcelable(UserModel.class.getClassLoader());
         transactionModel = in.readParcelable(TransactionModel.class.getClassLoader());
         shopModel = in.readParcelable(ShopModel.class.getClassLoader());
         date = (java.util.Date) in.readSerializable();
@@ -199,7 +199,8 @@ public class OrderModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
-        dest.writeParcelable(userModel, flags);
+        //todo verify harsha
+        //dest.writeParcelable(userModel, flags);
         dest.writeParcelable(transactionModel, flags);
         dest.writeParcelable(shopModel, flags);
         dest.writeSerializable(date);
