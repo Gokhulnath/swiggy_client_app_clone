@@ -34,7 +34,7 @@ public class OrderModel implements Parcelable {
         transactionModel = in.readParcelable(TransactionModel.class.getClassLoader());
         shopModel = in.readParcelable(ShopModel.class.getClassLoader());
         date = (java.util.Date) in.readSerializable();
-        orderStatus=orderStatus.values()[in.readInt()];
+        orderStatus=orderStatus.valueOf(in.readString());
         lastStatusUpdatedTime=(java.util.Date) in.readSerializable();
         if (in.readByte() == 0) {
             price = null;
@@ -203,7 +203,7 @@ public class OrderModel implements Parcelable {
         dest.writeParcelable(transactionModel, flags);
         dest.writeParcelable(shopModel, flags);
         dest.writeSerializable(date);
-        dest.writeInt(orderStatus.ordinal());
+        dest.writeString(orderStatus.name());
         dest.writeSerializable(lastStatusUpdatedTime);
         if (price == null) {
             dest.writeByte((byte) 0);

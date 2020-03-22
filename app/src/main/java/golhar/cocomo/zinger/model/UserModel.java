@@ -22,7 +22,7 @@ public class UserModel implements Parcelable {
         name = in.readString();
         email = in.readString();
         oauthId = in.readString();
-        role = role.values()[in.readInt()];
+        role = role.valueOf(in.readString());
         if (in.readByte() == 0) {
             isDelete = null;
         } else {
@@ -113,7 +113,7 @@ public class UserModel implements Parcelable {
         dest.writeString(name);
         dest.writeString(email);
         dest.writeString(oauthId);
-        dest.writeInt(role.ordinal());
+        dest.writeString(role.name());
         if (isDelete == null) {
             dest.writeByte((byte) 0);
         } else {
