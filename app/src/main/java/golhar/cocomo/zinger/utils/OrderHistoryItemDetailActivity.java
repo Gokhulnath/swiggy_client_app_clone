@@ -42,8 +42,8 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history_details);
-        Intent detail= getIntent();
-        OrderItemListModel orderItemListModel= detail.getParcelableExtra("FullOrderDetails");
+       // Intent detail= getIntent();
+       // OrderItemListModel orderItemListModel= detail.getParcelableExtra("FullOrderDetails");
         orderNumTV=findViewById(R.id.orderNumTV);
         statusTV=findViewById(R.id.statusTV);
         itemNumTV=findViewById(R.id.itemNumTV);
@@ -58,20 +58,20 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
         totalCostTV=findViewById(R.id.totalCostTV);
         viaTV=findViewById(R.id.viaTV);
 
-        List<OrderItemModel> orderItemList = orderItemListModel.getOrderItemsList();
-
-        statusTV.setText(String.valueOf(orderItemListModel.getOrderModel().getOrderStatus()));
-        itemNumTV.setText(orderItemList.size()+ "items");
-        itemCostTV.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
-        hotelTV.setText(orderItemListModel.getOrderModel().getShopModel().getName());
-        collegeNameTV.setText(orderItemListModel.getOrderModel().getShopModel().getCollegeModel().getName());
-        costTV.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
-        toTV.setText(orderItemListModel.getOrderModel().getDeliveryLocation());
-        toAddTV.setText(orderItemListModel.getOrderModel().getShopModel().getCollegeModel().getName());
-        delDateTV.setText(dateFormat.format(orderItemListModel.getOrderModel().getDate()));
-        deliveryCostTV.setText(String.valueOf(orderItemListModel.getOrderModel().getDeliveryPrice()));
-        totalCostTV.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
-        viaTV.setText(orderItemListModel.getOrderModel().getTransactionModel().getPaymentMode());
+//        List<OrderItemModel> orderItemList = orderItemListModel.getOrderItemsList();
+//
+//        statusTV.setText(String.valueOf(orderItemListModel.getOrderModel().getOrderStatus()));
+//        itemNumTV.setText(orderItemList.size()+ "items");
+//        itemCostTV.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
+//        hotelTV.setText(orderItemListModel.getOrderModel().getShopModel().getName());
+//        collegeNameTV.setText(orderItemListModel.getOrderModel().getShopModel().getCollegeModel().getName());
+//        costTV.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
+//        toTV.setText(orderItemListModel.getOrderModel().getDeliveryLocation());
+//        toAddTV.setText(orderItemListModel.getOrderModel().getShopModel().getCollegeModel().getName());
+//        delDateTV.setText(dateFormat.format(orderItemListModel.getOrderModel().getDate()));
+//        deliveryCostTV.setText(String.valueOf(orderItemListModel.getOrderModel().getDeliveryPrice()));
+//        totalCostTV.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
+//        viaTV.setText(orderItemListModel.getOrderModel().getTransactionModel().getPaymentMode());
 
 
     }
