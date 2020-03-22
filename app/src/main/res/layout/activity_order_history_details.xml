@@ -138,10 +138,10 @@
             android:src="@drawable/ic_check" />
 
         <TextView
+            android:id="@+id/delDateTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:id="@+id/delDateTV"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/checkIV"
             android:text="Order Delivered on March 4 5:30 PM" />
@@ -164,12 +164,13 @@
     </RelativeLayout>
 
     <ListView
-        android:layout_width="match_parent"
         android:id="@+id/itemsLV"
-        android:layout_below="@+id/bilDetailsRV"
-        android:layout_height="@dimen/_150sdp">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_below="@+id/bilDetailsRV">
 
     </ListView>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_5sdp"
@@ -184,71 +185,80 @@
         android:layout_height="wrap_content">
 
     </RelativeLayout>
+
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/paymentRV"
-        android:paddingTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/itemsLV"
-        android:layout_height="wrap_content">
+        android:paddingTop="@dimen/_10sdp">
+
         <TextView
-            android:layout_width="wrap_content"
             android:id="@+id/itemTotalTV"
-            android:text="Item Total"
-            android:paddingLeft="@dimen/_5sdp"
-            android:layout_height="wrap_content"/>
-        <TextView
             android:layout_width="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_5sdp"
+            android:text="Item Total" />
+
+        <TextView
             android:id="@+id/costTV"
-            android:text="₹240"
-            android:paddingRight="@dimen/_20sdp"
-            android:layout_height="wrap_content"/>
-        <TextView
             android:layout_width="wrap_content"
-            android:text="Delivery Charges"
-            android:layout_below="@id/itemTotalTV"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingLeft="@dimen/_5sdp"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:id="@+id/deliveryCostTV"
-            android:text="₹20"
-            android:paddingTop="@dimen/_5sdp"
-            android:layout_below="@+id/costTV"
             android:paddingRight="@dimen/_20sdp"
-            android:layout_height="wrap_content"/>
+            android:text="₹240" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemTotalTV"
+            android:paddingLeft="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:text="Delivery Charges" />
+
+        <TextView
+            android:id="@+id/deliveryCostTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/costTV"
+            android:layout_alignParentRight="true"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingRight="@dimen/_20sdp"
+            android:text="₹20" />
 
     </RelativeLayout>
+
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/paidViaRV"
-        android:layout_below="@+id/paymentRV"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/paymentRV">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:padding="@dimen/_5sdp"
             android:id="@+id/viaTV"
-            android:text="Paid Via Credit/Debt card"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:text="Paid Via Credit/Debt card" />
+
         <TextView
             android:layout_width="wrap_content"
-            android:text="Total"
+            android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/totalCostTV"
             android:paddingTop="@dimen/_5sdp"
             android:paddingRight="@dimen/_10sdp"
-            android:textColor="#000"
-            android:layout_height="wrap_content"/>
+            android:text="Total"
+            android:textColor="#000" />
+
         <TextView
-            android:layout_width="wrap_content"
             android:id="@+id/totalCostTV"
-            android:text="₹250"
-            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:paddingRight="@dimen/_20sdp"
             android:paddingTop="@dimen/_5sdp"
-            android:layout_height="wrap_content"/>
+            android:paddingRight="@dimen/_20sdp"
+            android:text="₹250"
+            android:textColor="#000" />
 
     </RelativeLayout>
 

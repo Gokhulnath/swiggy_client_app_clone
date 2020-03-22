@@ -10,33 +10,37 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import golhar.cocomo.zinger.R;
-import golhar.cocomo.zinger.model.ItemModel;
+import golhar.cocomo.zinger.model.OrderItemModel;
 
-public class OrderHistoryDetailAdapter extends ArrayAdapter<ItemModel> {
-    public OrderHistoryDetailAdapter(Context context, int resource, List<ItemModel> objects) {
+public class OrderHistoryDetailAdapter extends ArrayAdapter<OrderItemModel> {
+
+    Context context;
+    int resource;
+    List<OrderItemModel> objects =null;
+    public OrderHistoryDetailAdapter(Context context, int resource, List<OrderItemModel> objects) {
         super(context, resource, objects);
+        this.context=context;
+        this.resource=resource;
+        this.objects=objects;
     }
 
-    public OrderHistoryDetailAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
-
-    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        final ItemModel itemModel = getItem(position);
-        TextView eachItemCostTV = convertView.findViewById(R.id.eachItemCostTV);
-        TextView itemNameTV = convertView.findViewById(R.id.itemNameTV);
+        final OrderItemModel orderItemModel = getItem(position);
         if (convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_order_items, parent, false);
         }
-        if (itemModel.getIsVeg() == 0) {
+        TextView eachItemCostTV = convertView.findViewById(R.id.eachItemCostTV);
+        TextView itemNameTV = convertView.findViewById(R.id.itemNameTV);
+        if (orderItemModel.getItemModel().getIsVeg() == 0) {
             Drawable img = getContext().getResources().getDrawable(R.drawable.ic_non_vegetarian_mark);
             itemNameTV.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
         }
+        itemNameTV.setText(" "+ orderItemModel.getItemModel().getName()+" X "+orderItemModel.getQuantity());
+        eachItemCostTV.setText("₹"+ orderItemModel.getPrice().toString());
         return convertView;
     }
 }

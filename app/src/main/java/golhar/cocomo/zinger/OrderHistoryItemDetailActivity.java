@@ -1,4 +1,4 @@
-package golhar.cocomo.zinger.utils;
+package golhar.cocomo.zinger;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.adapter.OrderHistoryDetailAdapter;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
@@ -59,6 +58,7 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
         deliveryCostTV=findViewById(R.id.deliveryCostTV);
         totalCostTV=findViewById(R.id.totalCostTV);
         viaTV=findViewById(R.id.viaTV);
+        itemsLV=findViewById(R.id.itemsLV);
 
         List<OrderItemModel> orderItemList = orderItemListModel.getOrderItemsList();
 
@@ -75,6 +75,7 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
         totalCostTV.setText(String.valueOf(orderItemListModel.getOrderModel().getPrice()));
         viaTV.setText(orderItemListModel.getOrderModel().getTransactionModel().getPaymentMode());
 
-
+        orderHistoryDetailAdapter = new OrderHistoryDetailAdapter(this,R.layout.activity_order_items,orderItemList);
+        itemsLV.setAdapter(orderHistoryDetailAdapter);
     }
 }

@@ -21,9 +21,18 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import golhar.cocomo.zinger.R;
+import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
-import golhar.cocomo.zinger.utils.OrderHistoryItemDetailActivity;
+import golhar.cocomo.zinger.model.OrderModel;
+import golhar.cocomo.zinger.service.MainRepository;
+import golhar.cocomo.zinger.utils.Constants;
+import golhar.cocomo.zinger.utils.ErrorLog;
+import golhar.cocomo.zinger.OrderHistoryItemDetailActivity;
+import golhar.cocomo.zinger.utils.Response;
+import golhar.cocomo.zinger.utils.SharedPref;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderHolder> {
@@ -119,6 +128,52 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                 context.startActivity(history);
             }
         });
+
+        //TODO rename OHIDA
+        holder.rateBT.setOnClickListener((View.OnClickListener) view -> {
+
+            AlertDialog.Builder dialogBuilder= new AlertDialog.Builder(activityContext);
+            View v = LayoutInflater.from(context).inflate(R.layout.activity_rating_bar,null);
+            Button submitRatingBT = v.findViewById(R.id.submitRatingBT);
+            RatingBar ratingBar = v.findViewById(R.id.ratingBarRB);
+            dialogBuilder.setView(v);
+            AlertDialog dialog = dialogBuilder.create();
+            dialog.show();
+            submitRatingBT.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        holder.rateBT.setVisibility(View.GONE);
+                        holder.orderRatingTV.setVisibility(View.VISIBLE);
+                        holder.starImgIV.setVisibility(View.VISIBLE);
+                        holder.orderRateTV.setVisibility(View.VISIBLE);
+                        holder.orderRatingTV.setText(String.valueOf(ratingBar.getRating()));
+                        holder.orderRateTV.setText("Your rating is " );
+                        dialog.dismiss();
+                    String phoneNo = SharedPref.getString(context, Constants.phoneNumber);
+                    String authId = SharedPref.getString(context, Constants.authId);
+                    OrderModel orderModel=orderItemListModel.getOrderModel();
+                    OrderModel orderModel1=new OrderModel();
+                    orderModel1.setSecretKey(orderModel.getSecretKey());
+                    orderModel.setRating(Double.valueOf(ratingBar.getRating()));
+                    orderModel1.setCookingInfo(orderModel.getCookingInfo());
+                    orderModel1.setId(orderModel.getId());
+                    MainRepository.getOrderService().updateOrder(orderModel1,authId,phoneNo, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<String>>() {
+                        @Override
+                        public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
+                            Response<String> responseFromServer = response.body();
+                            if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)){
+                                Toast.makeText(context, "Thanks for rating", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Response<String>> call, Throwable t) {
+                            Toast.makeText(context, "Failure"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        });
     }
 
     @Override
@@ -153,32 +208,6 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             starImgIV=itemView.findViewById(R.id.starImgIV);
             orderRateTV=itemView.findViewById(R.id.orderRateTV);
             fullOrderRL=itemView.findViewById(R.id.fullOrderRL);
-
-            //TODO rename OHIDA
-            rateBT.setOnClickListener((View.OnClickListener) view -> {
-
-                AlertDialog.Builder dialogBuilder= new AlertDialog.Builder(activityContext);
-                View v = LayoutInflater.from(context).inflate(R.layout.activity_rating_bar,null);
-                Button submitRatingBT = v.findViewById(R.id.submitRatingBT);
-                final RatingBar ratingBar = v.findViewById(R.id.ratingBarRB);
-                final TextView ratingDisplayTV=v.findViewById(R.id.ratingDisplayTV);
-
-                dialogBuilder.setView(v);
-                AlertDialog dialog = dialogBuilder.create();
-                dialog.show();
-                submitRatingBT.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(context, "Your rating is " + String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
-                        orderRatingTV.setText(String.valueOf(ratingBar.getRating()));
-                        ratingDisplayTV.setText("Your rating is " + String.valueOf(ratingBar.getRating()));
-                        dialog.dismiss();
-                        //todo call API(not for now)
-                    }
-                });
-            });
-
-
         }
     }
 }

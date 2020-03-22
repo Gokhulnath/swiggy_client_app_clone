@@ -71,6 +71,7 @@ public class MainRepository {
         return (ItemService) retrofit.create(ItemService.class);
     }
 
+
     public static class DateTypeDeserializer implements JsonDeserializer<Date> {
         private final String[] DATE_FORMATS = new String[]{"dd/MM/yyyy HH:mm:ss", "HH:mm:ss"};
         @Override

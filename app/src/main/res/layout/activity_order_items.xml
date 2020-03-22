@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
-
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/_5sdp"
+    >
     <TextView
-        android:drawableLeft="@drawable/ic_vegetarian_mark"
         android:id="@+id/itemNameTV"
-        android:layout_width="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_height="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_width="@dimen/_260sdp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_vegetarian_mark"
+        android:gravity="center_vertical"
         android:text=" Sev Puri x 1"
-        android:textSize="@dimen/_8sdp" />
+        android:textSize="@dimen/_10ssp"
+        android:paddingLeft="@dimen/_5sdp"/>
 
     <TextView
         android:id="@+id/eachItemCostTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:paddingRight="@dimen/_20sdp"
-        android:text="₹100" />
+        android:text="₹100"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/_10ssp"/>
+</LinearLayout>
 
 </RelativeLayout>
