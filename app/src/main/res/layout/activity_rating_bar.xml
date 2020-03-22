@@ -6,7 +6,7 @@
     <RelativeLayout
         android:id="@+id/ratingRV"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_height="@dimen/_215sdp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true">
 
@@ -17,9 +17,11 @@
             android:layout_alignParentBottom="true"
             android:background="#ff9703"
             android:text="SUBMIT RATING"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:layout_marginBottom="@dimen/_15sdp"/>
 
         <TextView
+            android:id="@+id/rateBoxName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -43,7 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:numStars="5"
-            android:stepSize=".5" />
+            android:stepSize=".5"
+            android:layout_below="@id/rateBoxName"
+            android:layout_marginTop="@dimen/_30sdp"/>
     </RelativeLayout>
 </RelativeLayout>
    

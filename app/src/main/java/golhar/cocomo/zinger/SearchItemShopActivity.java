@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -92,12 +91,10 @@ public class SearchItemShopActivity extends AppCompatActivity {
                                 ArrayList<ItemModel> modifiedItemlist = (ArrayList<ItemModel>) responseFromServer.getData();
                                 searchShopMenuItemAdapter.setItemModelArrayList(modifiedItemlist);
                                 searchShopMenuItemAdapter.notifyDataSetChanged();
-                                Log.d("apiitem", "if item called");
                             } else {
                                 ArrayList<ItemModel> modifiedItemlist = new ArrayList<>();
                                 searchShopMenuItemAdapter.setItemModelArrayList(modifiedItemlist);
                                 searchShopMenuItemAdapter.notifyDataSetChanged();
-                                Log.d("apiitem", "else item called");
                             }
                         }
 
@@ -114,7 +111,6 @@ public class SearchItemShopActivity extends AppCompatActivity {
                     searchShopMenuItemAdapter.setItemModelArrayList(modifiedItemList);
                     searchShopMenuItemAdapter.notifyDataSetChanged();
                 }
-                Log.d("handler", "delay");
             }
         };
         Handler handler = new Handler();
@@ -139,7 +135,7 @@ public class SearchItemShopActivity extends AppCompatActivity {
                 searchShopMenuItemAdapter.setItemModelArrayList(modifiedItemlist);
                 searchShopMenuItemAdapter.notifyDataSetChanged();
                 handler.removeCallbacks(runnable);
-                handler.postDelayed(runnable, 2000);
+                handler.postDelayed(runnable, 1500);
             }
         });
     }
