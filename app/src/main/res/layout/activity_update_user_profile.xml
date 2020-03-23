@@ -81,7 +81,8 @@
             android:hint="Click here to choose your college"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_10sdp"
-            android:textSize="@dimen/_15ssp">
+            android:textSize="@dimen/_15ssp"
+            >
 
         </TextView>
 

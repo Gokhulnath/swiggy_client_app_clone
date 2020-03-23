@@ -31,6 +31,10 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
     String name;
     String email;
     String collegeName;
+    String phoneNumber;
+    String authId;
+    int collegeID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +45,14 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
         updateBT = findViewById(R.id.updateBT);
         name = SharedPref.getString(getApplicationContext(), Constants.userName);
         email = SharedPref.getString(getApplicationContext(), Constants.userEmail);
-        collegeName=SharedPref.getString(getApplicationContext(),Constants.collegeName);
         emailTIET.setText(email);
         nameTIET.setText(name);
-        collegeTV.setHint(collegeName);
+        updateBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateUserDetails();
+            }
+        });
         collegeTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,56 +65,64 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
-        String authId = SharedPref.getString(getApplicationContext(), Constants.authId);
-        int collegeID;
+
+        phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
+        authId = SharedPref.getString(getApplicationContext(), Constants.authId);
         collegeName = SharedPref.getString(getApplicationContext(), "selectedCollege");
         collegeID = SharedPref.getInt(getApplicationContext(), "selectedCollegeId");
+        if (collegeName == null) {
+            collegeName = SharedPref.getString(getApplicationContext(), Constants.collegeName);
+            collegeID = SharedPref.getInt(getApplicationContext(), Constants.collegeId);
+        }
         collegeTV.setText(collegeName);
-        SharedPref.remove(getApplicationContext(), "selectedCollege");
-        SharedPref.remove(getApplicationContext(), "selectedCollegeId");
+        SharedPref.remove(getApplicationContext(),"selectedCollege");
+        SharedPref.remove(getApplicationContext(),"selectedCollegeId");
         updateBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (nameTIET.getText().toString().equals("")) {
-                    nameTIET.setError("Please enter your name");
-                } else if (emailTIET.getText().toString().equals("")) {
-                    emailTIET.setError("Please enter your email");
-                } else if (collegeTV.getText().toString().equals("")) {
-                    Toast.makeText(UpdateUserProfileActivity.this, "Please choose your college", Toast.LENGTH_SHORT).show();
-                } else {
-                    UserCollegeModel userCollegeModel = new UserCollegeModel();
-                    CollegeModel collegeModel = new CollegeModel();
-                    UserModel userModel = new UserModel();
-                    userModel.setName(nameTIET.getText().toString());
-                    userModel.setEmail(emailTIET.getText().toString());
-                    userModel.setMobile(phoneNumber);
-                    userModel.setRole(UserRole.CUSTOMER);
-                    collegeModel.setId(collegeID);
-                    userCollegeModel.setUserModel(userModel);
-                    userCollegeModel.setCollegeModel(collegeModel);
-                    SharedPref.putString(getApplicationContext(),Constants.userName,nameTIET.getText().toString());
-                    SharedPref.putString(getApplicationContext(),Constants.userEmail,emailTIET.getText().toString());
-                    SharedPref.putInt(getApplicationContext(),Constants.collegeId,collegeID);
-                    SharedPref.putString(getApplicationContext(),Constants.collegeName,collegeName);
-                    MainRepository.getUserService().updateUserCollegeData(userCollegeModel,authId,phoneNumber,UserRole.CUSTOMER.name()).enqueue(new Callback<Response<String>>() {
-                        @Override
-                        public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
-                            Response<String> responseFromServer = response.body();
-                            if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)){
-                                Toast.makeText(UpdateUserProfileActivity.this, "User Profile Updated!!", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Response<String>> call, Throwable t) {
-                            Toast.makeText(UpdateUserProfileActivity.this, "Failure"+t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+                updateUserDetails();
             }
         });
+    }
+
+    void updateUserDetails() {
+        if (nameTIET.getText().toString().equals("")) {
+            nameTIET.setError("Please enter your name");
+        } else if (emailTIET.getText().toString().equals("")) {
+            emailTIET.setError("Please enter your email");
+        } else if (collegeTV.getText().toString().equals("")) {
+            Toast.makeText(UpdateUserProfileActivity.this, "Please choose your college", Toast.LENGTH_SHORT).show();
+        } else {
+            UserCollegeModel userCollegeModel = new UserCollegeModel();
+            CollegeModel collegeModel = new CollegeModel();
+            UserModel userModel = new UserModel();
+            userModel.setName(nameTIET.getText().toString());
+            userModel.setEmail(emailTIET.getText().toString());
+            userModel.setMobile(phoneNumber);
+            userModel.setRole(UserRole.CUSTOMER);
+            collegeModel.setId(collegeID);
+            userCollegeModel.setUserModel(userModel);
+            userCollegeModel.setCollegeModel(collegeModel);
+
+            MainRepository.getUserService().updateUserCollegeData(userCollegeModel, authId, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<String>>() {
+                @Override
+                public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
+                    Response<String> responseFromServer = response.body();
+                    if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)) {
+                        Toast.makeText(UpdateUserProfileActivity.this, "User Profile Updated!!", Toast.LENGTH_SHORT).show();
+                        SharedPref.putString(getApplicationContext(), Constants.userName, nameTIET.getText().toString());
+                        SharedPref.putString(getApplicationContext(), Constants.userEmail, emailTIET.getText().toString());
+                        SharedPref.putInt(getApplicationContext(), Constants.collegeId, collegeID);
+                        SharedPref.putString(getApplicationContext(), Constants.collegeName, collegeName);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Response<String>> call, Throwable t) {
+                    Toast.makeText(UpdateUserProfileActivity.this, "Failure" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }
