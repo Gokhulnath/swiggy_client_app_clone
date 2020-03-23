@@ -37,6 +37,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     TextView userEmailTV;
     Button logoutBT;
     Button viewMoreBT;
+    Button userEditBT;
     ArrayList<OrderItemListModel> orderItemListModels;
     int pageNum;
     SwipeRefreshLayout pullToRefresh;
@@ -50,6 +51,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         userNameTV = findViewById(R.id.userNameTV);
         userNumTV = findViewById(R.id.userNumTV);
         userEmailTV = findViewById(R.id.userEmailTV);
+        userEditBT = findViewById(R.id.userEditBT);
         orderHistoryAdapter = new OrderHistoryAdapter(new ArrayList<>(), getApplicationContext(), OrderHistoryActivity.this);
         viewMoreBT = findViewById(R.id.viewMoreBT);
         String phoneNo, email, userName;
@@ -64,7 +66,13 @@ public class OrderHistoryActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         orderListRV.setLayoutManager(linearLayoutManager);
         orderListRV.setAdapter(orderHistoryAdapter);
-
+        userEditBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent edit =new Intent(OrderHistoryActivity.this,UpdateUserProfileActivity.class);
+                startActivity(edit);
+            }
+        });
         logoutBT = findViewById(R.id.logoutBT);
         logoutBT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,5 +150,17 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 Log.d("RetroFit", "error");
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String phoneNo, email, userName;
+        phoneNo = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
+        email = SharedPref.getString(getApplicationContext(), Constants.userEmail);
+        userName = SharedPref.getString(getApplicationContext(), Constants.userName);
+        userNameTV.setText(userName);
+        userEmailTV.setText(email);
+        userNumTV.setText(phoneNo);
     }
 }

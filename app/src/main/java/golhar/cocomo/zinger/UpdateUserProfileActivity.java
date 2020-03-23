@@ -23,23 +23,32 @@ import golhar.cocomo.zinger.utils.SharedPref;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class RegistrationActivity extends AppCompatActivity {
-
+public class UpdateUserProfileActivity extends AppCompatActivity {
     TextView collegeTV;
     TextInputEditText nameTIET;
     TextInputEditText emailTIET;
-    Button registerBT;
-
+    Button updateBT;
+    String name;
+    String email;
+    String collegeName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
-
+        setContentView(R.layout.activity_update_user_profile);
         collegeTV = findViewById(R.id.collegeTV);
+        nameTIET = findViewById(R.id.nameTIET);
+        emailTIET = findViewById(R.id.emailTIET);
+        updateBT = findViewById(R.id.updateBT);
+        name = SharedPref.getString(getApplicationContext(), Constants.userName);
+        email = SharedPref.getString(getApplicationContext(), Constants.userEmail);
+        collegeName=SharedPref.getString(getApplicationContext(),Constants.collegeName);
+        emailTIET.setText(email);
+        nameTIET.setText(name);
+        collegeTV.setHint(collegeName);
         collegeTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent college_select = new Intent(RegistrationActivity.this, CollegeListActivity.class);
+                Intent college_select = new Intent(UpdateUserProfileActivity.this, CollegeListActivity.class);
                 startActivity(college_select);
             }
         });
@@ -51,16 +60,12 @@ public class RegistrationActivity extends AppCompatActivity {
         String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
         String authId = SharedPref.getString(getApplicationContext(), Constants.authId);
         int collegeID;
-        String collegeName;
-        nameTIET = findViewById(R.id.nameTIET);
-        emailTIET = findViewById(R.id.emailTIET);
-        registerBT = findViewById(R.id.registerBT);
         collegeName = SharedPref.getString(getApplicationContext(), "selectedCollege");
         collegeID = SharedPref.getInt(getApplicationContext(), "selectedCollegeId");
         collegeTV.setText(collegeName);
         SharedPref.remove(getApplicationContext(), "selectedCollege");
         SharedPref.remove(getApplicationContext(), "selectedCollegeId");
-        registerBT.setOnClickListener(new View.OnClickListener() {
+        updateBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -69,44 +74,35 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else if (emailTIET.getText().toString().equals("")) {
                     emailTIET.setError("Please enter your email");
                 } else if (collegeTV.getText().toString().equals("")) {
-                    Toast.makeText(RegistrationActivity.this, "Please choose your college", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateUserProfileActivity.this, "Please choose your college", Toast.LENGTH_SHORT).show();
                 } else {
-                    String userName;
-                    String userEmail;
-                    userName = nameTIET.getText().toString();
-                    userEmail = emailTIET.getText().toString();
-                    SharedPref.putString(getApplicationContext(), Constants.userName, userName);
-                    SharedPref.putString(getApplicationContext(), Constants.userEmail, userEmail);
-                    SharedPref.putInt(getApplicationContext(),Constants.collegeId,collegeID);
-                    SharedPref.putString(getApplicationContext(),Constants.collegeName,collegeName);
                     UserCollegeModel userCollegeModel = new UserCollegeModel();
-                    UserModel userModel = new UserModel();
-                    userModel.setName(userName);
-                    userModel.setEmail(userEmail);
-                    userModel.setMobile(phoneNumber);
-                    userModel.setOauthId(authId);
-                    userModel.setRole(UserRole.CUSTOMER);
-                    userModel.setIsDelete(0);
                     CollegeModel collegeModel = new CollegeModel();
+                    UserModel userModel = new UserModel();
+                    userModel.setName(nameTIET.getText().toString());
+                    userModel.setEmail(emailTIET.getText().toString());
+                    userModel.setMobile(phoneNumber);
+                    userModel.setRole(UserRole.CUSTOMER);
                     collegeModel.setId(collegeID);
                     userCollegeModel.setUserModel(userModel);
                     userCollegeModel.setCollegeModel(collegeModel);
-                    MainRepository.getUserService().updateUserCollegeData(userCollegeModel, authId, phoneNumber, UserRole.CUSTOMER.toString()).enqueue(new Callback<Response<String>>() {
+                    SharedPref.putString(getApplicationContext(),Constants.userName,nameTIET.getText().toString());
+                    SharedPref.putString(getApplicationContext(),Constants.userEmail,emailTIET.getText().toString());
+                    SharedPref.putInt(getApplicationContext(),Constants.collegeId,collegeID);
+                    SharedPref.putString(getApplicationContext(),Constants.collegeName,collegeName);
+                    MainRepository.getUserService().updateUserCollegeData(userCollegeModel,authId,phoneNumber,UserRole.CUSTOMER.name()).enqueue(new Callback<Response<String>>() {
                         @Override
                         public void onResponse(Call<Response<String>> call, retrofit2.Response<Response<String>> response) {
-                            Response<String> userDataResponse = response.body();
-                            if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.Success) && userDataResponse.getData().equals(ErrorLog.Success)) {
-                                SharedPref.putInt(getApplicationContext(), Constants.loginStatus, 1);
-                                Intent shopList = new Intent(RegistrationActivity.this, ShopListActivity.class);
-                                startActivity(shopList);
-                            } else {
-                                Toast.makeText(RegistrationActivity.this, userDataResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            Response<String> responseFromServer = response.body();
+                            if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)){
+                                Toast.makeText(UpdateUserProfileActivity.this, "User Profile Updated!!", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Response<String>> call, Throwable t) {
-                            Toast.makeText(RegistrationActivity.this, "Failure"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateUserProfileActivity.this, "Failure"+t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

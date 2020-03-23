@@ -15,5 +15,4 @@ public class Constants {
     public static final String collegeAddress = "collegeAddress";
     public static final String collegeUrl = "collegeUrl";
     public static final String loginStatus = "loginStatus";
-
 }
