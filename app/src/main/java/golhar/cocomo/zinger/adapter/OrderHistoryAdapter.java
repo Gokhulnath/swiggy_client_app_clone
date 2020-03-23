@@ -116,10 +116,15 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         item = "";
         List<OrderItemModel> orderItemList = orderItemListModel.getOrderItemsList();
         for (int i = 0; i < orderItemList.size(); i++) {
+            if(i<3){
             Quantity = orderItemList.get(i).getQuantity().toString();
             itemName = orderItemList.get(i).getItemModel().getName();
             tempItem = itemName + " x " + Quantity + "   ";
-            item = item.concat(tempItem);
+            item = item.concat(tempItem);}
+            else{
+                item = item.concat("..... See More");
+                break;
+            }
         }
         holder.orderItemTV.setText(item);
         holder.orderRatingTV.setText(String.valueOf(orderItemListModel.getOrderModel().getRating()));

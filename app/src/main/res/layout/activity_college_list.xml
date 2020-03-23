@@ -20,10 +20,14 @@
             android:lines="1"
             android:maxLines="1"
             android:textSize="@dimen/_15ssp" />
-
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/pullToRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/itemListRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 </RelativeLayout>

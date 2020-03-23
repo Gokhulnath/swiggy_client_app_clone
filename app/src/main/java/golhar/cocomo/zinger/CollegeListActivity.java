@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +33,13 @@ public class CollegeListActivity extends AppCompatActivity {
     CollegeListAdapter collegeAdapter;
     EditText collegeName;
     ArrayList<CollegeModel> collegeList;
+    SwipeRefreshLayout pullToSwipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_college_list);
-
+        pullToSwipe=findViewById(R.id.pullToRefresh);
         collegeName = findViewById(R.id.collegeNameET);
         collegeAdapter = new CollegeListAdapter(new ArrayList<>(), this);
         itemListRV = findViewById(R.id.itemListRV);
@@ -60,12 +62,28 @@ public class CollegeListActivity extends AppCompatActivity {
                 collegeAdapter.setCollegeArrayList(modifiedCollegeList);
                 collegeAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
 
+        getCollegeList();
+        pullToSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getCollegeList();
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void getCollegeList(){
         String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
         String authid = SharedPref.getString(getApplicationContext(),Constants.authId);
         MainRepository.getCollegeService().getAllColleges(authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<CollegeModel>>>() {
@@ -76,6 +94,7 @@ public class CollegeListActivity extends AppCompatActivity {
                     collegeAdapter.setCollegeArrayList((ArrayList<CollegeModel>) responseFromServer.getData());
                     collegeAdapter.notifyDataSetChanged();
                     collegeList = (ArrayList<CollegeModel>) responseFromServer.getData();
+                    pullToSwipe.setRefreshing(false);
                 } else {
                     Toast.makeText(CollegeListActivity.this, responseFromServer.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -86,10 +105,5 @@ public class CollegeListActivity extends AppCompatActivity {
                 Toast.makeText(CollegeListActivity.this, "Unable to reach the server"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class ShopListActivity extends AppCompatActivity {
     ShopListAdapter shopListAdapter;
     TextView searchShopET;
     ArrayList<ShopConfigurationModel> shopConfigurationModelArrayList;
+    SwipeRefreshLayout pullToRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class ShopListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shop_list);
         shopConfigurationModelArrayList = new ArrayList<ShopConfigurationModel>();
         searchShopET = findViewById(R.id.searchShopET);
+        pullToRefresh=findViewById(R.id.pullToRefresh);
         try {
             shopListAdapter = new ShopListAdapter(new ArrayList<>(), this);
         } catch (ParseException e) {
@@ -53,25 +56,11 @@ public class ShopListActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         shopListRV.setLayoutManager(linearLayoutManager);
         shopListRV.setAdapter(shopListAdapter);
-        int collegeId = SharedPref.getInt(getApplicationContext(), Constants.collegeId);
-        String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
-        String authId = SharedPref.getString(getApplicationContext(), Constants.authId);
-        MainRepository.getShopService().getShopsByCollegeId(Integer.toString(collegeId), authId, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<ShopConfigurationModel>>>() {
+        getShopList();
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onResponse(Call<Response<List<ShopConfigurationModel>>> call, retrofit2.Response<Response<List<ShopConfigurationModel>>> response) {
-                Response<List<ShopConfigurationModel>> responseFromServer = response.body();
-                if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)) {
-                    shopListAdapter.setShopConfigurationModelArrayList((ArrayList<ShopConfigurationModel>) responseFromServer.getData());
-                    shopListAdapter.notifyDataSetChanged();
-                    shopConfigurationModelArrayList = (ArrayList<ShopConfigurationModel>) responseFromServer.getData();
-                } else {
-                    Log.d("RetroFit2", "failure");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Response<List<ShopConfigurationModel>>> call, Throwable t) {
-                Log.d("ResponseFail", t.getMessage());
+            public void onRefresh() {
+                getShopList();
             }
         });
 
@@ -112,5 +101,30 @@ public class ShopListActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    void getShopList(){
+        int collegeId = SharedPref.getInt(getApplicationContext(), Constants.collegeId);
+        String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
+        String authId = SharedPref.getString(getApplicationContext(), Constants.authId);
+        MainRepository.getShopService().getShopsByCollegeId(Integer.toString(collegeId), authId, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<ShopConfigurationModel>>>() {
+            @Override
+            public void onResponse(Call<Response<List<ShopConfigurationModel>>> call, retrofit2.Response<Response<List<ShopConfigurationModel>>> response) {
+                Response<List<ShopConfigurationModel>> responseFromServer = response.body();
+                if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)) {
+                    shopListAdapter.setShopConfigurationModelArrayList((ArrayList<ShopConfigurationModel>) responseFromServer.getData());
+                    shopListAdapter.notifyDataSetChanged();
+                    shopConfigurationModelArrayList = (ArrayList<ShopConfigurationModel>) responseFromServer.getData();
+                    pullToRefresh.setRefreshing(false);
+                } else {
+                    Log.d("RetroFit2", "failure");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<List<ShopConfigurationModel>>> call, Throwable t) {
+                Log.d("ResponseFail", t.getMessage());
+            }
+        });
     }
 }

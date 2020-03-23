@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -38,6 +39,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     Button viewMoreBT;
     ArrayList<OrderItemListModel> orderItemListModels;
     int pageNum;
+    SwipeRefreshLayout pullToRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +76,20 @@ public class OrderHistoryActivity extends AppCompatActivity {
             }
         });
 
-
         getOrderListByPage(1);
+        pullToRefresh=findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                orderItemListModels.clear();
+                orderHistoryAdapter.setItemList(orderItemListModels);
+                orderHistoryAdapter.notifyDataSetChanged();
+                for(int i=1;i<=pageNum;i++) {
+                    getOrderListByPage(i);
+                }
+            }
+        });
+
 
         viewMoreBT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +131,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     }
                     smoothScroller.setTargetPosition(((pageNumFunc - 1) * 5));
                     orderListRV.getLayoutManager().startSmoothScroll(smoothScroller);
-
+                    pullToRefresh.setRefreshing(false);
                 } else {
                     viewMoreBT.setVisibility(View.GONE);
                 }

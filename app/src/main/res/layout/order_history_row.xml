@@ -65,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:text="Sev Puri x1, Dahi Papri Chaat x 1"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_12ssp"
+                android:maxLines="2"/>
 
             <TextView
                 android:id="@+id/orderDateTV"

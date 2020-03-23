@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,10 +19,17 @@ import java.util.Date;
 import java.util.List;
 
 import golhar.cocomo.zinger.adapter.OrderHistoryDetailAdapter;
+import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
+import golhar.cocomo.zinger.model.OrderModel;
+import golhar.cocomo.zinger.service.MainRepository;
 import golhar.cocomo.zinger.utils.Constants;
+import golhar.cocomo.zinger.utils.ErrorLog;
+import golhar.cocomo.zinger.utils.Response;
 import golhar.cocomo.zinger.utils.SharedPref;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class OrderHistoryItemDetailActivity extends AppCompatActivity {
 
@@ -44,14 +52,18 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
     ImageButton backArrowIB;
     OrderHistoryDetailAdapter orderHistoryDetailAdapter;
     TextView lastUpdatedTimeTV;
+    SwipeRefreshLayout pullToRefresh;
+    OrderModel newOrderModel;
+    OrderItemListModel orderItemListModel;
 
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_history_details);
+        setContentView(R.layout.activity_order_history_item_detail);
+        pullToRefresh=findViewById(R.id.pullToRefresh);
         Intent detail = getIntent();
-        OrderItemListModel orderItemListModel = detail.getParcelableExtra("FullOrderDetails");
+        orderItemListModel = detail.getParcelableExtra("FullOrderDetails");
         backArrowIB = findViewById(R.id.backArrowIB);
         orderNumTV = findViewById(R.id.orderNumTV);
         statusTV = findViewById(R.id.statusTV);
@@ -79,9 +91,53 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
         deliveryCostTV.setText("₹" + String.valueOf(orderItemListModel.getOrderModel().getDeliveryPrice()));
         totalCostTV.setText("₹" + String.valueOf(orderItemListModel.getOrderModel().getPrice()));
         viaTV.setText("Paid Via " + orderItemListModel.getOrderModel().getTransactionModel().getPaymentMode());
-        String status = String.valueOf(orderItemListModel.getOrderModel().getOrderStatus());
+        itemsLV.setScrollbarFadingEnabled(false);
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         Date date1 = orderItemListModel.getOrderModel().getLastStatusUpdatedTime();
+        String status = String.valueOf(orderItemListModel.getOrderModel().getOrderStatus());
+        statusChange(date1,status);
+
+        backArrowIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        orderHistoryDetailAdapter = new OrderHistoryDetailAdapter(this, R.layout.order_items, orderItemList);
+        itemsLV.setAdapter(orderHistoryDetailAdapter);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                    getOrderById();
+            }
+        });
+
+    }
+
+    void getOrderById()
+    {
+        String phoneNo = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
+        String authId = SharedPref.getString(getApplicationContext(), Constants.authId);
+        MainRepository.getOrderService().getOrderById(orderItemListModel.getOrderModel().getId(),authId,phoneNo, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<OrderModel>>() {
+            @Override
+            public void onResponse(Call<Response<OrderModel>> call, retrofit2.Response<Response<OrderModel>> response) {
+                Response<OrderModel> responseFromServer = response.body();
+                if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)){
+                    newOrderModel = responseFromServer.getData();
+                    statusChange(newOrderModel.getLastStatusUpdatedTime(),newOrderModel.getOrderStatus().toString());
+                    pullToRefresh.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response<OrderModel>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    void statusChange(Date date1,String status){
         if (date1 != null) {
             Calendar c = Calendar.getInstance();
             Date date2 = c.getTime();
@@ -90,10 +146,9 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
             long minutes = seconds / 60;
             long hours = minutes / 60;
             long days = hours / 24;
-            if (days == 1) {
-                lastUpdatedTimeTV.setVisibility(View.INVISIBLE);
-            }
-            if (minutes < 60) {
+            if (days >0) {
+                lastUpdatedTimeTV.setText("Lasted updated " + days + " day ago");
+            }else if (minutes < 60) {
                 lastUpdatedTimeTV.setText("Lasted updated " + minutes + " minutes ago");
             } else {
                 lastUpdatedTimeTV.setText("Lasted updated " + hours + " hour " + minutes % 60 + " minute ago");
@@ -135,14 +190,5 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
                 lastUpdatedTimeTV.setText("Order Delivered on " + dateFormat.format(orderItemListModel.getOrderModel().getDate()));
                 break;
         }
-        backArrowIB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        orderHistoryDetailAdapter = new OrderHistoryDetailAdapter(this, R.layout.order_items, orderItemList);
-        itemsLV.setAdapter(orderHistoryDetailAdapter);
     }
 }
