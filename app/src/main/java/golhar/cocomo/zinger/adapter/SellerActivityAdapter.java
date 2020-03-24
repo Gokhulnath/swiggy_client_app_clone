@@ -21,6 +21,9 @@ public class SellerActivityAdapter extends RecyclerView.Adapter<SellerActivityAd
     List<ItemModel> itemModelList;
     Context context, activityContext;
 
+    public List<ItemModel> getItemModelList() {
+        return itemModelList;
+    }
 
     public SellerActivityAdapter(List<ItemModel> itemModelList, Context context, Context activityContext) {
         this.itemModelList = itemModelList;
@@ -52,13 +55,19 @@ public class SellerActivityAdapter extends RecyclerView.Adapter<SellerActivityAd
     @Override
     public void onBindViewHolder(@NonNull SellerHolder holder, int position) {
         final ItemModel itemModel = itemModelList.get(position);
-        //holder.checkboxCB.setText(String.valueOf(itemModel.getIsDelete()));
+        holder.checkboxCB.setText(String.valueOf(itemModel.getIsDelete()));
+
         holder.checkboxCB.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                itemModel.setIsDelete(1);
+                public void onClick(View view)
+            {
+                if(itemModelList.get(position).getIsDelete()==1)
+                    itemModelList.get(position).setIsDelete(0);
+                else
+                    itemModelList.get(position).setIsDelete(1);
             }
         });
+
         holder.foodTV.setText(itemModel.getName());
         holder.priceTV.setEnabled(false);
         holder.priceTV.setText(String.valueOf(itemModel.getPrice()));

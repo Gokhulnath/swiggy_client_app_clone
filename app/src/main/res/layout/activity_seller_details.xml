@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SellerDetailsActivity">
+
+    <RelativeLayout
+        android:id="@+id/delPriceRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/delPriceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:text="DeliveryPrice"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rupeeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toRightOf="@id/delPriceTV"
+            android:padding="@dimen/_5sdp"
+            android:text=" ₹ "
+            android:textColor="#000" />
+
+        <EditText
+            android:id="@+id/priceTV"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_toRightOf="@id/rupeeTV"
+            android:text=" 30" />
+
+        <ToggleButton
+            android:id="@+id/editBT"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/priceTV"
+            android:background="@drawable/ic_pencil"
+            android:padding="@dimen/_10sdp"
+            android:textOff=" "
+            android:textOn=" " />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/delTakenRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/delPriceRL"
+        android:layout_margin="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/delTakenTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+
+            android:text="Delivery Taken?"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <ToggleButton
+            android:id="@+id/delTakenBT"
+            android:layout_width="62dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/delTakenTV"
+            android:background="#fff"
+            android:backgroundTint="@color/orange"
+            android:textOff="N0"
+            android:textOn="YES" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/orderTakenRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/delTakenRL"
+        android:layout_margin="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/orderTakenTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:text="Order Acceptable?"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <ToggleButton
+            android:id="@+id/orderTakenBT"
+            android:layout_width="62dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/orderTakenTV"
+            android:background="#fff"
+            android:backgroundTint="@color/orange"
+            android:textOff="N0"
+            android:textOn="YES" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mobileRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/orderTakenRL"
+        android:layout_margin="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/mobileTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:text="Mobile Number"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/numberTV"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_toRightOf="@id/mobileTV"
+            android:text="3056847512" />
+
+        <ToggleButton
+            android:id="@+id/mobileBT"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/numberTV"
+            android:background="@drawable/ic_pencil"
+            android:padding="@dimen/_10sdp"
+            android:textOff=" "
+            android:textOn=" " />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/openTimeRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mobileRL"
+        android:layout_margin="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/openTimeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:text="Opening Time"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/openTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/openTimeTV"
+            android:padding="@dimen/_5sdp"
+            android:text="12:30 PM"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/openBT"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/openTV"
+            android:background="#fff"
+            android:backgroundTint="@color/orange"
+            android:padding="@dimen/_5sdp"
+            android:text="Select Opening Time" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/closeTimeRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/openTimeRL"
+        android:layout_margin="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/closeTimeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:text="Closing Time"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/closeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/closeTimeTV"
+            android:padding="@dimen/_5sdp"
+            android:text="12:30 PM"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/closeBT"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/closeTV"
+            android:background="#fff"
+            android:backgroundTint="@color/orange"
+            android:padding="@dimen/_5sdp"
+            android:text="Select Closing Time" />
+
+    </RelativeLayout>
+</RelativeLayout>
