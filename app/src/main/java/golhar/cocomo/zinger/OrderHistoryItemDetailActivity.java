@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -132,7 +133,7 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Response<OrderModel>> call, Throwable t) {
-
+                Toast.makeText(OrderHistoryItemDetailActivity.this, "Failure"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

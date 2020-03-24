@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/itemNameTV"
-            android:layout_width="@dimen/_240sdp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_vegetarian_mark"
             android:gravity="center_vertical"
@@ -23,10 +23,10 @@
 
         <TextView
             android:id="@+id/eachItemCostTV"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="center_vertical"
+            android:textAlignment="textEnd"
+            android:paddingRight="@dimen/_15sdp"
             android:text="₹100"
             android:textSize="@dimen/_13ssp" />
     </LinearLayout>

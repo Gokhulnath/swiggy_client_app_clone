@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/ratingRV"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_215sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <Button
+            android:id="@+id/yesBT"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:background="#ff9703"
+            android:text="YES"
+            android:textColor="#fff"
+            android:layout_marginLeft="@dimen/_20sdp"/>
+        <Button
+            android:id="@+id/noBT"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_toRightOf="@id/yesBT"
+            android:background="#ff9703"
+            android:text="NO"
+            android:textColor="#fff"
+            android:layout_marginLeft="@dimen/_27sdp"
+            android:layout_marginRight="@dimen/_10sdp"/>
+
+        <TextView
+            android:id="@+id/replaceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="@dimen/_10sdp"
+            android:text="Replace cart item?"
+            android:textColor="#000"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/msgTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/replaceTV"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/_13sdp"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:text="Your cart contains dishes from Murugan Idli Shop. Do you want to discard the selection and add dishes from frozen bottle?" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

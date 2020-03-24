@@ -47,6 +47,8 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.3'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation 'com.google.firebase:firebase-auth:19.3.0'
 

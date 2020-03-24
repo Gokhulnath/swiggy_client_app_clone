@@ -26,6 +26,13 @@ public class OrderHistoryDetailAdapter extends ArrayAdapter<OrderItemModel> {
         this.objects = objects;
     }
 
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public void setObjects(List<OrderItemModel> objects) {
+        this.objects = objects;
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

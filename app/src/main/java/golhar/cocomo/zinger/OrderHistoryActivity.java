@@ -69,7 +69,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         userEditBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent edit =new Intent(OrderHistoryActivity.this,UpdateUserProfileActivity.class);
+                Intent edit = new Intent(OrderHistoryActivity.this, UpdateUserProfileActivity.class);
                 startActivity(edit);
             }
         });
@@ -85,14 +85,14 @@ public class OrderHistoryActivity extends AppCompatActivity {
         });
 
         getOrderListByPage(1);
-        pullToRefresh=findViewById(R.id.pullToRefresh);
+        pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 orderItemListModels.clear();
                 orderHistoryAdapter.setItemList(orderItemListModels);
                 orderHistoryAdapter.notifyDataSetChanged();
-                for(int i=1;i<=pageNum;i++) {
+                for (int i = 1; i <= pageNum; i++) {
                     getOrderListByPage(i);
                 }
             }

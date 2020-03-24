@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clickableLL"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -40,25 +41,36 @@
         <LinearLayout
             android:id="@+id/specialItemLL"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_35sdp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/priceTV"
                 android:layout_width="@dimen/_140sdp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="₹100"
                 android:textSize="@dimen/_11ssp" />
 
             <Button
                 android:id="@+id/addItemBT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_64sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:backgroundTint="#D21F3C"
                 android:text="ADD"
                 android:textColor="#FFFFFF"
-                android:textSize="@dimen/_11ssp"
+                android:textSize="@dimen/_12ssp"
                 android:textStyle="bold" />
+
+            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                android:id="@+id/numberButtonENB"
+                android:layout_width="@dimen/_64sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:backGroundColor="#D21F3C"
+                app:textSize="@dimen/_4ssp" />
 
         </LinearLayout>
 

@@ -18,22 +18,28 @@
             android:orientation="horizontal"
             android:paddingHorizontal="@dimen/_15sdp">
 
-            <TextView
-                android:id="@+id/searchShopET"
-                android:layout_width="@dimen/_240sdp"
-                android:layout_height="@dimen/_26sdp"
-                android:background="@drawable/myborder"
-                android:clickable="true"
-                android:drawableLeft="@drawable/ic_search_"
-                android:hint="Search"
-                android:paddingLeft="@dimen/_7sdp"
-                android:textSize="@dimen/_15ssp" />
+            <Button
+                android:id="@+id/searchShopBT"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/ic_search_"
+                android:layout_marginHorizontal="@dimen/_10sdp"/>
+
+            <Button
+                android:id="@+id/cartBT"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/ic_cart"
+                android:backgroundTint="#000"
+                android:layout_marginHorizontal="@dimen/_10sdp"/>
 
             <Button
                 android:id="@+id/accountBT"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:background="@drawable/ic_account_box" />
+                android:background="@drawable/ic_account_box"
+                android:layout_marginHorizontal="@dimen/_10sdp"/>
+
         </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

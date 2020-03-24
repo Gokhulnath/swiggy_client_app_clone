@@ -158,6 +158,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
                                 SharedPref.putString(getApplicationContext(), Constants.collegeAddress, userDataResponse.getData().getCollegeModel().getAddress());
                                 SharedPref.putString(getApplicationContext(), Constants.collegeUrl, userDataResponse.getData().getCollegeModel().getIconUrl());
                                 SharedPref.putInt(getApplicationContext(), Constants.loginStatus, 1);
+                                SharedPref.putInt(getApplicationContext(),Constants.shopId,-1);
                                 Intent shopList = new Intent(OtpVerificationActivity.this, ShopListActivity.class);
                                 startActivity(shopList);
                             } else if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.CollegeDetailNotAvailable)) {

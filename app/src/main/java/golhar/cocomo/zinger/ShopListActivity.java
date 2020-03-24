@@ -1,12 +1,12 @@
 package golhar.cocomo.zinger;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +14,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import golhar.cocomo.zinger.adapter.ShopListAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
+import golhar.cocomo.zinger.model.OrderItemModel;
 import golhar.cocomo.zinger.model.ShopConfigurationModel;
 import golhar.cocomo.zinger.service.MainRepository;
 import golhar.cocomo.zinger.utils.Constants;
@@ -34,16 +39,31 @@ public class ShopListActivity extends AppCompatActivity {
     Button accountBT;
     RecyclerView shopListRV;
     ShopListAdapter shopListAdapter;
-    TextView searchShopET;
+    Button searchShopBT;
     ArrayList<ShopConfigurationModel> shopConfigurationModelArrayList;
     SwipeRefreshLayout pullToRefresh;
+    Button cartBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_list);
+        cartBT=findViewById(R.id.cartBT);
+        if(RetrieveData().size()==0){
+            cartBT.setVisibility(View.INVISIBLE);
+        }
+        else{
+            cartBT.setVisibility(View.VISIBLE);
+        }
+        cartBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cart = new Intent(ShopListActivity.this,CartActivity.class);
+                startActivity(cart);
+            }
+        });
         shopConfigurationModelArrayList = new ArrayList<ShopConfigurationModel>();
-        searchShopET = findViewById(R.id.searchShopET);
+        searchShopBT = findViewById(R.id.searchShopBT);
         pullToRefresh=findViewById(R.id.pullToRefresh);
         try {
             shopListAdapter = new ShopListAdapter(new ArrayList<>(), this);
@@ -64,7 +84,7 @@ public class ShopListActivity extends AppCompatActivity {
             }
         });
 
-        searchShopET.setOnClickListener(new View.OnClickListener() {
+        searchShopBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent search = new Intent(ShopListActivity.this, SearchItemShopActivity.class);
@@ -78,10 +98,21 @@ public class ShopListActivity extends AppCompatActivity {
         accountBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent order = new Intent(ShopListActivity.this, SellerActivity.class);
+                Intent order = new Intent(ShopListActivity.this, OrderHistoryActivity.class);
                 startActivity(order);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(RetrieveData().size()==0){
+            cartBT.setVisibility(View.INVISIBLE);
+        }
+        else{
+            cartBT.setVisibility(View.VISIBLE);
+        }
     }
 
     boolean doubleBackToExitPressedOnce = false;
@@ -103,6 +134,16 @@ public class ShopListActivity extends AppCompatActivity {
         }, 2000);
     }
 
+    ArrayList<OrderItemModel> RetrieveData() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constants.sharedPreferencesCart, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(Constants.cart, null);
+        Type type = new TypeToken<ArrayList<OrderItemModel>>() {
+        }.getType();
+        ArrayList<OrderItemModel> orderItemModelArrayList = gson.fromJson(json, type);
+        return orderItemModelArrayList;
+    }
+
     void getShopList(){
         int collegeId = SharedPref.getInt(getApplicationContext(), Constants.collegeId);
         String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
@@ -117,13 +158,12 @@ public class ShopListActivity extends AppCompatActivity {
                     shopConfigurationModelArrayList = (ArrayList<ShopConfigurationModel>) responseFromServer.getData();
                     pullToRefresh.setRefreshing(false);
                 } else {
-                    Log.d("RetroFit2", "failure");
-                }
+                    Toast.makeText(ShopListActivity.this, "Failure", Toast.LENGTH_SHORT).show();                }
             }
 
             @Override
             public void onFailure(Call<Response<List<ShopConfigurationModel>>> call, Throwable t) {
-                Log.d("ResponseFail", t.getMessage());
+                Toast.makeText(ShopListActivity.this, "Failure"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -75,10 +75,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     String userEmail;
                     userName = nameTIET.getText().toString();
                     userEmail = emailTIET.getText().toString();
-                    SharedPref.putString(getApplicationContext(), Constants.userName, userName);
-                    SharedPref.putString(getApplicationContext(), Constants.userEmail, userEmail);
-                    SharedPref.putInt(getApplicationContext(),Constants.collegeId,collegeID);
-                    SharedPref.putString(getApplicationContext(),Constants.collegeName,collegeName);
                     UserCollegeModel userCollegeModel = new UserCollegeModel();
                     UserModel userModel = new UserModel();
                     userModel.setName(userName);
@@ -97,6 +93,11 @@ public class RegistrationActivity extends AppCompatActivity {
                             Response<String> userDataResponse = response.body();
                             if (userDataResponse.getCode().equals(ErrorLog.CodeSuccess) && userDataResponse.getMessage().equals(ErrorLog.Success) && userDataResponse.getData().equals(ErrorLog.Success)) {
                                 SharedPref.putInt(getApplicationContext(), Constants.loginStatus, 1);
+                                SharedPref.putString(getApplicationContext(), Constants.userName, userName);
+                                SharedPref.putString(getApplicationContext(), Constants.userEmail, userEmail);
+                                SharedPref.putInt(getApplicationContext(),Constants.collegeId,collegeID);
+                                SharedPref.putString(getApplicationContext(),Constants.collegeName,collegeName);
+                                SharedPref.putInt(getApplicationContext(),Constants.shopId,-1);
                                 Intent shopList = new Intent(RegistrationActivity.this, ShopListActivity.class);
                                 startActivity(shopList);
                             } else {
