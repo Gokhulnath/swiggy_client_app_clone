@@ -62,6 +62,8 @@ public class CartActivity extends AppCompatActivity {
         if (shopId == -1) {
             clearOrderList();
             SharedPref.putInt(getApplicationContext(),Constants.cartShopId,-1);
+            itemTotal=0.0;
+            deliveryFee=0.0;
         }
         cartLV = findViewById(R.id.cartLV);
         clearOrderBT = findViewById(R.id.clearOrderBT);
@@ -71,6 +73,9 @@ public class CartActivity extends AppCompatActivity {
                 orderHistoryDetailAdapter = new OrderHistoryDetailAdapter(getApplicationContext(), R.layout.order_items, clearOrderList());
                 cartLV.setAdapter(orderHistoryDetailAdapter);
                 SharedPref.putInt(getApplicationContext(),Constants.cartShopId,-1);
+                itemTotal=0.0;
+                deliveryFee=0.0;
+                finish();
             }
         });
         orderItemModelArrayList = RetrieveData();

@@ -17,7 +17,10 @@
         android:hint="Search for food and restaurants"
         android:lines="1"
         android:paddingHorizontal="@dimen/_10sdp"
-        android:textSize="@dimen/_15ssp" />
+        android:textSize="@dimen/_15ssp">
+    <requestFocus/>
+    </EditText>
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -124,7 +124,7 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
                     yesBT.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            SharedPref.putInt(context,Constants.cartShopId,SharedPref.getInt(context, Constants.shopId));
+                            SharedPref.putInt(context,Constants.cartShopId,itemModel.getShopModel().getId());
                             ArrayList<OrderItemModel> orderItemModelArrayList = new ArrayList<>();
                             LoadData(orderItemModelArrayList);
                             SharedPref.putString(context,Constants.cartShopName,itemModel.getShopModel().getName());
@@ -139,6 +139,7 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
                             orderItemModelArrayList2.add(orderItemModel);
                             LoadData(orderItemModelArrayList2);
                             dialog.dismiss();
+                            notifyDataSetChanged();
                         }
                     });
                     noBT.setOnClickListener(new View.OnClickListener() {

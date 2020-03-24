@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +39,7 @@ public class ShopListActivity extends AppCompatActivity {
     Button accountBT;
     RecyclerView shopListRV;
     ShopListAdapter shopListAdapter;
-    TextView searchShopET;
+    Button searchShopBT;
     ArrayList<ShopConfigurationModel> shopConfigurationModelArrayList;
     SwipeRefreshLayout pullToRefresh;
     Button cartBT;
@@ -64,7 +63,7 @@ public class ShopListActivity extends AppCompatActivity {
             }
         });
         shopConfigurationModelArrayList = new ArrayList<ShopConfigurationModel>();
-        searchShopET = findViewById(R.id.searchShopET);
+        searchShopBT = findViewById(R.id.searchShopBT);
         pullToRefresh=findViewById(R.id.pullToRefresh);
         try {
             shopListAdapter = new ShopListAdapter(new ArrayList<>(), this);
@@ -85,7 +84,7 @@ public class ShopListActivity extends AppCompatActivity {
             }
         });
 
-        searchShopET.setOnClickListener(new View.OnClickListener() {
+        searchShopBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent search = new Intent(ShopListActivity.this, SearchItemShopActivity.class);
@@ -99,7 +98,7 @@ public class ShopListActivity extends AppCompatActivity {
         accountBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent order = new Intent(ShopListActivity.this, SellerActivity.class);
+                Intent order = new Intent(ShopListActivity.this, OrderHistoryActivity.class);
                 startActivity(order);
             }
         });

@@ -76,10 +76,7 @@ public class ShopMenuItemAdapter extends RecyclerView.Adapter<ShopMenuItemAdapte
                 holder.numberButtonENB.setNumber(RetrieveData().get(i).getQuantity().toString());
                 holder.addItemBT.setVisibility(View.GONE);
                 holder.numberButtonENB.setVisibility(View.VISIBLE);
-            } else {
-                holder.addItemBT.setVisibility(View.VISIBLE);
-                holder.numberButtonENB.setVisibility(View.GONE);
-            }
+            } 
         }
 
         Glide.with(context)
