@@ -20,7 +20,7 @@
 
             <TextView
                 android:id="@+id/searchShopET"
-                android:layout_width="@dimen/_240sdp"
+                android:layout_width="@dimen/_205sdp"
                 android:layout_height="@dimen/_26sdp"
                 android:background="@drawable/myborder"
                 android:clickable="true"
@@ -34,6 +34,12 @@
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/ic_account_box" />
+            <Button
+                android:id="@+id/cartBT"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:backgroundTint="#000"
+                android:background="@drawable/ic_cart" />
         </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

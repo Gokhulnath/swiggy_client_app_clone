@@ -48,6 +48,9 @@ public class ShopMenuItemListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shop_menu_item_list);
         Intent shop = getIntent();
         ShopConfigurationModel shopConfigurationModel = shop.getParcelableExtra("shopDetails");
+        SharedPref.putInt(getApplicationContext(),Constants.shopId,shopConfigurationModel.getShopModel().getId());
+        SharedPref.putString(getApplicationContext(),Constants.shopName,shopConfigurationModel.getShopModel().getName());
+        SharedPref.putLong(getApplicationContext(),Constants.shopDeliveryPrice,(shopConfigurationModel.getConfigurationModel().getDeliveryPrice()).longValue());
         restaurantNameTV = findViewById(R.id.restaurantNameTV);
         ratingTV = findViewById(R.id.ratingTV);
         numberOfRatingTV = findViewById(R.id.numberOfRatingTV);
