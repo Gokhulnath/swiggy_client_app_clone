@@ -5,6 +5,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sellerMenuRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="@dimen/_500sdp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_below="@id/sellerMenuRV"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="#fff"
+        android:text="UPDATE"
+        android:textStyle="bold"
+        android:id="@+id/updateBT"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

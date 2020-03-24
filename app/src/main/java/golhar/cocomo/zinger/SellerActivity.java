@@ -9,6 +9,9 @@ import golhar.cocomo.zinger.model.ItemModel;
 
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -16,6 +19,7 @@ public class SellerActivity extends AppCompatActivity {
     SellerActivityAdapter sellerActivityAdapter;
     RecyclerView sellerMenuRV;
     ArrayList<ItemModel> ItemModel;
+    Button updateBT;
 
 
     @Override
@@ -25,6 +29,7 @@ public class SellerActivity extends AppCompatActivity {
         sellerActivityAdapter= new SellerActivityAdapter(new ArrayList<>(),getApplicationContext(),SellerActivity.this);
         ItemModel= new ArrayList<>();
         sellerMenuRV = findViewById(R.id.sellerMenuRV);
+        updateBT=findViewById(R.id.updateBT);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         sellerMenuRV.setLayoutManager(linearLayoutManager);
@@ -57,10 +62,24 @@ public class SellerActivity extends AppCompatActivity {
         //todo add rupee symbol before edit text--M
         //todo toggle tick --M
         //todo image better for button--M
-        //todo add a button below recycler view to update to show items that have been checked in the logcat by adding Log.d by adding itemmodel.tostring
+        //todo add a button below recycler view to update to show items that have been checked in the logcat by adding Log.d by adding itemmodel.tostring--M
 
         sellerActivityAdapter.setItemModelList(ItemModel);
         sellerActivityAdapter.notifyDataSetChanged();
+
+        updateBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(int i=0;i< sellerActivityAdapter.getItemModelList().size(); i++)
+                {
+                   if(sellerActivityAdapter.getItemModelList().get(i).getIsDelete()==1)
+                       Log.d("SellerActivity ",sellerActivityAdapter.getItemModelList().get(i).toString());
+
+                }
+               // Log.d(" ",itemModel1.toString());
+            }
+        });
+
 
     }
 }
