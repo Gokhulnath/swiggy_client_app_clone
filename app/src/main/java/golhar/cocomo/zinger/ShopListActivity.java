@@ -99,7 +99,7 @@ public class ShopListActivity extends AppCompatActivity {
         accountBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent order = new Intent(ShopListActivity.this, OrderHistoryActivity.class);
+                Intent order = new Intent(ShopListActivity.this, SellerActivity.class);
                 startActivity(order);
             }
         });

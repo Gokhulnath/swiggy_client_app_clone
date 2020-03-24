@@ -15,11 +15,12 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:theme">
         <activity android:name=".CartActivity"/>
-        <activity android:name=".UpdateUserProfileActivity" />
+        <activity android:name=".UpdateUserProfileActivity"></activity>
         <activity android:name=".SearchItemShopActivity" />
         <activity android:name=".ShopMenuItemListActivity" />
         <activity android:name=".OnBoardingActivity" />
         <activity android:name=".ShopListActivity" />
+        <activity android:name=".SellerActivity" />
         <activity android:name=".OrderHistoryActivity" />
         <activity android:name=".CollegeListActivity" />
         <activity android:name=".RecyclerViewDemoActivity" />
