@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ import java.util.Date;
 import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.ShopMenuItemListActivity;
 import golhar.cocomo.zinger.model.ShopConfigurationModel;
+
+import static android.graphics.Color.parseColor;
 
 public class SearchShopListAdapter extends RecyclerView.Adapter<SearchShopListAdapter.ShopNameHolder> {
     String Time = new SimpleDateFormat("HH:mm:ss").format(new Date());
@@ -63,7 +66,17 @@ public class SearchShopListAdapter extends RecyclerView.Adapter<SearchShopListAd
     @Override
     public void onBindViewHolder(@NonNull SearchShopListAdapter.ShopNameHolder holder, int position) {
         final ShopConfigurationModel shopConfigurationModel = shopConfigurationModelArrayList.get(position);
-        holder.specialItemLL.setVisibility(View.GONE);
+        holder.addItemBT.setVisibility(View.INVISIBLE);
+        if (shopConfigurationModel.getConfigurationModel().getIsOrderTaken().equals(0)) {
+            holder.priceTV.setText("Currently not taking orders");
+            holder.priceTV.setTextColor(parseColor("#ff0000"));;
+            holder.clickableLL.setEnabled(false);
+            holder.clickableLL.setBackgroundColor(Color.parseColor("#EBEBEB"));
+        }
+        else{
+            holder.clickableLL.setEnabled(true);
+            holder.specialItemLL.setVisibility(View.GONE);
+        }
         holder.nameTV.setText(shopConfigurationModel.getShopModel().getName());
         holder.nameTV.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         Glide.with(context)
@@ -71,6 +84,7 @@ public class SearchShopListAdapter extends RecyclerView.Adapter<SearchShopListAd
                 .placeholder(new ColorDrawable(Color.parseColor("#000000")))
                 .into(holder.iconIV);
         holder.typeTV.setText("Restaurant");
+
         holder.clickableLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +106,8 @@ public class SearchShopListAdapter extends RecyclerView.Adapter<SearchShopListAd
         ImageView iconIV;
         LinearLayout clickableLL;
         LinearLayout specialItemLL;
+        TextView priceTV;
+        Button addItemBT;
 
 
         public ShopNameHolder(@NonNull View itemView) {
@@ -101,6 +117,8 @@ public class SearchShopListAdapter extends RecyclerView.Adapter<SearchShopListAd
             iconIV = itemView.findViewById(R.id.iconIV);
             clickableLL = itemView.findViewById(R.id.clickableLL);
             specialItemLL = itemView.findViewById(R.id.specialItemLL);
+            priceTV = itemView.findViewById(R.id.priceTV);
+            addItemBT = itemView.findViewById(R.id.addItemBT);
         }
     }
 }

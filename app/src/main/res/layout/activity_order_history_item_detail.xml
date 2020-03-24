@@ -288,7 +288,7 @@
 
 
         <Button
-            android:id="@+id/reOrderBt"
+            android:id="@+id/reOrderBT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

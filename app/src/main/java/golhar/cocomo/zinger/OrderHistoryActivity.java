@@ -80,12 +80,14 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 SharedPref.removeAll(getApplicationContext());
                 FirebaseAuth.getInstance().signOut();
                 Intent MainActivity = new Intent(OrderHistoryActivity.this, OnBoardingActivity.class);
+                finishAffinity();
                 startActivity(MainActivity);
             }
         });
 
         getOrderListByPage(1);
         pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh.setRefreshing(true);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -142,12 +144,14 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     pullToRefresh.setRefreshing(false);
                 } else {
                     viewMoreBT.setVisibility(View.GONE);
+                    pullToRefresh.setRefreshing(false);
                 }
             }
 
             @Override
             public void onFailure(Call<Response<List<OrderItemListModel>>> call, Throwable t) {
                 Log.d("RetroFit", "error");
+                pullToRefresh.setRefreshing(false);
             }
         });
     }
@@ -162,5 +166,17 @@ public class OrderHistoryActivity extends AppCompatActivity {
         userNameTV.setText(userName);
         userEmailTV.setText(email);
         userNumTV.setText(phoneNo);
+        orderItemListModels.clear();
+        orderHistoryAdapter.setItemList(orderItemListModels);
+        orderHistoryAdapter.notifyDataSetChanged();
+        pullToRefresh.setRefreshing(true);
+        for (int i = 1; i <= pageNum; i++) {
+            getOrderListByPage(i);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

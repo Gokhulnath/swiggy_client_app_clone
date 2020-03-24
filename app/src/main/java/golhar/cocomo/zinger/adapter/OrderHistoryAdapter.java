@@ -3,6 +3,7 @@ package golhar.cocomo.zinger.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
+import golhar.cocomo.zinger.CartActivity;
 import golhar.cocomo.zinger.OrderHistoryItemDetailActivity;
 import golhar.cocomo.zinger.R;
 import golhar.cocomo.zinger.enums.UserRole;
@@ -195,6 +200,19 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                 }
             });
         });
+
+        holder.reOrderBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadData((ArrayList<OrderItemModel>)orderItemListModel.getOrderItemsList());
+                SharedPref.putInt(context, Constants.cartShopId, orderItemListModel.getOrderModel().getShopModel().getId());
+                SharedPref.putString(context, Constants.cartShopName,orderItemListModel.getOrderModel().getShopModel().getName() );
+                SharedPref.putLong(context, Constants.shopDeliveryPrice, orderItemListModel.getOrderModel().getDeliveryPrice().longValue());
+                Intent cart = new Intent(context, CartActivity.class);
+                cart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(cart);
+            }
+        });
     }
 
     @Override
@@ -211,6 +229,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         TextView orderDateTV;
         TextView orderRatingTV;
         Button rateBT;
+        Button reOrderBT;
         ImageView starImgIV;
         TextView orderRateTV;
         RelativeLayout fullOrderRL;
@@ -228,6 +247,15 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             starImgIV = itemView.findViewById(R.id.starImgIV);
             orderRateTV = itemView.findViewById(R.id.orderRateTV);
             fullOrderRL = itemView.findViewById(R.id.fullOrderRL);
+            reOrderBT = itemView.findViewById(R.id.reOrderBT);
         }
+    }
+    void LoadData(ArrayList<OrderItemModel> orderItemModelArrayList) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.sharedPreferencesCart, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(orderItemModelArrayList);
+        editor.putString(Constants.cart, json);
+        editor.apply();
     }
 }

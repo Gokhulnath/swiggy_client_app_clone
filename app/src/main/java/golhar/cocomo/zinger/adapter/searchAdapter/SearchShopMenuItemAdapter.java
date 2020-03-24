@@ -26,10 +26,14 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import golhar.cocomo.zinger.R;
+import golhar.cocomo.zinger.model.ConfigurationModel;
 import golhar.cocomo.zinger.model.ItemModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
+import golhar.cocomo.zinger.model.ShopModel;
 import golhar.cocomo.zinger.utils.Constants;
 import golhar.cocomo.zinger.utils.SharedPref;
+
+import static android.graphics.Color.parseColor;
 
 
 public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMenuItemAdapter.ItemNameHolder> {
@@ -69,17 +73,29 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
     @Override
     public void onBindViewHolder(@NonNull ItemNameHolder holder, int position) {
         final ItemModel itemModel = itemModelArrayList.get(position);
+
+
         for (int i = 0; i < RetrieveData().size(); i++) {
             if (itemModel.getId() == RetrieveData().get(i).getItemModel().getId()) {
                 holder.numberButtonENB.setNumber(RetrieveData().get(i).getQuantity().toString());
                 holder.addItemBT.setVisibility(View.GONE);
                 holder.numberButtonENB.setVisibility(View.VISIBLE);
-            }
-            else{
+            } else {
                 holder.addItemBT.setVisibility(View.VISIBLE);
                 holder.numberButtonENB.setVisibility(View.GONE);
             }
         }
+        if (itemModel.getIsAvailable() == 0 || getShopAvailabilty(itemModel.getShopModel().getId()) == 0) {
+            holder.priceTV.setText("Currently not available");
+            holder.priceTV.setTextColor(parseColor("#ff0000"));
+            holder.addItemBT.setVisibility(View.GONE);
+            holder.numberButtonENB.setVisibility(View.GONE);
+            holder.clickableLL.setBackgroundColor(Color.parseColor("#EBEBEB"));
+        } else {
+
+            holder.priceTV.setText("₹" + itemModel.getPrice());
+        }
+
         holder.nameTV.setText(" " + itemModel.getName());
         if (itemModel.getIsVeg() == 0) {
             Drawable img = context.getResources().getDrawable(R.drawable.ic_non_vegetarian_mark);
@@ -90,28 +106,30 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
                 .placeholder(new ColorDrawable(Color.parseColor("#000000")))
                 .into(holder.iconIV);
         holder.typeTV.setText(itemModel.getShopModel().getName());
-        holder.priceTV.setText("₹" + itemModel.getPrice());
         if (itemModel.getIsAvailable() == 0) {
             holder.addItemBT.setEnabled(false);
         }
         holder.addItemBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vi) {
-                if (SharedPref.getInt(context, Constants.cartShopId) == -1 || itemModel.getShopModel().getId()==SharedPref.getInt(context, Constants.cartShopId) || RetrieveData().size()==0) {
-                    SharedPref.putInt(context,Constants.cartShopId,itemModel.getShopModel().getId());
-                    SharedPref.putString(context,Constants.cartShopName,itemModel.getShopModel().getName());
+                if (SharedPref.getInt(context, Constants.cartShopId) == -1 || itemModel.getShopModel().getId() == SharedPref.getInt(context, Constants.cartShopId) || RetrieveData().size() == 0) {
+                    SharedPref.putInt(context, Constants.cartShopId, itemModel.getShopModel().getId());
+                    SharedPref.putString(context, Constants.cartShopName, itemModel.getShopModel().getName());
+                    SharedPref.putLong(context, Constants.shopDeliveryPrice, getShopDeliveryPrice(itemModel.getShopModel().getId()).longValue());
                     holder.addItemBT.setVisibility(View.GONE);
                     holder.numberButtonENB.setNumber(Integer.toString(1));
                     holder.numberButtonENB.setVisibility(View.VISIBLE);
                     OrderItemModel orderItemModel = new OrderItemModel();
-                    orderItemModel.setItemModel(itemModel);
+                    ItemModel itemModel1 = itemModel;
+                    ShopModel shopModel = new ShopModel();
+                    itemModel1.setShopModel(shopModel);
+                    orderItemModel.setItemModel(itemModel1);
                     orderItemModel.setQuantity(1);
                     orderItemModel.setPrice(itemModel.getPrice());
                     ArrayList<OrderItemModel> orderItemModelArrayList2 = RetrieveData();
                     orderItemModelArrayList2.add(orderItemModel);
                     LoadData(orderItemModelArrayList2);
-                }
-                else{
+                } else {
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
                     View v = LayoutInflater.from(context).inflate(R.layout.activity_cart_shop_change_prompt, null);
                     TextView msgTV = v.findViewById(R.id.msgTV);
@@ -119,20 +137,24 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
                     Button yesBT = v.findViewById(R.id.yesBT);
                     dialogBuilder.setView(v);
                     AlertDialog dialog = dialogBuilder.create();
-                    msgTV.setText("Your cart contains dishes from "+SharedPref.getString(context,Constants.cartShopName)+". Do you want to discard the selection and add dishes from "+itemModel.getShopModel().getName()+"?");
+                    msgTV.setText("Your cart contains dishes from " + SharedPref.getString(context, Constants.cartShopName) + ". Do you want to discard the selection and add dishes from " + itemModel.getShopModel().getName() + "?");
                     dialog.show();
                     yesBT.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            SharedPref.putInt(context,Constants.cartShopId,itemModel.getShopModel().getId());
+                            SharedPref.putInt(context, Constants.cartShopId, itemModel.getShopModel().getId());
                             ArrayList<OrderItemModel> orderItemModelArrayList = new ArrayList<>();
                             LoadData(orderItemModelArrayList);
-                            SharedPref.putString(context,Constants.cartShopName,itemModel.getShopModel().getName());
+                            SharedPref.putString(context, Constants.cartShopName, itemModel.getShopModel().getName());
+                            SharedPref.putLong(context, Constants.shopDeliveryPrice, getShopDeliveryPrice(itemModel.getShopModel().getId()).longValue());
                             holder.addItemBT.setVisibility(View.GONE);
                             holder.numberButtonENB.setNumber(Integer.toString(1));
                             holder.numberButtonENB.setVisibility(View.VISIBLE);
                             OrderItemModel orderItemModel = new OrderItemModel();
-                            orderItemModel.setItemModel(itemModel);
+                            ItemModel itemModel1 = itemModel;
+                            ShopModel shopModel = new ShopModel();
+                            itemModel1.setShopModel(shopModel);
+                            orderItemModel.setItemModel(itemModel1);
                             orderItemModel.setQuantity(1);
                             orderItemModel.setPrice(itemModel.getPrice());
                             ArrayList<OrderItemModel> orderItemModelArrayList2 = RetrieveData();
@@ -229,5 +251,37 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
         String json = gson.toJson(orderItemModelArrayList);
         editor.putString(Constants.cart, json);
         editor.apply();
+    }
+
+    Double getShopDeliveryPrice(int shopId) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.sharedPreferencesShop, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(Constants.shopDeliveryPriceList, null);
+        Type type = new TypeToken<ArrayList<ConfigurationModel>>() {
+        }.getType();
+        ArrayList<ConfigurationModel> shopDeliveryPrice = gson.fromJson(json, type);
+        for (ConfigurationModel cM : shopDeliveryPrice) {
+            if (shopId == cM.getShopModel().getId()) {
+                return cM.getDeliveryPrice();
+            }
+        }
+        return 0.0;
+    }
+
+    int getShopAvailabilty(int shopId) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.sharedPreferencesShop, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(Constants.shopDeliveryPriceList, null);
+        Type type = new TypeToken<ArrayList<ConfigurationModel>>() {
+        }.getType();
+        ArrayList<ConfigurationModel> shopDeliveryPrice = gson.fromJson(json, type);
+        for (ConfigurationModel cM : shopDeliveryPrice) {
+            if (shopId == cM.getShopModel().getId()) {
+                if (cM.getIsOrderTaken() == 0) {
+                    return 0;
+                }
+            }
+        }
+        return 1;
     }
 }

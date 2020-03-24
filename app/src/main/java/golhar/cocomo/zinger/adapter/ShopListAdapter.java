@@ -65,6 +65,8 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopNa
     @Override
     public void onBindViewHolder(@NonNull ShopListAdapter.ShopNameHolder holder, int position) {
         final ShopConfigurationModel shopConfigurationModel = shopConfigurationModelArrayList.get(position);
+
+
         holder.restaurantNameTV.setText(shopConfigurationModel.getShopModel().getName());
         Date closingTime = shopConfigurationModel.getShopModel().getClosingTime();
         Date openingTime = shopConfigurationModel.getShopModel().getOpeningTime();
@@ -81,11 +83,10 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopNa
             holder.statusTV.setTextColor(parseColor("#ff0000"));
             holder.cliclableLL.setBackgroundColor(Color.parseColor("#EBEBEB"));
         }
-        if(shopConfigurationModel.getRatingModel()==null || shopConfigurationModel.getRatingModel().getRating().equals(0) || shopConfigurationModel.getRatingModel().getUserCount().equals(0)) {
+        if (shopConfigurationModel.getRatingModel() == null || shopConfigurationModel.getRatingModel().getRating().equals(0) || shopConfigurationModel.getRatingModel().getUserCount().equals(0)) {
             holder.ratingTV.setText("No ratings");
             holder.numberOfRatingTV.setVisibility(View.INVISIBLE);
-        }
-        else{
+        } else {
             holder.ratingTV.setText(shopConfigurationModel.getRatingModel().getRating().toString());
             holder.numberOfRatingTV.setText("(" + shopConfigurationModel.getRatingModel().getUserCount().toString() + ")");
         }
@@ -97,7 +98,7 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopNa
             @Override
             public void onClick(View v) {
                 Intent shopItemList = new Intent(context, ShopMenuItemListActivity.class);
-                shopItemList.putExtra("shopDetails",shopConfigurationModel);
+                shopItemList.putExtra("shopDetails", shopConfigurationModel);
                 context.startActivity(shopItemList);
             }
         });

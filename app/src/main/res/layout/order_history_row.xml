@@ -77,7 +77,7 @@
                 android:text="March 5, 5:45 PM" />
 
             <Button
-                android:id="@+id/reorderBT"
+                android:id="@+id/reOrderBT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/orderDateTV"
@@ -95,7 +95,7 @@
                 android:layout_below="@+id/orderDateTV"
                 android:layout_marginLeft="@dimen/_45sdp"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:layout_toRightOf="@+id/reorderBT"
+                android:layout_toRightOf="@+id/reOrderBT"
                 android:background="#fff"
                 android:onClick="showDialog"
                 android:padding="@dimen/_8sdp"

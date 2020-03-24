@@ -24,6 +24,7 @@ import java.util.List;
 
 import golhar.cocomo.zinger.adapter.ShopListAdapter;
 import golhar.cocomo.zinger.enums.UserRole;
+import golhar.cocomo.zinger.model.ConfigurationModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
 import golhar.cocomo.zinger.model.ShopConfigurationModel;
 import golhar.cocomo.zinger.service.MainRepository;
@@ -48,23 +49,23 @@ public class ShopListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_list);
-        cartBT=findViewById(R.id.cartBT);
-        if(RetrieveData().size()==0){
+
+        cartBT = findViewById(R.id.cartBT);
+        if (RetrieveData().size() == 0) {
             cartBT.setVisibility(View.INVISIBLE);
-        }
-        else{
+        } else {
             cartBT.setVisibility(View.VISIBLE);
         }
         cartBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cart = new Intent(ShopListActivity.this,CartActivity.class);
+                Intent cart = new Intent(ShopListActivity.this, CartActivity.class);
                 startActivity(cart);
             }
         });
         shopConfigurationModelArrayList = new ArrayList<ShopConfigurationModel>();
         searchShopBT = findViewById(R.id.searchShopBT);
-        pullToRefresh=findViewById(R.id.pullToRefresh);
+        pullToRefresh = findViewById(R.id.pullToRefresh);
         try {
             shopListAdapter = new ShopListAdapter(new ArrayList<>(), this);
         } catch (ParseException e) {
@@ -107,10 +108,9 @@ public class ShopListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(RetrieveData().size()==0){
+        if (RetrieveData().size() == 0) {
             cartBT.setVisibility(View.INVISIBLE);
-        }
-        else{
+        } else {
             cartBT.setVisibility(View.VISIBLE);
         }
     }
@@ -144,7 +144,7 @@ public class ShopListActivity extends AppCompatActivity {
         return orderItemModelArrayList;
     }
 
-    void getShopList(){
+    void getShopList() {
         int collegeId = SharedPref.getInt(getApplicationContext(), Constants.collegeId);
         String phoneNumber = SharedPref.getString(getApplicationContext(), Constants.phoneNumber);
         String authId = SharedPref.getString(getApplicationContext(), Constants.authId);
@@ -156,14 +156,30 @@ public class ShopListActivity extends AppCompatActivity {
                     shopListAdapter.setShopConfigurationModelArrayList((ArrayList<ShopConfigurationModel>) responseFromServer.getData());
                     shopListAdapter.notifyDataSetChanged();
                     shopConfigurationModelArrayList = (ArrayList<ShopConfigurationModel>) responseFromServer.getData();
+                    ArrayList<ConfigurationModel> configurationModelArrayList = new ArrayList<>();
+                    for (ShopConfigurationModel sCM : shopConfigurationModelArrayList) {
+                        ConfigurationModel configurationModel = new ConfigurationModel();
+                        configurationModel = sCM.getConfigurationModel();
+                        configurationModel.setShopModel(sCM.getShopModel());
+                        configurationModelArrayList.add(configurationModel);
+                    }
+                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constants.sharedPreferencesShop, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(configurationModelArrayList);
+                    editor.putString(Constants.shopDeliveryPriceList, json);
+                    editor.apply();
                     pullToRefresh.setRefreshing(false);
                 } else {
-                    Toast.makeText(ShopListActivity.this, "Failure", Toast.LENGTH_SHORT).show();                }
+                    Toast.makeText(ShopListActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                    pullToRefresh.setRefreshing(false);
+                }
             }
 
             @Override
             public void onFailure(Call<Response<List<ShopConfigurationModel>>> call, Throwable t) {
-                Toast.makeText(ShopListActivity.this, "Failure"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShopListActivity.this, "Failure" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                pullToRefresh.setRefreshing(false);
             }
         });
     }

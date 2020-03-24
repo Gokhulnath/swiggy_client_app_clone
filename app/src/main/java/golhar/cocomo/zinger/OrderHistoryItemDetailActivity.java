@@ -1,10 +1,13 @@
 package golhar.cocomo.zinger;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,8 +16,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.gson.Gson;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -56,6 +62,7 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
     SwipeRefreshLayout pullToRefresh;
     OrderModel newOrderModel;
     OrderItemListModel orderItemListModel;
+    Button reOrderBT;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -63,6 +70,7 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history_item_detail);
         pullToRefresh=findViewById(R.id.pullToRefresh);
+        reOrderBT=findViewById(R.id.reOrderBT);
         Intent detail = getIntent();
         orderItemListModel = detail.getParcelableExtra("FullOrderDetails");
         backArrowIB = findViewById(R.id.backArrowIB);
@@ -114,6 +122,20 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
             }
         });
 
+
+        reOrderBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadData((ArrayList<OrderItemModel>)orderItemListModel.getOrderItemsList());
+                SharedPref.putInt(getApplicationContext(), Constants.cartShopId, orderItemListModel.getOrderModel().getShopModel().getId());
+                SharedPref.putString(getApplicationContext(), Constants.cartShopName,orderItemListModel.getOrderModel().getShopModel().getName() );
+                SharedPref.putLong(getApplicationContext(), Constants.shopDeliveryPrice, orderItemListModel.getOrderModel().getDeliveryPrice().longValue());
+                Intent cart = new Intent(OrderHistoryItemDetailActivity.this,CartActivity.class);
+                startActivity(cart);
+                finish();
+            }
+        });
+
     }
 
     void getOrderById()
@@ -129,11 +151,15 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
                     statusChange(newOrderModel.getLastStatusUpdatedTime(),newOrderModel.getOrderStatus().toString());
                     pullToRefresh.setRefreshing(false);
                 }
+                else{
+                    pullToRefresh.setRefreshing(false);
+                }
             }
 
             @Override
             public void onFailure(Call<Response<OrderModel>> call, Throwable t) {
                 Toast.makeText(OrderHistoryItemDetailActivity.this, "Failure"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                pullToRefresh.setRefreshing(false);
             }
         });
     }
@@ -191,5 +217,20 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
                 lastUpdatedTimeTV.setText("Order Delivered on " + dateFormat.format(orderItemListModel.getOrderModel().getDate()));
                 break;
         }
+    }
+
+    void LoadData(ArrayList<OrderItemModel> orderItemModelArrayList) {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constants.sharedPreferencesCart, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(orderItemModelArrayList);
+        editor.putString(Constants.cart, json);
+        editor.apply();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

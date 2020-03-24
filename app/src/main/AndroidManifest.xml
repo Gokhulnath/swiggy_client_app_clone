@@ -14,8 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:replace="android:theme">
-        <activity android:name=".CartActivity"/>
-        <activity android:name=".UpdateUserProfileActivity"></activity>
+        <activity android:name=".PaymentGatewayTestActivity"></activity>
+        <activity android:name=".CartActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".UpdateUserProfileActivity" />
         <activity android:name=".SearchItemShopActivity" />
         <activity android:name=".ShopMenuItemListActivity" />
         <activity android:name=".OnBoardingActivity" />

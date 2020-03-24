@@ -2,11 +2,17 @@ package golhar.cocomo.zinger.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 public class OrderItemListModel implements Parcelable {
 
     OrderModel orderModel;
     List<OrderItemModel> orderItemsList;
+
+    public OrderItemListModel() {
+        orderModel = new OrderModel();
+        orderItemsList = new ArrayList<>();
+    }
 
     protected OrderItemListModel(Parcel in) {
         orderModel = in.readParcelable(OrderModel.class.getClassLoader());
