@@ -19,7 +19,7 @@ import java.util.Date;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
-public class SellerDetailsActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
+public class SellerDetailsActivity extends AppCompatActivity {
     EditText priceTV;
     ToggleButton editBT;
     ToggleButton delTakenBT;
@@ -31,9 +31,12 @@ public class SellerDetailsActivity extends AppCompatActivity implements TimePick
     TextView closeTV;
     Button closeBT;
     ConfigurationModel configurationModel;
-    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    hh:mm:ss a");
-    Calendar cal = Calendar.getInstance();
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    TimePickerDialog timePickerDialog;
+    Calendar calendar;
+    int currentHour;
+    int currentMinute;
+    String amPm;
+
 
 
     @Override
@@ -41,6 +44,7 @@ public class SellerDetailsActivity extends AppCompatActivity implements TimePick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_details);
 
+        ConfigurationModel configurationModel=new ConfigurationModel();
         priceTV=findViewById(R.id.priceTV);
         editBT=findViewById(R.id.editBT);
         delTakenBT=findViewById(R.id.delTakenBT);
@@ -51,20 +55,20 @@ public class SellerDetailsActivity extends AppCompatActivity implements TimePick
         openBT=findViewById(R.id.openBT);
         closeTV=findViewById(R.id.closeTV);
         closeBT=findViewById(R.id.closeBT);
+        priceTV.setEnabled(false);
 
-        editBT.setEnabled(false);
         editBT.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     // The toggle is enabled
                     priceTV.setEnabled(true);
                     editBT.setBackground(getDrawable(R.drawable.ic_check));
-                   editBT.setText((configurationModel.getDeliveryPrice().intValue()));
+                   editBT.setText(String.valueOf(configurationModel.getDeliveryPrice()));
                 } else {
                     // The toggle is disabled
                     priceTV.setEnabled(false);
                     editBT.setBackground(getDrawable(R.drawable.ic_pencil));
-                    editBT.setText((configurationModel.getDeliveryPrice().intValue()));
+                    editBT.setText(String.valueOf(configurationModel.getDeliveryPrice()));
                 }
             }
         });
@@ -92,7 +96,7 @@ public class SellerDetailsActivity extends AppCompatActivity implements TimePick
                 }
             }
         });
-
+        numberTV.setEnabled(false);
 //        numberTV.setText(configurationModel.getShopModel().getMobile());
         mobileBT.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -100,37 +104,61 @@ public class SellerDetailsActivity extends AppCompatActivity implements TimePick
                     // The toggle is enabled
                     numberTV.setEnabled(true);
                     numberTV.setText(configurationModel.getShopModel().getMobile());
-
+                    mobileBT.setBackground(getDrawable(R.drawable.ic_check));
                 } else {
                     // The toggle is disabled
                     numberTV.setEnabled(false);
+                    mobileBT.setBackground(getDrawable(R.drawable.ic_pencil));
                 }
             }
         });
 
-        //openTV.setText(configurationModel.getShopModel().setOpeningTime((sdf.format(cal.getTime())));
-        openBT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker");
-            }
-        });
+        Calendar calendar = Calendar.getInstance();
+        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = calendar.get(Calendar.MINUTE);
+        closeTV.setText(currentHour+":"+currentMinute);
+        openTV.setText(currentHour+":"+currentMinute);
 
         closeBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker");
+//                Calendar calendar = Calendar.getInstance();
+//                int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+//                int currentMinute = calendar.get(Calendar.MINUTE);
+//                closeTV.setText(currentHour+":"+currentMinute+amPm);
+
+                TimePickerDialog timePickerDialog = new TimePickerDialog(SellerDetailsActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                        if (hourOfDay >= 12) {
+                            amPm = "PM";
+                        } else {
+                            amPm = "AM";
+                        }
+                        closeTV.setText(String.format("%02d:%02d", hourOfDay , minutes) + amPm);
+                    }
+                }, currentHour, currentMinute, false);
+                timePickerDialog.show();
+
             }
         });
+       openBT.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               TimePickerDialog timePickerDialog = new TimePickerDialog(SellerDetailsActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                   @Override
+                   public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                       if (hourOfDay >= 12) {
+                           amPm = "PM";
+                       } else {
+                           amPm = "AM";
+                       }
+                       openTV.setText(String.format("%02d:%02d", hourOfDay , minutes) + amPm);
+                   }
+               }, currentHour, currentMinute, false);
+               timePickerDialog.show();
 
-
+           }
+       });
     }
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        openTV.setText("Hour: " + hourOfDay + " Minute: " + minute);
-        closeTV.setText("Hour: " + hourOfDay + " Minute: " + minute);
-    }
-
 }
