@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -40,11 +41,19 @@ public class SearchItemShopActivity extends AppCompatActivity {
     EditText searchET;
     ArrayList<ShopConfigurationModel> modifiedShopList;
     ArrayList<ItemModel> modifiedItemList;
+    SwipeRefreshLayout pullToRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_item_shop);
+        pullToRefresh=findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pullToRefresh.setRefreshing(false);
+            }
+        });
         modifiedItemList = new ArrayList<>();
         modifiedShopList = new ArrayList<>();
         ArrayList<ShopConfigurationModel> shopConfigurationModelArrayList = this.getIntent().getExtras().getParcelableArrayList("Shopdetails");
@@ -75,14 +84,17 @@ public class SearchItemShopActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (searchET.getEditableText().toString().trim().length() > 2) {
+                    pullToRefresh.setRefreshing(true);
                     //shop
                     modifiedShopList = (ArrayList<ShopConfigurationModel>) shopConfigurationModelArrayList
                             .stream()
                             .filter(shopConfigurationModel -> shopConfigurationModel.getShopModel().getName().toLowerCase().contains(searchET.getEditableText().toString().trim().toLowerCase()))
                             .collect(Collectors.toList());
+                        pullToRefresh.setRefreshing(false);
                     searchShopListAdapter.setShopConfigurationModelArrayList(modifiedShopList);
                     searchShopListAdapter.notifyDataSetChanged();
                     //item
+                    pullToRefresh.setRefreshing(true);
                     MainRepository.getItemService().getItemsByName(collegeId, searchET.getEditableText().toString().trim(), authid, phoneNumber, UserRole.CUSTOMER.name()).enqueue(new Callback<Response<List<ItemModel>>>() {
                         @Override
                         public void onResponse(Call<Response<List<ItemModel>>> call, retrofit2.Response<Response<List<ItemModel>>> response) {
@@ -91,16 +103,19 @@ public class SearchItemShopActivity extends AppCompatActivity {
                                 ArrayList<ItemModel> modifiedItemlist = (ArrayList<ItemModel>) responseFromServer.getData();
                                 searchShopMenuItemAdapter.setItemModelArrayList(modifiedItemlist);
                                 searchShopMenuItemAdapter.notifyDataSetChanged();
+                                pullToRefresh.setRefreshing(false);
                             } else {
                                 ArrayList<ItemModel> modifiedItemlist = new ArrayList<>();
                                 searchShopMenuItemAdapter.setItemModelArrayList(modifiedItemlist);
                                 searchShopMenuItemAdapter.notifyDataSetChanged();
+                                pullToRefresh.setRefreshing(false);
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Response<List<ItemModel>>> call, Throwable t) {
                             Toast.makeText(SearchItemShopActivity.this, "Unable to reach the server" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            pullToRefresh.setRefreshing(false);
                         }
                     });
                 } else {
@@ -110,6 +125,7 @@ public class SearchItemShopActivity extends AppCompatActivity {
                     modifiedItemList.clear();
                     searchShopMenuItemAdapter.setItemModelArrayList(modifiedItemList);
                     searchShopMenuItemAdapter.notifyDataSetChanged();
+                    pullToRefresh.setRefreshing(false);
                 }
             }
         };

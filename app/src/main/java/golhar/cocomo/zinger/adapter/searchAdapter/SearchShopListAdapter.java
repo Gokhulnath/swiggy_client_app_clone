@@ -76,6 +76,7 @@ public class SearchShopListAdapter extends RecyclerView.Adapter<SearchShopListAd
         else{
             holder.clickableLL.setEnabled(true);
             holder.specialItemLL.setVisibility(View.GONE);
+            holder.clickableLL.setBackgroundColor(Color.parseColor("#FFFFFF"));
         }
         holder.nameTV.setText(shopConfigurationModel.getShopModel().getName());
         holder.nameTV.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
