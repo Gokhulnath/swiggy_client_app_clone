@@ -84,7 +84,7 @@ public class PaymentGatewayTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 orderModel.setOrderStatus(OrderStatus.CANCELLED_BY_USER);
-                transactionModel.setResponseMessage(OrderStatus.TXN_FAILURE.name());
+                transactionModel.setResponseMessage(OrderStatus.CANCELLED_BY_USER.name());
                 orderModel.setTransactionModel(transactionModel);
                 orderItemListModel.setOrderModel(orderModel);
                 orderAPI(orderItemListModel);

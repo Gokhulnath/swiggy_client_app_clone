@@ -29,6 +29,7 @@ import java.util.List;
 import golhar.cocomo.zinger.CartActivity;
 import golhar.cocomo.zinger.OrderHistoryItemDetailActivity;
 import golhar.cocomo.zinger.R;
+import golhar.cocomo.zinger.enums.OrderStatus;
 import golhar.cocomo.zinger.enums.UserRole;
 import golhar.cocomo.zinger.model.OrderItemListModel;
 import golhar.cocomo.zinger.model.OrderItemModel;
@@ -150,12 +151,16 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                 Intent history = new Intent(activityContext, OrderHistoryItemDetailActivity.class);
                 history.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 history.putExtra("FullOrderDetails", orderItemListModel);
-                //todo pass the current clicked orderitemlist to next class
                 context.startActivity(history);
             }
         });
 
-        //TODO rename OHIDA
+        if(orderItemListModel.getOrderModel().getOrderStatus().equals(OrderStatus.COMPLETED) || orderItemListModel.getOrderModel().getOrderStatus().equals(OrderStatus.DELIVERED) ){
+            holder.rateBT.setEnabled(true);
+        }
+        else {
+            holder.rateBT.setEnabled(false);
+        }
         holder.rateBT.setOnClickListener((View.OnClickListener) view -> {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activityContext);
             View v = LayoutInflater.from(context).inflate(R.layout.activity_rating_bar, null);

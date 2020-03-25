@@ -51,7 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="₹100"
-                android:textSize="@dimen/_11ssp" />
+                android:textSize="@dimen/_11ssp"
+                android:textColor="#000000"/>
 
             <Button
                 android:id="@+id/addItemBT"

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,8 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
     OrderModel newOrderModel;
     OrderItemListModel orderItemListModel;
     Button reOrderBT;
+    LinearLayout secretKeyLL;
+    TextView secretKeyTV;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -73,6 +76,8 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
         reOrderBT=findViewById(R.id.reOrderBT);
         Intent detail = getIntent();
         orderItemListModel = detail.getParcelableExtra("FullOrderDetails");
+        secretKeyLL=findViewById(R.id.secretKeyLL);
+        secretKeyTV=findViewById(R.id.secretKeyTV);
         backArrowIB = findViewById(R.id.backArrowIB);
         orderNumTV = findViewById(R.id.orderNumTV);
         statusTV = findViewById(R.id.statusTV);
@@ -105,6 +110,7 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
         Date date1 = orderItemListModel.getOrderModel().getLastStatusUpdatedTime();
         String status = String.valueOf(orderItemListModel.getOrderModel().getOrderStatus());
         statusChange(date1,status);
+        secretKeyLL.setVisibility(View.INVISIBLE);
 
         backArrowIB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +155,13 @@ public class OrderHistoryItemDetailActivity extends AppCompatActivity {
                 if (responseFromServer.getCode().equals(ErrorLog.CodeSuccess) && responseFromServer.getMessage().equals(ErrorLog.Success)){
                     newOrderModel = responseFromServer.getData();
                     statusChange(newOrderModel.getLastStatusUpdatedTime(),newOrderModel.getOrderStatus().toString());
+                    if(newOrderModel.getSecretKey()!=null){
+                        secretKeyLL.setVisibility(View.VISIBLE);
+                        secretKeyTV.setText(newOrderModel.getSecretKey());
+                    }
+                    else{
+                        secretKeyLL.setVisibility(View.INVISIBLE);
+                    }
                     pullToRefresh.setRefreshing(false);
                 }
                 else{

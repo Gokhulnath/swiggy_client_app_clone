@@ -65,7 +65,9 @@ public class ShopListActivity extends AppCompatActivity {
         });
         shopConfigurationModelArrayList = new ArrayList<ShopConfigurationModel>();
         searchShopBT = findViewById(R.id.searchShopBT);
+        searchShopBT.setEnabled(false);
         pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh.setRefreshing(true);
         try {
             shopListAdapter = new ShopListAdapter(new ArrayList<>(), this);
         } catch (ParseException e) {
@@ -81,6 +83,7 @@ public class ShopListActivity extends AppCompatActivity {
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                searchShopBT.setEnabled(false);
                 getShopList();
             }
         });
@@ -170,6 +173,7 @@ public class ShopListActivity extends AppCompatActivity {
                     editor.putString(Constants.shopDeliveryPriceList, json);
                     editor.apply();
                     pullToRefresh.setRefreshing(false);
+                    searchShopBT.setEnabled(true);
                 } else {
                     Toast.makeText(ShopListActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                     pullToRefresh.setRefreshing(false);

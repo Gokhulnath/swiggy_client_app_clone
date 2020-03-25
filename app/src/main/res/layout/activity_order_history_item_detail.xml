@@ -98,7 +98,7 @@
                 <RelativeLayout
                     android:id="@+id/deliveryRV"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_90sdp"
+                    android:layout_height="@dimen/_110sdp"
                     android:layout_below="@+id/orderRV">
 
                     <ImageView
@@ -154,8 +154,33 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/toTV"
                             android:text="SSN College of Engineering" />
+                        <LinearLayout
+                            android:id="@+id/secretKeyLL"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:orientation="horizontal"
+                            android:layout_below="@id/toAddTV">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"
+                            android:textSize="@dimen/_15ssp"
+                            android:text="Secret Key:"
+                            android:padding="@dimen/_5sdp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"/>
+                            <TextView
+                                android:id="@+id/secretKeyTV"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:textSize="@dimen/_15ssp"
+                                android:text="ABCDEF"
+                                android:padding="@dimen/_5sdp"
+                                android:textColor="#000000"/>
+
+                        </LinearLayout>
 
                     </RelativeLayout>
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -163,7 +188,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_below="@+id/deliveryRV"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:background="#EFEFEF">
 
                     <TextView

@@ -39,7 +39,7 @@ import static android.graphics.Color.parseColor;
 public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMenuItemAdapter.ItemNameHolder> {
     ArrayList<ItemModel> itemModelArrayList;
     Context context;
-    ArrayList<OrderItemModel> orderItemModelArrayList = new ArrayList<>();
+
 
     public SearchShopMenuItemAdapter(ArrayList<ItemModel> itemModelArrayList, Context context) {
         this.itemModelArrayList = itemModelArrayList;
@@ -73,27 +73,30 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
     @Override
     public void onBindViewHolder(@NonNull ItemNameHolder holder, int position) {
         final ItemModel itemModel = itemModelArrayList.get(position);
-
-
+        ArrayList<ConfigurationModel> getShopAvailability = ShopAvailability();
+        int shopOrderTaken = -1;
+        for (int i = 0; i < getShopAvailability.size(); i++) {
+            if (itemModel.getShopModel().getId() == getShopAvailability.get(i).getShopModel().getId()) {
+                shopOrderTaken = getShopAvailability.get(i).getIsOrderTaken();
+            }
+        }
+        if (itemModel.getIsAvailable() == 0 || shopOrderTaken == 0) {
+            holder.priceTV.setText("Currently not available");
+            holder.priceTV.setTextColor(parseColor("#ff0000"));
+            holder.addItemBT.setVisibility(View.GONE);
+            holder.clickableLL.setBackgroundColor(Color.parseColor("#EBEBEB"));
+        } else {
+            holder.priceTV.setText("₹" + itemModel.getPrice());
+            holder.addItemBT.setVisibility(View.VISIBLE);
+            holder.priceTV.setTextColor(parseColor("#000000"));
+            holder.clickableLL.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }
         for (int i = 0; i < RetrieveData().size(); i++) {
             if (itemModel.getId() == RetrieveData().get(i).getItemModel().getId()) {
                 holder.numberButtonENB.setNumber(RetrieveData().get(i).getQuantity().toString());
                 holder.addItemBT.setVisibility(View.GONE);
                 holder.numberButtonENB.setVisibility(View.VISIBLE);
-            } else {
-                holder.addItemBT.setVisibility(View.VISIBLE);
-                holder.numberButtonENB.setVisibility(View.GONE);
             }
-        }
-        if (itemModel.getIsAvailable() == 0 || getShopAvailabilty(itemModel.getShopModel().getId()) == 0) {
-            holder.priceTV.setText("Currently not available");
-            holder.priceTV.setTextColor(parseColor("#ff0000"));
-            holder.addItemBT.setVisibility(View.GONE);
-            holder.numberButtonENB.setVisibility(View.GONE);
-            holder.clickableLL.setBackgroundColor(Color.parseColor("#EBEBEB"));
-        } else {
-
-            holder.priceTV.setText("₹" + itemModel.getPrice());
         }
 
         holder.nameTV.setText(" " + itemModel.getName());
@@ -143,6 +146,7 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
                         @Override
                         public void onClick(View v) {
                             SharedPref.putInt(context, Constants.cartShopId, itemModel.getShopModel().getId());
+                            ArrayList<Integer> itemPos = new ArrayList<>();
                             ArrayList<OrderItemModel> orderItemModelArrayList = new ArrayList<>();
                             LoadData(orderItemModelArrayList);
                             SharedPref.putString(context, Constants.cartShopName, itemModel.getShopModel().getName());
@@ -268,20 +272,13 @@ public class SearchShopMenuItemAdapter extends RecyclerView.Adapter<SearchShopMe
         return 0.0;
     }
 
-    int getShopAvailabilty(int shopId) {
+    ArrayList<ConfigurationModel> ShopAvailability() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.sharedPreferencesShop, Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(Constants.shopDeliveryPriceList, null);
         Type type = new TypeToken<ArrayList<ConfigurationModel>>() {
         }.getType();
-        ArrayList<ConfigurationModel> shopDeliveryPrice = gson.fromJson(json, type);
-        for (ConfigurationModel cM : shopDeliveryPrice) {
-            if (shopId == cM.getShopModel().getId()) {
-                if (cM.getIsOrderTaken() == 0) {
-                    return 0;
-                }
-            }
-        }
-        return 1;
+        ArrayList<ConfigurationModel> getShopAvailability = gson.fromJson(json, type);
+        return getShopAvailability;
     }
 }

@@ -108,6 +108,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     viewMoreBT.setVisibility(View.GONE);
                 } else {
                     pageNum += 1;
+                    pullToRefresh.setRefreshing(true);
                     getOrderListByPage(pageNum);
                 }
             }

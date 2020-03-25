@@ -107,9 +107,9 @@ public class ConfigurationModel implements Parcelable {
             dest.writeInt(isDeliveryAvailable);
         }
         if (isOrderTaken == null) {
-            dest.writeByte((byte) 0);
+            dest.writeInt(0);
         } else {
-            dest.writeByte((byte) 1);
+            dest.writeInt(1);
             dest.writeInt(isOrderTaken);
         }
     }
