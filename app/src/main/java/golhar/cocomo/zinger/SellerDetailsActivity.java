@@ -1,10 +1,5 @@
 package golhar.cocomo.zinger;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import golhar.cocomo.zinger.fragment.TimePickerFragment;
-import golhar.cocomo.zinger.model.ConfigurationModel;
-
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +7,14 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-import java.util.Calendar;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Calendar;
+
+import golhar.cocomo.zinger.model.ConfigurationModel;
 
 public class SellerDetailsActivity extends AppCompatActivity {
     EditText priceTV;
@@ -37,6 +34,7 @@ public class SellerDetailsActivity extends AppCompatActivity {
     int currentMinute;
     String amPm;
 
+    //todo add email in layout file
 
 
     @Override
