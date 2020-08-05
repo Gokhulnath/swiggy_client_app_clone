@@ -1,6 +1,6 @@
 # Swiggy client app clone
 
-## Please refer the screenrecord.mp4 for the working of the app.
+## Please refer the [screenrecord.mp4](https://github.com/Gokhulnath/swiggy_client_app_clone/blob/master/Screen%20record.mp4) for the working of the app.
 
 Its an complete Swiggy app clone with features like
 * Onboarding screen with feature list
