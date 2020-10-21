@@ -7,7 +7,7 @@ Its an complete Swiggy app clone with features like
 * OTP verification and auto verification are added
 * If the user exist already he is redirected to the home screen, if not he is redirected to the registration screen
 * List of all Shops prioritized based on its rating
-* An global search, which gives the result of the dishes and shop in that name. i.e. both shop and dishes details can be searched simultaneously
+* A global search, which gives the result of the dishes and shop in that name. i.e. both shop and dishes details can be searched simultaneously
 * Shop activity lists the dishes available in the shop
 * The shop can be rated in this activity
 * The shop image, timings, delivery options, delivery price etc. are displayed
