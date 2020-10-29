@@ -1,5 +1,9 @@
 # Swiggy client app clone
 
+![](https://github.com/Gokhulnath/swiggy_client_app_clone/blob/master/pictures/14.png)
+![](https://github.com/Gokhulnath/swiggy_client_app_clone/blob/master/pictures/15.png)
+![](https://github.com/Gokhulnath/swiggy_client_app_clone/blob/master/pictures/16.png)
+
 ## Please refer the [screenrecord.mp4](https://github.com/Gokhulnath/swiggy_client_app_clone/blob/master/Screen%20record.mp4) for the working of the app.
 
 Its an complete Swiggy app clone with features like
